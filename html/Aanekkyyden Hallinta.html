@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="fi">
+  <head>
+    <title>Aanekkyyden Hallinta</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <meta content="Mikael Hartzell 2012" name="author">
+  </head>
+  <body>
+    <div style="color: #7f7f7f;" align="right">Mikael Hartzell 2012<br>
+    </div>
+    <h1>Äänekkyyden hallinta<br>
+    </h1>
+    <br>
+    <h2>Mitä äänekkyydellä tarkoitetaan ?</h2>
+    Äänekkyydellä tarkoitetaan sitä miten ihminen kokee jonkin äänimateriaalin
+    äänekkyyden.<br>
+    <br>
+    Yllättävää kyllä äänisignaalin mittaamiseen tarkoitetun huippuarvomittarin
+    näyttämät arvot eivät vastaa sitä miten ihmiset kokevat äänekkyyden. Tämä
+    johtuu siitä että mittari näyttää vain äänisignaalin sähköistä hetkellistä
+    huippuarvoa, mutta ihmisen äänekkyyskokemukseen vaikuttaa huippuarvon
+    lisäksi myös äänessä olevat taajuudet, niiden kestot ja henkilökohtaiset
+    mieltymykset.<br>
+    <br>
+    Puhekielessä puhutaan usein äänen sähköisestä huipputasosta ja äänekkyydestä
+    ikään kuin samana asiana. Nyt kun otamme käyttöön äänekkyyteen perustuvan
+    mittaustavan, on suositeltavaa selvyyden vuoksi käyttää termejä näin:<br>
+    <br>
+    <strong>Äänekkyys</strong> = Ihmisen kokema äänekkyys tai äänekkyysmittarin
+    näyttämä äänekkyysarvo.<br>
+    <blockquote>Esim 1: Tämä kohtaus kuulostaa äänekkäämmältä kuin edellinen.<br>
+      Esim 2: Ohjelman äänekkyys on -21 LUFS.<br>
+    </blockquote>
+    <strong>Huipputaso / Huippuarvo = </strong>Äänisignaalin korkein sähköinen
+    arvo.<br>
+    <blockquote>Esim: Ohjelman huipputaso on -5 dBFS.<br>
+    </blockquote>
+    <br>
+    <h2>Äänekkyyden ongelmat</h2>
+    Äänekkyyden liialliset vaihtelut ovat olleet ongelma siitä asti kun radio-
+    ja tv-toiminta alkoi. Katsojilta tulee säännöllisesti palautetta siitä, että
+    ohjelmien äänekkyys vaihtelee liian rajusti.<br>
+    <br>
+    Kaikesta teknisestä kehityksestä huolimatta äänekkyyden hallintaan ei ole
+    ollut saatavilla kunnollisia teknisiä apuvälineitä. Ongelma on siksi pysynyt
+    ratkaisemattomana pulmana meidän päiviimme saakka.<br>
+    <br>
+    Äänekkyyden ongelma jakautuu kahteen erilliseen ongelmaan:<br>
+    <ol>
+      <li><strong>Ohjelmien sisäiset äänekkyysvaihtelut.</strong></li>
+      <li><strong>Ohjelmien väliset äänekkyysvaihtelut lähetysvirrassa.</strong><br>
+      </li>
+    </ol>
+    Äänekkyysongelman ratkaiseminen edellyttää kummankin osa-alueen onnistunutta
+    ratkaisemista.<br>
+    <br>
+    <br>
+    <h2>Miksi äänekkyysvaihteluita ei ole saatu hallintaan ?</h2>
+    Ihmisen äänekkyyskokemusta ei ole osattu kunnolla mallintaa ja siksi
+    äänekkyyden mittaamiseen ei ole ollut saatavilla kunnollisia teknisiä
+    työkaluja.<br>
+    <br>
+    Huipputasomittari on ollut käytännössä ainoa tekninen väline äänisignaalin
+    hallintaan. Huipputasomittarin näyttämät arvot eivät kuitenkaan vastaa sitä
+    miten ihmiset kokevat äänekkyyden.<br>
+    <br>
+    Tilanne on kuitenkin huonontunut vuosien varrella. Analogian aikakaudella
+    käytetyissä PPM mittareissa oli usein mittarin reagointinopeuteen
+    tarkoituksella lisätty viivettä. Tämän seurauksena nämä mittarit eivät
+    näyttäneet signaalin nopeimpia huippuja ja ne "keskiarvoistivat"
+    mittaustulosta niin, että mittarin näyttämä arvo vastasi karkeasti ihmisen
+    äänekkyyskokemusta. Digitaalisuuden syrjäyttäessä analogiset mittarit
+    siirryimme käyttämään hyvin nopeita digitaalisia huippuarvomittareita, jotka
+    eivät enää "keskiarvoistaneet" mittaustulosta mitenkään. Tästä seurasi se,
+    että mittarin näyttämä ei enää vastannut lainkaan ihmisen äänekkyykokemusta.<br>
+    <br>
+    1990 - luvulla digitaalinen äänenkäsittely antoi äänittäjille yhä
+    tehokkaammat työkalut äänen manipulointiin. Musikkiteollisuudessa syntyi
+    muoti-ilmiö, jossa cd-levyjen ääntä kompressoitiin vuosi vuodelta enemmän
+    musiikin äänekkyyden lisäämiseksi. Tarkoituksena oli saada oman yhtiön
+    musiikki kuulumaan radiokuuntelussa kovempaa kuin kilpailijoiden.
+    Tarpeettoman voimakkaan kompression muoti-ilmiö levisi myöhemmin myös
+    radioon ja televisioon.<br>
+    <br>
+    Kompressoinnissa äänen huipputasoja lasketaan alemmas, ja äänimateriaalin
+    kokonaistasoa nostetaan. Huippujen laskemisen ansiosta korkeimmat huiput
+    pysyvät edelleen sallituissa rajoissa. Kompressio lisää äänekkyyttä niin,
+    että huipputaso ei välttämättä nouse lainkaan. Voimakkaan kompression käytön
+    yleistyminen vaikeutti edelleen äänimateriaalien äänekkyyden arviointia, kun
+    apuvälineenä oli ainoastaan huippuarvomittari.<br>
+    <br>
+    Koska äänekkyyden mittaamiseen ei ollut olemassa luotettavia työkaluja, oli
+    äänittäjän käytettävä "aistinvaraista arviointia", eli käytettävä korviaan
+    äänekkyysmittarina. Aistinvarainen äänekkyysmittaus toimii erinomaisesti,
+    sillä ääntähän tehdään asiakkaiden korvia varten :) Ihminen on konetta
+    parempi arvioimaan äänekkyyttä.<br>
+    <br>
+    Aistinvaraisesti tehty mittaus toimii hyvin esim. yhden työpäivän sisällä.
+    Yhden päivän aikana tehtyjen ohjelmien äänekkyyden saa helposti säädettyä
+    samaksi, mutta kun päivä, kuunteluolosuhteet tai vireystila vaihtuu, vaihtuu
+    yleensä myös äänekkyystaso. Saman äänekkyystason säilyttäminen edellyttäisi
+    yhteisesti sovitun, koneellisesti mitattavissa olevan äänekkyyden kohdetason
+    olemassaoloa. Yhteisen "mittatikun" puuttuminen johtaa siihen, että
+    lähetyksessä syntyy ohjelmasta toiseen siirryttäessä äänekkyyshyppyjä.<br>
+    <br>
+    <br>
+    <h2>Huippuarvomittari ei näytä äänimateriaalin äänekkyyttä</h2>
+    <br>
+    <strong>DemoVideo 1:</strong> Kaikkien näytteiden huipputaso on 0 dBFS,
+    mutta näytteiden äänekkyys vaihtelee kuitenkin huomattavasti. Huippuarvo ei
+    kerro äänekkyyttä.<br>
+    <strong>DemoVideo 2:</strong> Videossa esitellään mitä äänekkyydelle ja
+    huippuarvolla tapahtuu, kun ääntä kompressoidaan.<br>
+    <br>
+    <strong>Esimerkki:</strong> Huippuarvo ja äänekkyys ristiriidassa. Esimerkin
+    yläkuvassa näkyy heavy-metal konsertin sähköiset huippuarvot ja sen
+    alapuolella mitattu äänekkyys. Yläkuvan korkeat huippuarvot (soittajien
+    haastattelut) ovat äänekyydeltään hiljaisempia kuin matalat huippuarvot
+    (musiikkiesitykset). Musiikin voimakas kompressointi on nostanut musiikin
+    äänekkyyttä, mutta laskenut samalla huipputasoja. Huippuarvomittarin
+    näyttämät arvot ovat täysin päinvastaisia äänimateriaalin todellisen
+    äänekkyyden kanssa.<br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/Sample_Peaks_vs_Loudness-Finnish.png"><br>
+    <br>
+    <br>
+    <h2>EBU:n äänekkyysstandardi R128</h2>
+    <h2></h2>
+    <p>Euroopan yleisradioyhtiöiden liitto EBU julkaisi elokuussa 2010
+      standardin <strong>R128</strong>, joka yrittää ratkaista
+      äänekkyysongelman. Standardi sisältää äänekkyyden koneellisen
+      mittausmenetelmän, joka mallintaa hyvällä tarkkuudella ihmisen
+      äänekkyykokemuksen. Standardi määrittelee myös kaikelle äänimateriaalille
+      yksiselitteisen yhteisen kohdeäänekkyytason ja antaa näin vihdoin välineet
+      todelliseen äänekkyyden hallintaan.</p>
+    <p>Standardi määrittelee lähetysvirran kaikille ohjelmille ja välikkeille
+      saman yhteisen äänekkyystason. Tästä seuraa vihdoin se, että ohjelman
+      lähettäjä ei voi enää yrittää päättää katsojan puolesta ohjelman tai
+      välikkeen äänekyyttä, vaan katsoja määrittelee itse millä äänekkyystasolla
+      hän mitäkin ohjelmaa kuuntelee.</p>
+    <p></p>
+    <p><br>
+    </p>
+    <p></p>
+    <table style="width: 100%;" border="0">
+      <tbody>
+        <tr>
+          <td><img alt="" src="Pictures/R128_Scales.png"></td>
+          <td style="width: 100%; vertical-align: top;">
+            <ul>
+            </ul>
+            <blockquote>
+              <h1>R128 standardin keskeisiä asioita</h1>
+            </blockquote>
+            <ul>
+              <ul>
+                <li> R128 standardin käyttämä ITU-R BS 1770 mittausalgoritmi
+                  mallintaa hyvällä tarkkuudella sen miten ihminen keskimäärin
+                  kokee äänekkyyden.<br>
+                </li>
+                <li> Mittausmenetelmä on teknisesti suhteellisen yksinkertainen,
+                  joten fyysisten ja softamittareiden toteuttaminen on helppoa.<br>
+                </li>
+                <li>Mittausmenetelmän toimivuus on testattu
+                  sokkokuuntelutesteillä.<br>
+                </li>
+                <li> Standardi tukee kanavamääriä yhdestä kuuteen (mono -&gt;
+                  5.1 monikanavaääni).</li>
+                <li> Toimii hyvin kaikenlaisella äänimateriaalilla (klassinen
+                  musiikki, puhe, heavy-metal, jne).</li>
+                <li>Käyttää samaa desibeliskaalaa kuin digitaaliset
+                  huipputasomittarit, mutta skaalan mittayksikön nimi on dB:n
+                  sijaan LU (Loudness Unit).</li>
+              </ul>
+            </ul>
+            <blockquote>
+              <h3>Kohdetaso<br>
+              </h3>
+            </blockquote>
+            <ul>
+              <ul>
+                <li>Kohdetasolla tarkoitetaan sitä äänekkyystasoa, johon
+                  kaikkien ohjelmien ja välikkeiden keskimääräinen äänekkyys
+                  asetetaan.</li>
+                <li>Kohdetasolla olevat ohjelmat kuulostavat kaikki yhtä
+                  äänekkäiltä.<br>
+                </li>
+                <li>Kohdeäänekkyystaso kaikelle äänimateriaalille on -23 LUFS.</li>
+              </ul>
+            </ul>
+            <blockquote>
+              <h3>Äänekkyyden mitta-asteikon numerointi<br>
+              </h3>
+            </blockquote>
+            <ul>
+              <ul>
+                <li>Mitta-asteikon numeroinissa käytetään kahta erilaista
+                  numerointitapaa (kuva vasemmalla):</li>
+                <li><strong>LU:</strong> asteikon suurin arvo on +23 ja muut
+                  asteikon arvot ovat sen alapuolella. Tällöin yksikkönä
+                  käytetään kirjaimia LU (<strong>L</strong>oudness <strong>U</strong>nit)
+                  ja kohdeäänekkyys on 0 LU.<br>
+                </li>
+                <li> <strong>LUFS:</strong> asteikon korkein arvo on nolla ja
+                  kaikki muut arvot ovat negatiivisia lukuja sen alapuolella.
+                  Tällöin yksikkönä käytetään kirjaimia LUFS (<strong>L</strong>oudness
+                  <strong>U</strong>nit relative to <strong>F</strong>ull <strong>S</strong>cale)
+                  ja kohdeäänekkyys on -23 LUFS.</li>
+                <li><strong>0 LU = -23 LUFS:</strong> Kohdeäänekkyys on
+                  kummassakin merkintätavassa sama, 0 LU = -23 LUFS, vain
+                  skaalan numerointitavat eroavat toisistaan. Käyttäjä saa
+                  valita kumpaa merkintätapaa haluaa käyttää.</li>
+              </ul>
+            </ul>
+            <blockquote>
+              <h3>Huomattavaa</h3>
+            </blockquote>
+            <ul>
+              <ul>
+                <ul>
+                </ul>
+                <li> Koska R128 käyttää samaa skaalaa kuin digitaalinen
+                  desibelimittari, niin <strong>1 LU = 1 dB</strong>. Tästä
+                  seuraa se, että jos ohjelman mitattu äänekkyys on +3 LU:ta
+                  liian korkealla, osuu äänekkyys tarkalleen kohdetasoon, kun
+                  äänitiedoston äänen voimakkuutta laskee työasemassa 3 dB:tä.</li>
+              </ul>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p><br>
+    </p>
+    <h1>EBU R128:n mittayksiköt</h1>
+    <br>
+    EBU:n standardissa äänekkyysmittaukselle määritellään kolme uutta
+    mittayksikköä. Yksiköt eroavat toisistaan lähinnä siinä kuinka pitkää
+    aikaviipaletta yksiköllä mitataan.<br>
+    <br>
+    <h3>Keskimääräinen äänekkyys eli integrated loudness</h3>
+    Yksiköllä mitataan äänekkyyttä kokonaisen ohjelman ajalta. Mittauksen
+    tuloksena on yksi numero, joka kertoo ohjelman keskimääräistetyn
+    äänekkyyden.<br>
+    <br>
+    <ul>
+      <li>Ohjelma jaetaan 400 ms viipaleisiin, joista jokaisesta mitatataan
+        äänekkyys. Osa aikaviipaleiden mittaustuloksista suodatetaan pois
+        tiettyjen sääntöjen mukaan ja lopuista lasketaan keskiarvo. <br>
+      </li>
+      <li>Monikanavaäänessä etukanavien ja takakanavien mittaustuloksia
+        painotetaan eri tavalla ja efektikanava LFE jätetään aina huomioimatta.<br>
+      </li>
+      <li>Tuloksena on yksi numero, joka kertoo ohjelman keskimääräisen
+        äänekkyyden. Keskimääräisen äänekkyyden kohdetaso on -23 LUFS.</li>
+      <li>Kaikki ohjelmat säädetään samaan kohdetasoon.</li>
+      <li>Keskimääräisen äänekkyyden mittaustapa sallii äänekkyysvaihtelut
+        ohjelman sisällä, vain keskiarvolla on merkitystä.</li>
+      <li>Jos ohjelman mitattu keskimääräinen äänekkyys on -19 LUFS, niin
+        ohjelma on 4 LU:ta liian äänekäs.</li>
+      <li>Tiedostopohjaisessa äänekkyysmittauksessa keskimääräinen äänekkyys
+        mitataan koko tiedostosta. Reaaliaikamittaria käytettäessä käyttäjä
+        käynnistää mittauksen ohjelma alussa ja pysäyttää ohjelman lopussa.<br>
+      </li>
+    </ul>
+    <p><br>
+    </p>
+    <h3>Lyhytaikainen äänekkyys, eli short-term loudness</h3>
+    <ul>
+      <li>Ohjelma jaetaan 3 sekunnin aikaviipaleisiin ja niistä mitataan
+        äänekkyys.</li>
+      <li>Tiedostopohjaisessa äänekkyysmittauksessa lyhytaikaisen äänekkyyden
+        mittaustuloksia käytetään yleensä vain kun tiedoston sisäisistä
+        äänekkyysvaihteluista piirretään kuvaaja.</li>
+      <li>Reaaliaikamittaria käytettäessä lyhytaikainen äänekkyys kertoo
+        viimeisen 3 sekunnin äänekkyysarvon. Joissain reaaliaikamittareissa
+        käyttäjä voi muuttaa aika-arvon (3 sek.) joksikin muuksi haluamakseen
+        arvoksi.<br>
+      </li>
+    </ul>
+    <p><br>
+    </p>
+    <h3>Hetkellinen äänekkyys</h3>
+    <ul>
+      <li>Äänestä otetaan 400 ms näyte ja mitataan siitä äänekyys. Hetkellisen
+        äänekkyyden mittaustuloksia käytetään kun lasketaan edellä kuvattuja
+        lyhytaikaista äänekkyyttä ja keskimääräistä äänekkyyttä.</li>
+      <li>Reaaliaikamittaria käytettäessä hetkellisen äänekkyyden mittaustulo
+        näytetään käyttäjälle esim. mittaripalkin muodossa.</li>
+      <li>Hetkellisen äänekkyyden mittaustulos kertoo käyttäjälle äänekkyyden
+        nopeista vaihteluista.<br>
+      </li>
+    </ul>
+    <p><br>
+    </p>
+    <h3>Äänekkyyden vaihteluväli eli loudness range (LRA)<br>
+    </h3>
+    <p></p>
+    <ul>
+      <li>Äänekkyyden vaihteluväli eli LRA (Loudness Range) kuvaa karkeasti
+        äänimateriaalin äänekkyyden vaihteluiden laajuutta.</li>
+      <li>Arvo pyrkii kuvaamaan sitä kuinka kaukana hiljaisimmat ja
+        voimakkaimmat hyötyäänet ovat toisistaan, eli sitä kuinka laaja
+        dynamiikka äänimateriaalissa on.</li>
+      <li>Arvo on kuitenkin viitteellinen eikä se kerro koko totuutta. Arvosta
+        ei esim. voi välttämättä päätellä onko äänimateriaalin dynamiikka-alue
+        liian laaja tv-lähetykseen (toimintaelokuvat).</li>
+    </ul>
+    <p><br>
+    </p>
+    <h2>Mihin kaikkia näitä mittayksiköitä käytetään ?</h2>
+    <h3>Tiedostopohjainen äänekkyysmittaus<br>
+    </h3>
+    <ul>
+      <li><strong>Keskimääräinen äänekkyys:</strong> mittaustulos kertoo koko
+        ohjelman pituudelta lasketun keskimääräistetyn äänekkyyden.</li>
+      <li><strong>Lyhytaikainen äänekkyys:</strong> tämän mittaustuloksen avulla
+        piirretään ohjelman sisäisiä äänekkyysvaihteluita kuvaava
+        tulosgrafiikka.</li>
+      <li><strong>Hetkellinen äänekkyys:</strong> tätä mittaustulosta ei käytetä
+        mihinkään käyttäjälle näkyvään asiaan. Tätä mittaustulosta käytetään
+        laskettaessa lyhytaikaista ja keskimääräistä äänekkyyttä.</li>
+      <li><strong>Äänekkyyden vaihteluväli:</strong> tämä mittaustulos kertoo
+        äänekkyyden vaihteluvälin ja se näytetään mittauksen tulosgrafiikassa.</li>
+    </ul>
+    <br>
+    Kuva: Lyhytaikaisen äänekkyyden mittaustuloksista piirretään äänitiedoston
+    äänekkyysvaihteluita kuvaava grafiikka. Äänekkyyden vaihteluiden kuvaaja
+    (ruskea viiva) on koottu 3 sekunnin pituisten mittausten tuloksista.<br>
+    <br>
+    <img alt="" src="Pictures/Short_Term_Loudness_Is_Used_To_Draw_History_Graphics.jpg"><br>
+    <h3>Reaaliaikainen äänekkyysmittaus<br>
+    </h3>
+    <ul>
+      <li><strong>Keskimääräinen äänekkyys:</strong> mittaustulos kertoo
+        ohjelman alussa käynnistetyn mittauksen tähän hetkeen asti lasketun
+        keskimääräistetyn äänekkyyden.</li>
+      <li><strong>Lyhytaikainen äänekkyys:</strong> tämä mittaustulos kertoo
+        käyttäjälle viimeisen 3 sekunnin äänekkyystason ja käyttäjä näkee tämän
+        arvon avulla mihin suuntaan äänekkyysmittaus on tällä hetkellä matkalla.</li>
+      <li><strong>Hetkellinen äänekkyys:</strong> tätä mittaustulosta käytetään
+        esim. pylväsmittarin näytön piirtämiseen. Tämä mittaustulos näyttää
+        äänekkyyden nopeat vaihtelut.</li>
+      <li><strong>Äänekkyyden vaihteluväli:</strong> tämä mittaustulos kertoo
+        äänekkyyden vaihteluvälin.<br>
+      </li>
+    </ul>
+    <p></p>
+    Alla on kuva erään valmistajan softapohjaisesta äänekkyysmittarista (Nugen
+    Audio). Mittarin ikkunan oikeasta laidasta löytyy yllä mainitut asiat
+    ylhäältä alaspäin:
+    <ul>
+      <li>Short-term = lyhytaikainen äänekkyys (3 viimeisen sekunnin äänekkyys).<br>
+      </li>
+      <li>Integrated = keskimääräinen äänekkyys (ohjelman alusta tähän hetkeen
+        asti mitattu keskimääräistetty äänekkyys).</li>
+      <li>Loudness Range = äänekkyyden vaihteluväli.</li>
+    </ul>
+    Hetkellisen äänekkyysmittauksen (400 ms aikaviipaleiden) mittaustulosten
+    avulla piirretään ikkunassa näkyvä 'ledimittaripalkki'. Palkin vasemmalla
+    puolella on ns. historianäyttö, se rullaa oikealta vasemmalle ja näyttää
+    hetkellisten äänekkyysmittausten historiaa. Historianäytön pituus on yleensä
+    käyttäjän määriteltävissä, alla olevassa kuvassa historia näyttää
+    hetkellisen äänekkyyden mittaustulosten liikkeitä viimeisen kahden minuutin
+    ajalta.<br>
+    R128 standardin mittayksiköiden ymmärtäminen auttaa lukemaan
+    äänekkyysmittarin näyttöä.<br>
+    <br>
+    <img alt="" src="Pictures/VisLM-H.png"><br>
+    <br>
+    <strong>Demovideo 4:</strong> Videossa näytetään erään valmistajan (ZPlane)
+    yksinkertainen softapohjainen äänekkyysmittari. Ääninäytteen äänekkyys
+    nousee näytteen alusta sen keskiosaa kohti ja laskee keskiosasta eteenpäin.
+    Keskiarvoistetun äänekyyden (integrated loudness) mittaustulos näkyy
+    mittarin ikkunan oikeassa laidassa ja ledipylväs näyttää hetkellisen
+    äänekkyysmittauksen nopeita vaihteluita. Huomaa miten keskiarvoistetun
+    äänekkyyden mittaustulos muuttuu hyvin hitaasti se 'laahaa jäljessää
+    verrattuna ledipalkkiin. <br>
+    Keskimääräisen äänekkyyden muutosten hitaus johtuu siitä, että se on
+    kaikkien aiempien hetkellisten äänekkyysmittausten keskiarvoistettu summa.
+    Lyhyet muutokset hetkellisessä äänekkyydessä eivät juuri vaikuta
+    keskimääräiseen äänekkyyteen. Saman suuntaisia muutoksia on oltava paljon,
+    jotta keskiarvo muuttuu. Tästä seuraa se, että ohjelman sisällä voi olla
+    suuriakin äänekkyysvaihteluita ja ohjelman äänekkyys saattaa silti osua
+    kohdetasoon -23 LUFS. On siis edelleen käyttäjän vastuulla säätää ohjelman
+    sisäiset äänekkyysvaihtelut lähetysvirtaan sopiviksi.<br>
+    <br>
+    <h2>Miten äänekkyysmittausta käytetään ?</h2>
+    Äänekkyysmittauksen voi toteuttaa kahdella eri tavalla:
+    reaaliaikamittauksella tai tiedostopohjaisella mittauksella. Kumpikin
+    mittaustapa soveltuu eri käyttökohteisiin.<br>
+    <h3>Reaaliaikamittaus</h3>
+    Reaaliaikamittaus soveltuu kohteisiin, joissa käyttäjä voi aktiivisesti
+    lukea mittaria ja säätää sen perusteella äänilähteen äänekkyyttä
+    reaaliajassa. Reaaliaikamittaus soveltuu hyvin tuotantopisteisiin, joissa
+    tallennetaan 'livesignaalia' ja joissa ohjelma valmistuu reaaliajassa
+    (ulkolähetys, studiotallennus, toky, live radio, lähetysyksiköt, jne).<br>
+    <br>
+    Reaaliaikamittari on hyödyllinen aistinvaraisen äänekkyysmittauksen tueksi
+    myös mm. jälkikäsittelyn äänitarkkaamoissa.<br>
+    <h3>Tiedostopohjainen äänekkyysmittaus</h3>
+    Tiedostopohjaisessa äänekkyysmittauksessa mittaus tehdään lähetysvalmiin
+    ohjelman äänitiedostosta. Samalla kun tiedoston keskimääräinen äänekkyys
+    mitatataan voidaan sen äänekkyystaso säätää koneellisesti EBU:n
+    kohdeäänekkyystasoon.<br>
+    <br>
+    Tämä työtapa mahdollistaa sen, että ohjelman koosto ja äänen käsittely
+    voidaan tehdä perinteisiä työtapoja käyttäen, eikä työpisteessä välttämättä
+    tarvita erillistä äänekkyysmittaria. Näin tehdyn ohjelman keskimääräinen
+    äänekkyys ei luultavasti asetu EBU:n kohdetasoon, joten ohjelman
+    äänitiedoston äänekkyys säädetään kohdetasoon koneellisesti samalla kun
+    tiedoston äänekkyyttä mitataan.<br>
+    <br>
+    Tämä työtapa sopii kohteisiin, joissa ohjelma tallennetaan tiedostoksi ennen
+    ohjelman lähetystä.<br>
+    <h3>Kumpikin mittaustapa</h3>
+    Vaikka käytettävissä olisikin äänekkyysmittari, on käyttäjän tärkein työkalu
+    edelleen korvat ja aistinvarainen äänekyysmittaus. Kone ei tiedä mikä on
+    hyötyääntä esim. puhetta ja mikä epäoleellista ääntä esim. sateen kohinaa.
+    Käyttäjän on siksi säädettävä aistinvaraisesti eri äänielementtien
+    keskinäiset suhteet sopiviksi. Äänekkyysmittari on käyttäjän tukena ja antaa
+    'ankkurin' (kohdetason -23 LUFS), johon lopputuloksen keskimääräinen
+    äänekkyys 'ankkuroidaan'.<br>
+    <br>
+    <br>
+    <h2>Äänekkyysvaihtelut lähetysvirrassa</h2>
+    Alla olevassa kuvassa on yhden tv-kanavan lähetysvirrasta mitattuja
+    äänekkyyksiä keväällä 2012.<br>
+    <br>
+    Mittaus tapahtui aikavälillä klo 10:00 - 15:00 (aikajana kuvan alareunassa).
+    Kuvassa näkyy punaisena 3 sekunnin yksittäisten äänekkyysmittausten piirtämä
+    tiheä kuvio. Kuvan vasemmassa laidassa on R128 - standardin mukainen
+    mitta-asteikko (yksikkö on LUFS). EBU:n kohdetaso näkyy koko kuvan läpi
+    kulkevana vihreänä viivana. Yksittäisen tv-ohjelman keskimääräinen äänekkyys
+    on piirretty kuvaan mustana vaakasuuntaisena viivana.<br>
+    <br>
+    Mittausjakson aikana lähetettiin 8 kokonaista ohjelmaa ja niiden
+    keskimääräiset äänekkyydet vaihtelivat reilusti EBU:n kohdetason kumminkin
+    puolin. Tämä kuva on kertoo yhdestä tavallisesta lähetyspäivästä ja kuvaa
+    hyvin lähetyksen äänekkyyden arkea.<br>
+    <br>
+    Kuva kertoo myös sen, että vaikka meillä on kuviteltu olevan lähetettäville
+    ohjelmille yhtenäinen äänen 'taso', kyseessä on pitkälti ollut illuusio.
+    Paremman työkalun puutteessa lähetykseen sopivan äänen taso on määritelty
+    ainoastaan sen perusteella, että äänen sähköinen huippuarvo ei ole saanut
+    ylittää tiettyä raja-arvoa.<br>
+    <br>
+    Kuvasta voi päätellä myös sen että ohjelman sopiminen lähetysvirtaan
+    äänekkyytensä puolesta on riippunut siitä mikä sitä edellisen ja seuraavan
+    ohjelman äänekkyys on sattunut olemaan. Äänekkyyshypyn syntyminen on ollut
+    sattuman kauppaa.<br>
+    <br>
+    <img alt="" src="Pictures/The_Problem.png"><br>
+    <br>
+    <img alt="" src="file:///tavara/Yle_Ja_AanekkyysKorjaus-Serveri/Yle_Ja_AanekkyysKorjaus-Serveri/html/Pictures/The_Problem.png"><br>
+    Alla yksityiskohta yläkuvasta. Kuvan ohjelmavirrassa näkyy häiritsevän suuri
+    äänekkyyshyppy useammassa paikassa. Klo 11:00 ohjelman vaihdoksessa tapahtuu
+    7 LU pudotus, klo 12:05 7.8 LU:n nousu ja klo 12:50 6.8 LU:n pudotus. Tämän
+    kokoluokan äänekkyyshyppy on häiritsevä ja katsoja joutuu säätämään
+    uudelleen kuunteluvoimakkuutensa.<br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/The_Problem-2-finnish.jpg"><br>
+    <br>
+    <p></p>
+    <p></p>
+    <h2>&nbsp;ÄänekkyysKorjain (FreeLCS)<br>
+    </h2>
+    <p></p>
+    <ul>
+      <li>Ohjelman ääni exportoidaan kuva- tai äänityöasemasta ja kopioidaan
+        verkossa olevalle 'ÄänekkyysKorjaus-palvelimelle'.</li>
+      <li>Palvelin mittaa äänitiedoston äänekkyyden ja tuottaa tiedoston
+        äänekkyysvaihteluita kuvaavan grafiikan ja EBU:n kohdetasoon korjatun
+        äänitiedoston.</li>
+      <li>Äänekkyyskorjattu tiedosto kopioidaan verkon yli työasemalle ja
+        laitetaan ohjelman äänitiedostoksi.</li>
+      <li>Yksi miksaus = yksi äänitiedosto. Yhden miksauksen kaikkien
+        äänikanavien pitää olla yhdessä ja samassa tiedostossa. Jos esim.
+        stereomiksauksen äänikanavat käsittelee erillään toisistaan, on
+        lopputuloksen äänekyys 3 LU:ta pielessä.</li>
+      <li>Yhdessä äänitiedostossa saa olla vain yhden miksauksen äänikanavat.
+        Jos ohjelmassa on erillinen stereo- ja 5.1 - miksaus, kumpikin
+        exportoidaan työasemasta erikseen.</li>
+      <li>EBU:n standardi on tarkoitettu lähetysvalmiiden ohjelmien äänekkyyden
+        mittaamiseen. Raakamateriaalin käsittely voi aiheuttaa virheitä sillä
+        pois leikattavat osat voivat vääristää mittaustulosta.</li>
+      <li>Pääsääntöisesti palvelimen käsiteltäväksi laitetaan vain
+        lähetysvalmiita ohjelmia. Makasiiniohjelmien koostossa voi kuitenkin
+        olla hyödyllistä säätää erilliset ohjelmasegmentit (studiojuonnot,
+        insertit) kaikki erikseen kohdetasoon ennen ohjelman koostoa. Tällöin
+        pitää kuitenkin pitää huolta siitä, että materiaalissa ei ole äänekkäitä
+        osia (mikrofonin käsittelyäänet, mikrofoniin osuva kova tuuli), jotka
+        leikataan pois. Hiljaisuutta ei oteta huomioon äänekkyysmittauksessa,
+        joten mykkiä kohtia voi leikata pois äänekkyysmittauksen jälkeen
+        vaikuttamatta materiaalin äänekkyyteen.</li>
+      <li>ÄänekkyysKorjaus-palvelin on työkalu, joka säätää ohjelman äänekkyyden
+        lähetysvirtaan sopivaksi. Äänekkyyskorjaus ei muuta tiedoston sisäisiä
+        äänekkysvaihteluita mitenkään. Jos tiedoston äänekkyyvaihtelut ovat
+        liian laajoja, ne ovet sitä myös äänekkyyskorjauksen jälkeen. Ohjelman
+        työstäjän vastuulla on säätää äänimateriaalin sisäiset äänekkyyserot
+        sopiviksi.</li>
+      <li>DemoVideossa 3 on ensimmäisen videon ääninäytteiden äänekkyys korjattu
+        kohdetasolle 0 LU (-23 LUFS).<br>
+      </li>
+      <li>Jälkituotannossa, jossa ääni on jo tallennettu tiedostomuotoon, ei
+        enää ole merkitystä sillä missä äänen huippuarvot liikkuvat, kunhan
+        huiput eivät mene yli asteikon ja ääni särölle. Kun äänen voimakkuus
+        ankkuroidaan oikealle paikalleen äänekkyyden mukaan, huipuille ja
+        äänekkyysvaihteluille jää enemmän tilaa. Kompression liiallinen käyttö
+        vähenee, kun sillä ei saavuteta enää äänekkyyshyötyä ja miksauksista
+        tulee hengittävämpiä ja elävämpiä. Huippuarvomittareita tarvitaan
+        kuitenkin edelleen pisteissä, joissa ääntä otetaan sisään varmistamaan,
+        että huiput pysyvät sallitulla alueella.</li>
+    </ul>
+    <br>
+    <h2>Tulosgrafiikka</h2>
+    <br>
+    <img alt="" src="Pictures/Beethoven-Coriolan_Overture_Op_62.wav-Aanekkyyslaskennan_Tulokset.jpg"><br>
+    <br>
+    Muistiinpanoja
+    <ul>
+      <li>Selitä TruePeak</li>
+      <li>ÄänekkyysKorjauksen Mounttaus ja käyttäminen.</li>
+      <li>Pointtaa, että ÄänekkyysKorjaus ei auta tilanteessa, jossa ohjelman
+        sisällä on liian suuria äänekkyyshyppyjä (makasiiniohjelmat (pikku
+        kakkonen),). Ohjelman koostajan vastuulla on hoitaa kaikki
+        ohjelmasegmentit kohdetasolle. Esimerkkikuvana esim. Sonata Arctica.</li>
+      <li>Lisää kaikkiin esitelmätiedostoihin lisenssi: saa vapaasti muokata ja
+        levittää, kunhan mainitsee alkuperäisen tekijän.</li>
+      <li>On tärkeää, että ohjelman äänekkyyttää säädettäessä puhe säädetään
+        kohdetasoon, sillä katsojat säätävät kotikuuntelun äänen voimakkuuden
+        puheen äänekkyyden mukaan.</li>
+      <li>Laita EBU R128 tärkeimpiin ominaisuuksiin maininta, että
+        äänekkyysstandardin noudattaminen on nyt pakollista joissakin maissa
+        (Italia, USA). Kerro samassa kappaleessa, että Yle ja suomalaiset
+        kaupalliset tv-toimijat ottavat EBU R128 käyttöön vuoden 2013 aikana.</li>
+      <li>Mainitse, että EB:n kohdetaso on 2 dB:tä Ylen nykyistä keskiarvoa
+        alempana, joten siirrymme keskiäänekkyydessä hieman matalammalle tasolle
+        ?</li>
+      <li>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        Mainitse että palvelin on vapaan lähdekoodin projekti, jota kuka vain
+        saa käyttää ilmaiseksi.</li>
+    </ul>
+    <br>
+    Getting FreeLCS
+    <ul>
+      <li>The latest released package can be downloaded from SourceForge</li>
+      <li>Development happens at Github. The latest unreleased version can be
+        downloaded with the source versioning tool git:<br>
+        git clone http://github.com/mhartzel/freelcs.git<br>
+      </li>
+    </ul>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </body>
+</html>
