@@ -126,14 +126,14 @@
         type="video/webm"> <source src="../video/mp4/DemoVideo-3.mp4" type="video/mp4">
       Your browser does not support the video tag. </video> <br>
     <br>
-    <strong>Esimerkki:</strong> Huippuarvo ja äänekkyys ristiriidassa. Esimerkin
-    yläkuvassa näkyy heavy-metal konsertin sähköiset huippuarvot ja sen
-    alapuolella mitattu äänekkyys. Yläkuvan korkeat huippuarvot (soittajien
-    haastattelut) ovat äänekyydeltään hiljaisempia kuin matalat huippuarvot
-    (musiikkiesitykset). Musiikin voimakas kompressointi on nostanut musiikin
-    äänekkyyttä, mutta laskenut samalla huipputasoja. Huippuarvomittarin
-    näyttämät arvot ovat täysin päinvastaisia äänimateriaalin todellisen
-    äänekkyyden kanssa.<br>
+    <strong>Esimerkki:</strong> Huippuarvo ja äänekkyys ristiriidassa. Alla
+    näkyvän esimerkin yläkuvassa näkyy heavy-metal konsertin sähköiset
+    huippuarvot ja sen alapuolella mitattu äänekkyys. Yläkuvan korkeat
+    huippuarvot (soittajien haastattelut) ovat äänekyydeltään hiljaisempia kuin
+    matalat huippuarvot (musiikkiesitykset). Musiikin voimakas kompressointi on
+    nostanut musiikin äänekkyyttä, mutta laskenut samalla huipputasoja.
+    Huippuarvomittarin näyttämät arvot ovat täysin ristiriitaisia
+    äänimateriaalin todellisen äänekkyyden kanssa.<br>
     <br>
     <br>
     <img alt="" src="Pictures/Sample_Peaks_vs_Loudness-Finnish.png"><br>
@@ -487,59 +487,210 @@
     <br>
     <p></p>
     <p></p>
-    <h2>&nbsp;ÄänekkyysKorjain (FreeLCS)<br>
-    </h2>
+    <h2>&nbsp;Tiedostopohjainen ÄänekkyysKorjaus</h2>
+    <br>
+    Seuraavaksi esitellään eräs tiedostopohjainen äänekkyysmittari /
+    automaattinen äänekkyyden korjaaja. Kyseessä on FreeLCS (<a href="http://freelcs.sourceforge.net">http://freelcs.sourceforge.net</a>).<br>
+    <br>
+    <h3>ÄänekkyysKorjauksen käyttäminen</h3>
+    "<strong>ÄänekkyysKorjaus</strong>" on verkossa oleva palvelin, jolle
+    käyttäjä voi siirtää äänitiedostoja mitattavaksi. Palvelin tekee
+    äänitiedostosta EBU R128:n mukaan korjatun version, jonka käyttäjä voi imeä
+    takaisin omalle työasemalleen verkon yli ja liittää ohjelman ääneksi.
+    Palvelin tuottaa myös äänitiedoston äänekkyysvaihteluita kuvaavan grafiikan.<br>
+    <br>
+    ÄänekkyysKorjaus - palvelimen käyttö on hyvin helppoa:<br>
+    <ol>
+      <li>Ensin ÄänekkyysKorjaus - palvelimen verkkolevy mountataan työasemalle
+        verkon yli.</li>
+      <li>Sitten käsiteltävät tiedostot raahataan hiirellä työasemalta
+        palvelimen levylle.</li>
+      <li>Muutaman minuutin odottelun jälkeen äänekkyyskorjatut tiedostot
+        raahataan palvelimen hakemistosta "<strong>00-Korjatut_Tiedostot</strong>"
+        takaisin työasemalle verkon yli.<br>
+      </li>
+    </ol>
+    Palvelimen levyn mounttaaminen työasemalle on selitetty myöhemmin omassa
+    kappaleessaan. Alla olevan esimerkin kuvat ovat windows 7
+    käyttöjärjestelmästä, mutta samat periaatteet pätevät muihinkin
+    käyttöjärjestelmiin (OS X , windows xp, jne).<br>
+    <br>
+    ÄänekkyysKorjaus - palvelimen levy näkyy mounttaamisen jälkeen työasemassa
+    tavallisena kiintolevynä ja levylle voi raahata tiedostoja käsiteltäväksi.<br>
+    <br>
+    Alla olevan esimerkin kuvassa työaseman paikallinen levy käsiteltäväksi
+    haluttuine tiedostoineen näkyy ylemmässä ikkunassa. ÄänekkyysKorjaus -
+    palvelimen kovalevy näkyy alemmassa ikkunassa. Halutut tiedostot kopioidaan
+    korjauspalvelimen päähakemistoon hiirellä raahaamalla.<br>
+    <br>
+    Huom !!!!!!! Tiedostot on kopioitava palvelimen juurihakemistoon, vain tähän
+    hakemistoon ilmestyvät tiedostot menevät äänekkyyskorjaukseen.<br>
+    <br>
+    <img alt="" src="Pictures/Usage-windows7-finnish-01.jpg"><br>
+    <br>
+    <br>
+    Palvelin alkaa käsitellä äänitiedostoja, kun ne ovat kokonaan siirtyneet
+    palvelimelle. Kun tiedostot on kopioitu, klikkaa auki palvelimen hakemisto "<strong>00-Korjatut_Tiedostot</strong>",
+    äänekkyyskorjauksen tuloksena syntyvät tiedostot ilmestyvät sinne.<br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/Usage-windows7-finnish-02.jpg"><br>
+    <br>
+    <br>
+    Hetken päästä äänekkyyskorjauksen tulokset alkavat ilmestyä hakemistoon.<br>
+    &nbsp;Ensin valmiiksi tulee korjaamattoman äänitiedoston
+    äänekkyysvaihteluista kertova grafiikkatiedosto. Sen voi avata
+    tarkasteltavaksi tuplaklikkaamalla hiirellä. Tiedoston nimen lopussa on aina
+    merkkijono "<strong>Aanekkyyslaskennan_Tulokset</strong>".<br>
+    <br>
+    Seuraavaksi ilmestyy EBU R128:n mukaan äänekkyyskorjattu versio
+    alkuperäisestä tiedostosta. Korjatun tiedoston nimen perässä on aina
+    merkkijono "<strong>-23_LUFS</strong>", joka kertoo, että kyseinen tiedosto
+    on korjattu EBU:n kohdetasoon.<br>
+    <br>
+    Äänekkyyskorjattu tiedosto kopioidaan verkon yli takaisin omalle työasemalle
+    ja liitetään ohjelman ääneksi.<br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/Usage-windows7-finnish-03.jpg"><br>
+    <br>
+    <br>
+    <h3>ÄänekkyysKorjaus - palvelimen hakemistot</h3>
+    Palvelimen levyllä on kolme hakemistoa: <strong>juurihakemisto</strong>, <strong>00-Korjatut_Tiedostot</strong>,
+    <strong>00-Laskentajonon_Tiedot</strong>. <br>
+    <ul>
+      <li><strong>"Juurihakemisto"</strong> on hakemisto, jonka sisällä edellä
+        mainitut muut kaksi hakemistoa ovat. Juurihakemisto on se paikka johon
+        käsiteltävät tiedostot pitää kopioida. Muihin hakemistoihin kopioituja
+        tiedostoja ei käsitellä.</li>
+      <li><strong>"00-Korjatut_Tiedostot"</strong> on hakemisto, johon
+        äänitiedostojen äänekkyysmittauksen ja korjauksen tuloksena syntyvät
+        tiedostot ilmestyvät. Tänne ilmestyy tiedostojen äänekkyyskorjatut
+        versiot ja korjaamattomien äänitiedostojen äänekkyysvaihteluita kuvaavat
+        grafiikat.</li>
+      <li><strong>"00-Laskentajonon_Tiedot</strong>" on hakemisto, josta löytyy
+        ÄänekkyysKorjaus - palvelimen ns. käsittelyjonon tilannetta kuvaava html
+        - sivu (<strong>00-Laskentajonon_Tiedot.html</strong>). Sivun voi avata
+        nettiselaimeen ja se kertoo sen kuinka monta tiedostoa odottaa jonossa
+        käsittelyä ja mitä tiedostoja käsitellään parhaillaan. Tätä nettisivua
+        ei luultavasti tarvita normaalissa käyttössä, mutta siitä on hyötyä jos
+        omien tiedostojen korjatut versiot eivät odottelun jälkeen ilmesty
+        saataville. Tämän nettisivun avulla voi tarkastaa johtuuko viivästyminen
+        palvelimen ruuhkaantumisesta.<br>
+      </li>
+    </ul>
+    Käyttäjän palvelimelle kopioimat tiedostot ja niiden käsittelyn tuloksena
+    syntyneet tiedostot deletoidaan palvelimelta automaattisesti kahdeksan
+    tunnin kuluttua.<br>
+    <br>
     <p></p>
     <ul>
-      <li>Ohjelman ääni exportoidaan kuva- tai äänityöasemasta ja kopioidaan
-        verkossa olevalle 'ÄänekkyysKorjaus-palvelimelle'.</li>
-      <li>Palvelin mittaa äänitiedoston äänekkyyden ja tuottaa tiedoston
-        äänekkyysvaihteluita kuvaavan grafiikan ja EBU:n kohdetasoon korjatun
-        äänitiedoston.</li>
-      <li>Äänekkyyskorjattu tiedosto kopioidaan verkon yli työasemalle ja
-        laitetaan ohjelman äänitiedostoksi.</li>
-      <li>Yksi miksaus = yksi äänitiedosto. Yhden miksauksen kaikkien
-        äänikanavien pitää olla yhdessä ja samassa tiedostossa. Jos esim.
-        stereomiksauksen äänikanavat käsittelee erillään toisistaan, on
-        lopputuloksen äänekyys 3 LU:ta pielessä.</li>
-      <li>Yhdessä äänitiedostossa saa olla vain yhden miksauksen äänikanavat.
-        Jos ohjelmassa on erillinen stereo- ja 5.1 - miksaus, kumpikin
-        exportoidaan työasemasta erikseen.</li>
-      <li>EBU:n standardi on tarkoitettu lähetysvalmiiden ohjelmien äänekkyyden
-        mittaamiseen. Raakamateriaalin käsittely voi aiheuttaa virheitä sillä
-        pois leikattavat osat voivat vääristää mittaustulosta.</li>
-      <li>Pääsääntöisesti palvelimen käsiteltäväksi laitetaan vain
-        lähetysvalmiita ohjelmia. Makasiiniohjelmien koostossa voi kuitenkin
-        olla hyödyllistä säätää erilliset ohjelmasegmentit (studiojuonnot,
-        insertit) kaikki erikseen kohdetasoon ennen ohjelman koostoa. Tällöin
-        pitää kuitenkin pitää huolta siitä, että materiaalissa ei ole äänekkäitä
-        osia (mikrofonin käsittelyäänet, mikrofoniin osuva kova tuuli), jotka
-        leikataan pois. Hiljaisuutta ei oteta huomioon äänekkyysmittauksessa,
-        joten mykkiä kohtia voi leikata pois äänekkyysmittauksen jälkeen
-        vaikuttamatta materiaalin äänekkyyteen.</li>
-      <li>ÄänekkyysKorjaus-palvelin on työkalu, joka säätää ohjelman äänekkyyden
-        lähetysvirtaan sopivaksi. Äänekkyyskorjaus ei muuta tiedoston sisäisiä
-        äänekkysvaihteluita mitenkään. Jos tiedoston äänekkyyvaihtelut ovat
-        liian laajoja, ne ovet sitä myös äänekkyyskorjauksen jälkeen. Ohjelman
-        työstäjän vastuulla on säätää äänimateriaalin sisäiset äänekkyyserot
-        sopiviksi.</li>
-      <li>DemoVideossa 3 on ensimmäisen videon ääninäytteiden äänekkyys korjattu
-        kohdetasolle 0 LU (-23 LUFS).<br>
+    </ul>
+    <h2>Tulosgrafiikka</h2>
+    Alla on esimerkki äänekkyysmittauksen tuloksena syntyvästä grafiikasta.
+    Kuvan keskeltä ylälaidasta käy ilmi seuraavat tiedot:<br>
+    <ul>
+      <li>Tiedoston nimi</li>
+      <li>Tiedoston keskimääräinen äänekkyys</li>
+      <li>Kuinka paljon tiedoston keskimääräinen äänekkyys eroaa EBU:n
+        kohdetasosta -23 LUFS.</li>
+      <li>Äänekkyyden vaihteluväli</li>
+      <li>Tiedoston huipputaso desibeleinä.<br>
       </li>
-      <li>Jälkituotannossa, jossa ääni on jo tallennettu tiedostomuotoon, ei
-        enää ole merkitystä sillä missä äänen huippuarvot liikkuvat, kunhan
-        huiput eivät mene yli asteikon ja ääni särölle. Kun äänen voimakkuus
-        ankkuroidaan oikealle paikalleen äänekkyyden mukaan, huipuille ja
-        äänekkyysvaihteluille jää enemmän tilaa. Kompression liiallinen käyttö
-        vähenee, kun sillä ei saavuteta enää äänekkyyshyötyä ja miksauksista
-        tulee hengittävämpiä ja elävämpiä. Huippuarvomittareita tarvitaan
-        kuitenkin edelleen pisteissä, joissa ääntä otetaan sisään varmistamaan,
-        että huiput pysyvät sallitulla alueella.</li>
+    </ul>
+    Äänekkyysvaihteluista kertovaa kuvaajaa luetaan näin:<br>
+    <ul>
+      <li>Ruskea viiva kuvaa tiedostosta mitattuja äänekkyyden vaihteluita.</li>
+      <li>Vaalean vihreä kuvan läpi kulkeva vaakaviiva kuvaa EBU:n kohdetasoa
+        -23 LUFS / 0 LU.</li>
+      <li>Tumman vihreä viiva kuvaa tiedostosta mitattua keskimääräistä
+        äänekkyyttä.<br>
+      </li>
     </ul>
     <br>
-    <h2>Tulosgrafiikka</h2>
+    Alla oleva esimerkki kuvaa yhden klassisen musiikkikappaleen
+    äänekkyysvaihteluita. Klassisessa musiikissa äänekkyys normaalistikin
+    vaihtelee hyvin laajalla alueella.<br>
+    <br>
+    Äänekkyyskuvaajasta näkee esiintyykö ohjelmassa ongelmallisia
+    äänekkyyhyppyjä. Epäilyttävät paikat kannattaa tarkastaa. Äänekkyyshypyn
+    paikan ajassa voi päätellä tulosgrafiikan alareunan aikajanan perusteella.<br>
+    <br>
     <br>
     <img alt="" src="Pictures/Beethoven-Coriolan_Overture_Op_62.wav-Aanekkyyslaskennan_Tulokset.jpg"><br>
+    <br>
+    <br>
+    <h2>EBU R128 ja sähköinen huipputaso</h2>
+    Kun äänen voimakkuus ankkuroidaan oikealle paikalleen äänekkyyden mukaan,
+    sähköisille huipuille ja äänekkyysvaihteluille jää enemmän tilaa.
+    Kompression liiallinen käyttö vähenee, kun sillä ei saavuteta enää
+    äänekkyyshyötyä ja miksauksista tulee hengittävämpiä ja elävämpiä.<br>
+    <br>
+    EBU R128 määrittelee äänen sähköisen huipputason mittaamiselle menetelmän,
+    joka on tarkempi kuin perinteiset digitaaliset huipputasomittarit. <br>
+    <br>
+    <img alt="" src="Pictures/TruePeak-Sampling-1.png"><br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/TruePeak-Sampling-2.png"><br>
+    <br>
+    <h2>Tärkeitä huomioita ÄänekkyysKorjaus - palvelimen käytöstä</h2>
+    Tiedostopohjaisessa äänekkyysmittauksessa on muutamia asioita, jotka on
+    tärkeätä ottaa huomioon.<br>
+    <h3>Äänikanavat</h3>
+    Yhden miksauksen kaikkien äänikanavien pitää olla samassa tiedostossa. Esim.
+    stereomiksauksen äänikanavia ei saa käsitellä niin, että
+    äänekkyyskorjaukseen laitetaan erilliset vasemman ja oikean äänikanavan
+    tiedostot. Tällä tavalla käsiteltyjen käsiteltyjen tiedostojen äänekkyys
+    menee väärälle äänekkyystasolle (3 LU :ta pieleen).<br>
+    <br>
+    Yhdessä äänitiedostossa saa olla vain yhden miksauksen äänikanavat. Jos
+    ohjelmassa on erillinen stereo- ja 5.1 - miksaus, kumpikin miksaus pitää
+    käsitellä erikseen.<br>
+    <br>
+    <strong>Esim:</strong> Kun ohjelmassa on kolme eri äänimiksausta (Stereo
+    Suomi, Stereo Ruotsi, 5.1 Suomi) syntyy tästä seuraavat tiedostot:<br>
+    <br>
+    Tiedosto 1 = Stereo Suomi (kaksi äänikanavaa)<br>
+    Tiedosto 2 = Stereo Ruotsi (kaksi äänikanavaa)<br>
+    Tiedosto 3 = 5.1 Suomi (kuusi äänikanavaa)<br>
+    <h3>Raakamateriaalin käsittely</h3>
+    EBU:n äänekkyysstandardi on tarkoitettu vain lähetysvalmiiden ohjelmien
+    äänekkyyden mittaamiseen. Raakamateriaalia ei voi äänekkyyskorjata, sillä
+    jos materiaalista leikataan äänekkyyskorjauksen jälkeen pois osia, muuttuu
+    tiedoston keskimääräinen äänekkyys. Tämä johtuu siitä, että keskimääräinen
+    äänekkyys kertyy tiedostosta tehtyjen 3 sekunnin mittausten keskiarvosta ja
+    tämä keskiarvo muuttuu kun mittaustuloksia (tiedoston osia) poistetaan.
+    Pääsääntöisesti ÄänekkyysKorjaus - palvelimelle siis laitetaan
+    käsiteltäväksi ainoastaan lähetysvalmiita ohjelmia, joita ei enää muuteta
+    mitenkään.<br>
+    <br>
+    Poikkeuksen edelliseen tekee makasiinohjelmat. Jos materiaali koostuu esim.
+    samassa paikassa tehdyistä studiojuonnoista ja inserteistä, voi juonnot ja
+    insertit korjata niin, että jokainen ohjelmasegmentti korjataan erikseen.
+    Tällä tavalla pääsee eroon segmenttien välisistä mahdollisista
+    äänekkyyseroista. Tässä pitää kuitenkin pitää huolta siitä, että
+    materiaalissa ei ole osia, jotka leikataan myöhemmin pois. Hiljaisuutta ei
+    oteta huomioon äänekkyysmittauksessa, joten mykkiä kohtia voi leikata pois
+    äänekkyysmittauksen jälkeen vaikuttamatta äänekkyyteen.<br>
+    <h3>Ohjelman sisäiset äänekkyysvaihtelut<br>
+    </h3>
+    ÄänekkyysKorjaus-palvelin on työkalu, joka säätää ohjelman äänekkyyden
+    lähetysvirtaan sopivaksi. Äänekkyyskorjaus ei muuta tiedoston sisäisiä
+    äänekkysvaihteluita mitenkään. Jos äänekkyyvaihtelut ovat alun perinkin
+    liian laajoja, ne ovet sitä myös äänekkyyskorjauksen jälkeen. Ohjelman
+    työstäjän vastuulla on säätää äänimateriaalin sisäiset äänekkyyserot
+    sopiviksi.<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <ul>
+    </ul>
+    DemoVideossa 3 on ensimmäisen videon ääninäytteiden äänekkyys korjattu
+    kohdetasolle 0 LU (-23 LUFS).<br>
+    <br>
+    <br>
     <br>
     Muistiinpanoja
     <ul>
