@@ -111,6 +111,9 @@
     kerro äänekkyyttä. Jos alla oleva video ei toimi selaimellasi, voit katsoa
     videon <a href="http://www.youtube.com/watch?v=ii1ijC2OQow&amp;vq&amp;hd=1">YouTubesta</a>.<br>
     <br>
+    Huom !!!!!!! Videonäytteet kannattaa kuunnella suhteellisen kovalla
+    volyymillä, jotta niiden äänekkyyserot käyvät selvemmin ilmi.<br>
+    <br>
     <br>
     <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-1.webm"
         type="video/webm"> <source src="../video/mp4/DemoVideo-1.mp4" type="video/mp4">
@@ -445,6 +448,12 @@
     'ankkurin' (kohdetason -23 LUFS), johon lopputuloksen keskimääräinen
     äänekkyys 'ankkuroidaan'.<br>
     <br>
+    On tärkeää tietää, että katsojat säätävät kotikuuntelunsa äänen voimakkuuden
+    sopivaksi puheen äänekkyyden mukaan. Jos puhe on liian hiljainen tai
+    äänekäs, joutuu kuuntelija säätämään vastaanottimensa äänen voimakkuutta.
+    Tämän takia on tärkeää, että puhe on aina kohdeäänekkyystasossa -23 LUFS tai
+    ainakin hyvin lähellä sitä.<br>
+    <br>
     <br>
     <h2>Äänekkyysvaihtelut lähetysvirrassa</h2>
     Alla olevassa kuvassa on yhden tv-kanavan lähetysvirrasta mitattuja
@@ -620,19 +629,70 @@
     <img alt="" src="Pictures/Beethoven-Coriolan_Overture_Op_62.wav-Aanekkyyslaskennan_Tulokset.jpg"><br>
     <br>
     <br>
-    <h2>EBU R128 ja sähköinen huipputaso</h2>
-    Kun äänen voimakkuus ankkuroidaan oikealle paikalleen äänekkyyden mukaan,
-    sähköisille huipuille ja äänekkyysvaihteluille jää enemmän tilaa.
-    Kompression liiallinen käyttö vähenee, kun sillä ei saavuteta enää
-    äänekkyyshyötyä ja miksauksista tulee hengittävämpiä ja elävämpiä.<br>
+    <h2>Sähköinen huipputaso ja TruePeak<br>
+    </h2>
+    Analogisen äänen digitoinnissa on on yksi perustavan laatuinen ongelma,
+    jonka seurauksena saattaa ääneen syntyä säröä kun se muutataan takaisin
+    analogiseksi ja kun ääni kompressoidaan informaatiota hukkaavaan formaattiin
+    tv-lähetystä varten.<br>
     <br>
-    EBU R128 määrittelee äänen sähköisen huipputason mittaamiselle menetelmän,
-    joka on tarkempi kuin perinteiset digitaaliset huipputasomittarit. <br>
+    Alla kuvassa sininen viiva edustaa äänen sähköisä vaihteluita ja punaiset
+    pisteet äänen digitoinnissa äänestä otettuja näytteitä. Esimerkin
+    tilanteessa äänen sähköiset huipputasot sattuvat hyvin yksiin näytteenoton
+    kanssa ja äänen kaikki sähköiset huiput rekisteröityvät digitaaliseen
+    muotoon ongelmitta. <br>
+    <br>
     <br>
     <img alt="" src="Pictures/TruePeak-Sampling-1.png"><br>
     <br>
+    Jos äänessä on hyvin nopeita sähköisiä huippuja saattaa syntyä alla näkyvä
+    tilanne. Digitoitaessa näytteiden oton ajoitus osuu epäedullisesti suhteessa
+    signaalin huippuihin. Äänen sähköiseksi huipputasoksi rekisteröituu paljon
+    matalampi arvo, kuin todelliset sähköiset huiput, sillä korkeimmat huiput
+    osuvat näytteiden oton välisiin aikoihin.<br>
+    <br>
+    Tämä ei muuten olisi ongelma, mutta kun ääni muutetaan takaisin analogiseksi
+    tai kun ääni muutetaan lähetystä varten informaatiota hukkaavaan muotoon
+    (mpeg2, mpeg4, aac), nämä "haamuhuiput" ilmestyvät takaisin signaaliin.<br>
+    <br>
+    Jos äänityöt on tehty digitaalista huippuarvomittaria käyttäen, näyttää
+    mittari huippuarvoksi digitoitaessa saadun huippuarvon, eikä signaalin
+    todellisia analogisia huippuja. Jos äänen voimakkuus on äänityöstössä
+    nostettu lähelle digitaalisen asteikon huippua, menevät nämä haamuhuiput yli
+    sallitun asteikon kun signaali muutetaan takaisin analogiseksi katsojan
+    vastaanottimessa. Huiput säröytyvät.<br>
+    <br>
     <br>
     <img alt="" src="Pictures/TruePeak-Sampling-2.png"><br>
+    <br>
+    Ongelman ratkaisuksi kehitetyn menetelmän nimi on TruePeak. Tekniikka
+    "ylinäytteistää" signaalin, eli laskee äänisignaalista otettujen näytteiden
+    välille uusia näytepisteitä ja samalla löytää&nbsp; näytteiden välissä
+    mahdollisesti sijaitsevat "haamuhuiput". <br>
+    <br>
+    TruePeak tekniikalla varustetun mittarin asteikossa on tunnus dBTP
+    erotuksena perinteisestä sähköistä huippuarvoa näyttävästä digitaalisesta
+    mittarista, jonka asteikko on usemmiten dBFS.<br>
+    <br>
+    Käytännössä ohjelmista on löytynyt "haamuhuippuja" joiden suuruus on jopa 3
+    dB:tä. TruePeak mittaus saattaa näyttää tällaiselle äänisignaalille
+    huippuarvoa, joka on yli dBFS asteikon ylimmän sallitun arvon 0 dBFS.
+    Mitattu arvo voi siis olla esim. +2.5 dBFS, eli 2.5 dB:tä korkeampi kuin
+    suurin sallittu arvo. Yli asteikon menevät huiput säröytyvät, kun ääntä
+    muutetaan takaisin analogiseen muotoon katsojan vastaanottimessa.<br>
+    <br>
+    Haamuhuippujen ongelmallisuuden takia EBU:n äänekkyysstandardissa
+    määritellään, että äänen huippuarvot on mitattava TruePeak - tekniikkaa
+    käyttäen.<br>
+    <br>
+    Alla olevassa kuvassa on äänisignaalista otettujen näytteiden välille
+    laskettu jälkikäteem uusia näytteitä, jolloin signaalin sisältämät
+    haamuhuiput löytyivät.<br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/TruePeak-Sampling-3.png"><br>
+    <br>
+    <br>
     <br>
     <h2>Tärkeitä huomioita ÄänekkyysKorjaus - palvelimen käytöstä</h2>
     Tiedostopohjaisessa äänekkyysmittauksessa on muutamia asioita, jotka on
@@ -682,36 +742,43 @@
     työstäjän vastuulla on säätää äänimateriaalin sisäiset äänekkyyserot
     sopiviksi.<br>
     <br>
+    <h3>Lähetysvirran keskimääräinen äänekkyystaso laskee</h3>
+    Kanavillamme lähetettävien ohjelmien äänekkyystasoja on tilastoitu parin
+    vuoden ajan. Keskimääräinen äänekkyys vaihtelee ohjelmasta toiseen, mutta
+    kaikkien tv - kanaviemme pitkäaikainen keskimääräinen äänekkyys on asettunut
+    tasoon -21 LUFS. Kun siirrymme käyttämään EBU:n äänekkyysstandardia, laskee
+    lähetysvirran keskimääräinen äänekkyys n. 2 LU:ta.<br>
     <br>
+    <h3>Äänekkyysstandardilla on hyviä seuraksia</h3>
+    Kun äänen voimakkuus ankkuroidaan oikealle paikalleen äänekkyyden mukaan,
+    sähköisille huipuille ja äänekkyysvaihteluille, eli dynamiikan käytölle jää
+    enemmän tilaa. Kompression liiallinen käyttö vähenee, kun sillä ei saavuteta
+    enää äänekkyyshyötyä ja miksauksista tulee hengittävämpiä ja elävämpiä.<br>
     <br>
-    <br>
+    EBU:n äänekkyysstandardi siirtää vastuun kotikuuntelun äänekkyydestä
+    takaisin sinne missä sen olisi pitänyt aina ollakin: katsojalle itselleen.
+    Kun kaikkien ohjelmien keskimääräinen äänekkyys on sama, voi katsoja
+    lopultakin itse päättää kuinka kovaa hän mitäkin ohjelmaa kuuntelee.<br>
     <ul>
     </ul>
-    DemoVideossa 3 on ensimmäisen videon ääninäytteiden äänekkyys korjattu
-    kohdetasolle 0 LU (-23 LUFS).<br>
+    <strong>DemoVideo 3:</strong> Videossa on DemoVideon 1 ääninäytteiden
+    äänekkyys korjattu samalle kohdetasolle 0 LU (-23 LUFS).<br>
     <br>
     <br>
+    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-3.webm"
+        type="video/webm"> <source src="../video/mp4/DemoVideo-3.mp4" type="video/mp4">
+      Your browser does not support the video tag. </video> <br>
     <br>
-    Muistiinpanoja
+    <br>
+    Muistiinpanoja <br>
     <ul>
-      <li>Selitä TruePeak</li>
-      <li>ÄänekkyysKorjauksen Mounttaus ja käyttäminen.</li>
-      <li>Pointtaa, että ÄänekkyysKorjaus ei auta tilanteessa, jossa ohjelman
-        sisällä on liian suuria äänekkyyshyppyjä (makasiiniohjelmat (pikku
-        kakkonen),). Ohjelman koostajan vastuulla on hoitaa kaikki
-        ohjelmasegmentit kohdetasolle. Esimerkkikuvana esim. Sonata Arctica.</li>
+      <li>ÄänekkyysKorjauksen Mounttaus</li>
       <li>Lisää kaikkiin esitelmätiedostoihin lisenssi: saa vapaasti muokata ja
         levittää, kunhan mainitsee alkuperäisen tekijän.</li>
-      <li>On tärkeää, että ohjelman äänekkyyttää säädettäessä puhe säädetään
-        kohdetasoon, sillä katsojat säätävät kotikuuntelun äänen voimakkuuden
-        puheen äänekkyyden mukaan.</li>
       <li>Laita EBU R128 tärkeimpiin ominaisuuksiin maininta, että
         äänekkyysstandardin noudattaminen on nyt pakollista joissakin maissa
         (Italia, USA). Kerro samassa kappaleessa, että Yle ja suomalaiset
         kaupalliset tv-toimijat ottavat EBU R128 käyttöön vuoden 2013 aikana.</li>
-      <li>Mainitse, että EB:n kohdetaso on 2 dB:tä Ylen nykyistä keskiarvoa
-        alempana, joten siirrymme keskiäänekkyydessä hieman matalammalle tasolle
-        ?</li>
       <li>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         Mainitse että palvelin on vapaan lähdekoodin projekti, jota kuka vain
