@@ -1,21 +1,912 @@
-<!DOCTYPE html><html dir="ltr" lang="en">  <head>    <title>Introduction To Loudness Correction</title>    <meta content="text/html; charset=UTF-8" http-equiv="content-type">    <meta content="Mikael Hartzell 2013" name="author">  </head>  <body>    <div style="color: #7f7f7f;" align="right">Mikael Hartzell 2013<br>    </div>    <h1>Introduction To Loudness Correction<br>    </h1>    <br>    <a href="#What%20does%20loudness%20mean%20?">What does loudness mean ?</a><br>    <br>    <a href="#Problem%20with%20loudness">Problem with loudness</a><a href="#Loudness%20problems"></a><br>    <br>    <a href="#Why%20haven%27t%20we%20been%20able%20to%20solve%20the%20loudness%20problem%20?">Why
-      haven't we been able to solve the loudness problem ?</a><br>    <br>    <a href="#A%20peak%20meter%20can%20not%20be%20used%20to%20measure%20loudness">A      peak meter can not be used to measure loudness</a><br>    <br>    <a href="#EBU%20loudness%20recommendation%20R128">EBU loudness      recommendation R128</a><a href="#EBU:n%20aanekkyyssuositus%20R128"></a><br>    <br>    <a href="#EBU%20R128%20measurement%20units">EBU R128 measurement units</a><a      href="#EBU%20R128:n%20mittayksikot"></a><br>    <br>    <a href="#How%20are%20the%20different%20measurement%20results%20used%20?">How      are the different measurement results used ?</a><br>    <br>    <a href="#Mihin%20eri%20mittayksikoita%20kaytetaan%20?"></a><br>    <br>    <a href="#Reaaliaikainen%20ja%20tiedostopohjainen%20aanekkyysmittaus">Reaaliaikainen
-      ja tiedostopohjainen äänekkyysmittaus</a><br>    <br>    <a href="#Aanekkyysvaihtelut%20lahetysvirrassa">Äänekkyysvaihtelut      lähetysvirrassa</a><br>    <br>    <a href="#Tiedostopohjaisen%20AanekkyysKorjauksen%20kayttaminen">Tiedostopohjaisen
-      ÄänekkyysKorjauksen käyttäminen</a><br>    <br>    <a href="#AanekkyysKorjaus%20-%20palvelimen%20hakemistot">ÄänekkyysKorjaus -      palvelimen hakemistot</a><br>    <br>    <a href="#Tulosgrafiikka">Tulosgrafiikka</a><br>    <br>    <a href="#Palvelimen%20kasittelyjonon%20tietojen%20katselu">Palvelimen      käsittelyjonon tietojen katselu</a><br>    <br>    <a href="#Aanen%20sahkoinen%20huipputaso%20ja%20TruePeak">Äänen sähköinen      huipputaso ja TruePeak</a><br>    <br>    <a href="#Tarkeita%20huomioita%20AanekkyysKorjaus%20-%20palvelimen%20kaytosta">Tärkeitä
-      huomioita ÄänekkyysKorjaus - palvelimen käytöstä</a><br>    <br>    <a href="#Miten%20EBU%20R128%20-%20suosituksen%20kayttoonotto%20vaikuttaa%20kaytannon%20aanitoihin%20?"></a><a      href="#Miten%20EBU%20R128%20-%20suosituksen%20kayttoonotto%20vaikuttaa%20aanisuunnittelijan%20tyohon%20?">Miten
-      EBU R128 - suosituksen käyttöönotto vaikuttaa äänisuunittelijan työhön ?</a><br>    <br>    <a href="#AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen">ÄänekkyysKorjaus
-      - palvelimen levyn mounttaaminen</a><br>    <br>    <a href="#Aanekkyyskorjattujen%20tiedostojen%20tuominen%20Avid%20-%20Media%20Composeriin">Äänekkyyskorjattujen
-      tiedostojen tuominen Avid - Media Composeriin</a><br>    <br>    <br>    <br>    <br>    <h2><a id="What does loudness mean ?">What does loudness mean ?</a></h2>    Loudness means the sound level percieved by a human.<br>    <br>    Electrical peaks shown by a peak meter do not correspond to how a human    percieves the loudness of a sound. Human hearing tends to average sound    level a bit. Frequency components and their durations also affect human    sensation of loudness.<br>    <br>    In this documents when we talk about loudness we always mean the sound level    perceived by a person or a measurement done with a loudness meter. When we    talk about peak value we mean the electrical measurement of the highest    electrical peak of a sound signal.<br>    <br>    <br>    <h2><a id="Problem with loudness">Problem with loudness<br>      </a></h2>    Loudness jumps have been a problem since tv- and radio begun. It is the    cause of constant complaint from the viewers.<br>    <br>    Despite our technical advancements there hasn't been any proper tools to    control loudness. This is why the problem gas remained unsold until our    days.<br>    <br>    There are two separate problems that needs to be solved:<br>    <ol>      <li>Loudness jumps inside a program.</li>      <li>Loudness jumps between programs.<br>      </li>    </ol>    <br>    <br>    <h2><a id="Why haven't we been able to solve the loudness problem ?">Why        haven't we been able to solve the loudness problem ?</a></h2>    It has been difficult to model the way humans perceive loudness and this is    tha reason we have not had any proper tools to control loudness.<br>    <br>    Peak meter has been the only tool to manage loudness. However readings on a    peak meter do not match the way how humans hear loudness.<br>    <br>    The situation has slowly grown worse. In the analog era we used PPM - meters    that had some deliberate 'slowness' on how fast the meter reacted to rapid    changes in sound level. This slowness or integration time had an averaging    effect on the meter display. This averaging removed sharp movement from the    meter display causing the meter to react more like human hearing reacts on    the loudness of sound. When the digital age began fast digital meters    surpassed PPM meters and we lost the averaging effect of the meter. Readings    on a fast digital meter do not correspond any more to how humans 'feel'    loudness.<br>    <br>    In 1990's digital processing gave sound engineers tools to manipulate audio    in ways that were not possible before. The music industry gave birth to a    phenomenon were sound was 'over compressed' to gain more and more loudness.    Hypercompression was used to get one's own music to sound louder on car    radio than the music from cometing companies. This trend soon crossed over    to radio and television.<br>    <br>    Compression can be used to increase loudness in a way were the electrical    peaks in the audio don't go up, in fact they can even go down inspite of    loudness going up. This hypercompression made it even more difficult to get    a sensible reading for loudness from a peak meter.<br>    <br>    Because there has not been any proper tools to manage loudness, the only way    for a sound engineer to do it was to use his ears as a loudness meter. Using    one's hearing as a loudness meter works surprisingly well, but it's problem    is the lack of a commonly agreed target loudness level. A sound engineer can    produce very consistent loudness inside the same working day, but the lack    of a common standard target level makes it very difficult even for the same    sound engineer to produce consistent loudness in the long run.<br>    <br>    <br>    <h2><a id="A peak meter can not be used to measure loudness">A peak meter        can not be used to measure loudness<br>      </a></h2>    <br>    <strong>DemoVideo 1:</strong> The video below demonstrates a situation where    peak levels of several sound samples are the same 0 dBFS, the the loudness    of each sample is different.<br>    <br>    If your browser is not able to play the video below, then you can watch it    on <a href="http://www.youtube.com/watch?v=ii1ijC2OQow&amp;vq&amp;hd=1">YouTube</a>.<br>    <br>    Note !!!!!!! You should use a relatively loud playback volume to really hear    loudness differences in the samples.<br>    <br>    <br>    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-1.webm"        type="video/webm">      <source src="../video/mp4/DemoVideo-1.mp4" type="video/mp4"> Your browser      does not support the video tag. </video> <br>    <br>    <br>    <strong>DemoVideo 2:</strong> The next video demontrates what happens to    loudness and peak level of a sample when it is compressed. The same sample    is played twice in the demo, first without additional compression and then    with heavy compression. Both samples have the same peak level of 0 dBFS.<br>    <br>    If your browser is not able to play the video below, then you can watch it    on <a href="http://www.youtube.com/watch?v=FeQCduxNM-k&amp;vq&amp;hd=1">YouTube</a>.<br>    <br>    Note !!!!!!! You should use a relatively loud playback volume to really hear    loudness differences in the samples.<br>    <br>    <br>    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-2.webm"        type="video/webm">      <source src="../video/mp4/DemoVideo-3.mp4" type="video/mp4"> Your browser      does not support the video tag. </video> <br>    <br>    <strong>Example:</strong> Loudness and peak level measurements can be in    total disagreement with each other. The the upper part of the picture below    shows the electrical peaks of a heavy-metal consert and the lower part the    measured loudness. The parts with high electrical peaks in upper picture are    interviews of musicians and the parts with low peak levels are musical    performances. The parts with high peak levels are actually lower in loudness    than the parts with low electrical peaks and vice versa. Music has been    heavily compressed increasing it's loudness while simultaneously lowering    it's electrical peaks. If one had a peak and a loudness meter side by side    both measuring this material the meters would in fact show opposite values.    When peak levels go up the loudness goes down.<br>    <br>    <br>    <img alt="" src="Pictures/Sample_Peaks_vs_Loudness-Finnish.png"><br>    <br>    <br>    <h2><a id="EBU loudness recommendation R128">EBU loudness recommendation        R128</a></h2>    <h2></h2>    <p>The European Broadcasting Union EBU published the loudness recommendation      <strong>R128</strong> in august 2010. R128 defines a technical method for      measuring loudness in a way that corresponds very well with how humans      perceive loudness. The recommendation defines a common target loudness      level for all audio material and finally gives us the tools to measure and      manage loudness.</p>    <p></p>    <p><br>    </p>    <p></p>    <table style="width: 100%;" border="0">      <tbody>        <tr>          <td><img alt="" src="Pictures/R128_Scales.png"></td>          <td style="width: 100%; vertical-align: top;">            <ul>            </ul>            <blockquote>              <h1>Main concepts of R128<br>              </h1>            </blockquote>            <ul>              <ul>                <li>R128 uses a measuring method defined in ITU-R BS 1770.                  Measurements done with this algorithm correspond very well to                  human perception of loudness.</li>                <li>R128 supports channel counts from one to six (mono -&gt;                  5.1).</li>                <li>R128 works very well with all types of material (classical                  music, speech, heavy-metal, etc).</li>                <li>R128 uses the same scale used in digital peak meters. In                  peak meters the unit is dB in loudness meters the unit is LU                  (Loudness Unit).<br>                </li>              </ul>            </ul>            <blockquote>              <h3>Target level<br>              </h3>            </blockquote>            <ul>              <ul>                <li>Target level for all kinds of&nbsp; material is -23 LUFS.<br>                </li>                <li>Kohdeäänekkyystaso on kaikelle äänimateriaalille -23 LUFS.<br>                </li>              </ul>            </ul>            <blockquote>              <h3>Loudness scale<br>              </h3>            </blockquote>            <ul>              <ul>                <li>There are two ways to define the loudness scale (pictire on                  the left): 1. Relative to target level 2. Relative to maximum                  level .</li>                <li><strong>LU:</strong> the maximum value is +23. Unit is <strong>LU</strong>                  (Loudness Unit) and target level is 0 LU.</li>                <li><strong>LUFS:</strong> the maximum value is 0. Unit is <strong>LUFS</strong>                  (<strong>L</strong>oudness <strong>U</strong>nit <strong>R</strong>elative                  to <strong>F</strong>ull <strong>S</strong>cale) and target                  level is -23 LUFS.</li>                <li><strong>0 LU = -23 LUFS:</strong> Target level is the same                  in both scales, only the way to apply numbers on the scale are                  different. The user is free to choose which way he wants to                  use.<br>                </li>              </ul>            </ul>            <blockquote>              <h3>Huomattavaa</h3>            </blockquote>            <ul>              <ul>                <ul>                </ul>                <li>The R128 uses the same scale as digital peak meters and                  because of this <strong>1 LU = 1 dB</strong>.&nbsp; This                  means that if the measured integrated loudness of a program is                  +3 LU too high, then the loudness will be precisely at target                  level if you reduce the volume by 3 dB's in the audio                  workstation. </li>              </ul>            </ul>            <blockquote>              <h3>Suosituksen käyttöönotto</h3>            </blockquote>            <blockquote>              <ul>                <li>The following countries have (by march 2013) already use or                  have announced that they will start to use R128 soon (source:                  <a href="http://www.r128audio.com/">http://www.r128audio.com/</a>):                  <strong>France, Germany, Netherlands, Italy, Israel,                    Switzerland, Austria, Scandinavian countries, Poland</strong>.                  Other European countries will follow shortly.</li>                <li><strong>Usa</strong><strong></strong><strong></strong> (<a href="http://www.thecalmact.com/">http://www.thecalmact.com/</a>                  ), <strong>Japan</strong> and <strong>Brazil</strong> are                  using a method very similar to R128.<br>                </li>              </ul>            </blockquote>          </td>        </tr>      </tbody>    </table>    <p><br>    </p>    <h2><a id="EBU R128 measurement units">EBU R128 measurement units<br>      </a></h2>    The EBU loudness recommendation defines three new measurement units. The    main difference in these units is how long the time window of the    measurement is.<br>    <br>    <h3>Integrated loudness</h3>    Integrated loudness measures the loudness for the duration of a whole    program from start to finish. The result of this measurement is a single    number that tells the averaged loudness of the program.<br>    <ul>      <li>The program duration is divided into 400 ms 'slices' and loudness of        each slice is measured. Some of the measurement results are thrown away        (filtered) according to rules.</li>      <li>The back channels of a surround mix get a slightly greater weight in        the calculations compared to front channels. The LFE channel is always        discarded in the loudness calculations.</li>      <li>The result of integrated loudness measurement is a single number that        tells the averaged loudness of the program.</li>      <li>The target loudness level is -23 LUFS. The integrated loudness of all        programs must be at the target level.</li>      <li>Loudness is allowed to vary inside a program, only the averaged result        of all loudness variations is taken into account.<br>      </li>    </ul>    <h3>Short-term loudness</h3>    <ul>    </ul>    <p>Short-term loudness measures loudness from a 3 second time slice.</p>    <ul>      <li>In case of file based loudness measurement the results of these 3        second time slices are used to create a graphical presentation of        loudness variations inside a file.<br>      </li>    </ul>    <h3>Momentary loudness<br>    </h3>    <ul>      <li>Momentary loudness measures loudness from a single 400 ms time slice.        The results of multiple momentary loudness measurements is used when        integrated loudness and short-term loudness is calculated.<br>      </li>    </ul>    <h3>Loudness range (LRA)<br>    </h3>    <p></p>    <ul>      <li>Loudness range (LRA) tells about the wideness of loudness variations        in the audio material.</li>      <li>Loudness range tries to tell how far apart the loud and quiet parts of        a program are from each other. LRA measurement is somewhat coarse in        nature and can be used only as a guide, it is not absolute in any way.        LRA results should be taken with a grain of salt.<br>      </li>    </ul>    <p><br>    </p>    <h2><a id="How are the different measurement results used ?">How are the        different measurement results used ?</a></h2>    <h3>File based loudness measurement</h3>    <ul>      <li><strong>Integrated loudness:</strong> The result of this measurement        shows the averaged loudness of the program.</li>      <li><strong>Short-term loudness:</strong> The result of this measurement        are used to create a graphical presentation of loudness variations        inside a file</li>      <li><strong>Momentary loudness:</strong> The result of this measurement is        not used for anything visible to a user.&nbsp; These results are used        when integrated loudness and short-term loudness is calculated.</li>      <li><strong>Loudness range:</strong> The result of this measurement shows        about the wideness of loudness variations in the audio material.</li>    </ul>    Picture below: Short-term loudness results are used to create a graphical    presentation of loudness variations inside a file. The brown line in the    picture is drawn using results from 3 second time slice loudness    measurements.<br>    <br>    <img alt="" src="Pictures/Short_Term_Loudness_Is_Used_To_Draw_History_Graphics.jpg"><br>    <h3>Real time loudness measurement</h3>    <ul>      <li><strong>Integrated loudness:</strong> When using a real time loudness        meter then the user must manually start the integrated loudness        measurement in the beginning of the program and stop at the end of the        program. The measurement result shows the accumulated integrated        loudness from the beginning of the program to the current moment.<br>      </li>      <li><strong>Short-term loudness:</strong> This value shows the loudness of        the last 3 seconds. This value can be used to determine the direction        where the loudness is heading at the moment.<br>      </li>      <li><strong>Momentary loudness:</strong> This value shows fast movements        of the loudness and it is used to draw a metering bar on the display of        the loudness meter.<br>      </li>      <li><strong>Loudness range:</strong> The result of this measurement shows        about the wideness of loudness variations in the audio material.</li>    </ul>    <p></p>    There is an example of a real time loudness meter below (Nugen Audio). The    measurement units discussed above can all be found on right side of the    meter display. They are from top to bottom:<br>    <ul>      <li>Short-term = loudness of the last 3 seconds.</li>      <li>Integrated = the integrated loudess from the beginning of the        measurement to current moment.</li>      <li>Loudness range</li>      <li>The meter bar on the right side of the values shows measurements of        momentary loudness.</li>    </ul>    <p>On the left side of the meter display is a loudness history window. It      rolls to the left and shows the history of past momentary loudness      measurements. The time window of the history display is user definable and      in the case below it shows the history of the last two minutes.<br>    </p>    Understanding the units of EBU R128 helps to read the display of a real time    loudness meter.<br>    <br>    <br>    <img alt="" src="Pictures/VisLM-H.png"><br>    <br>    <strong>Demovideo 4:</strong> shows a simple real time loudness meter    (ZPlane).<br>    <br>    The loudness of the audio in the demo increases from start to the middle of    the video and then starts to decrease towards the end. The result of    integrated loudness can be seen on the right side of the meter display and    the led bar shows results from momentary loudness measuremets. Note how the    result from integrated loudness moves very slowly compared to the fast led    bar.<br>    <br>    The slow response to loudness variations of the integrated measuremets is    caused by the fact that integrated loudness is the averaged sum of previous    loudness measurements. Short changes in the loudness have no effect on    integrated loudness, a large number of changes toward the same direction are    needed before the averaged results starts to move into that direction. This    means that it is possible that there are large loudness variations inside a    file and the integrated loudnes still hits the target level of -23 LUFS. The    user still has the responsibility to adjust loudness variations in a program    to fit the distribution channel.<br>    <br>    &nbsp; If your browser is not able to play the video below, then you can    watch it on <a href="http://www.youtube.com/watch?v=3IF8j8IEtOc&amp;vq&amp;hd=1">YouTubesta</a>.<br>    <br>    <br>    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-4.webm"        type="video/webm">      <source src="../video/mp4/DemoVideo-4.mp4" type="video/mp4"> Your browser      does not support the video tag. </video> <br>    <br>    <br>    <h2><a id="Reaaliaikainen ja tiedostopohjainen aanekkyysmittaus">Reaaliaikainen
-        vai tiedostopohjainen äänekkyysmittaus</a> ?<br>    </h2>    Äänekkyysmittauksen voi toteuttaa kahdella eri tavalla:    reaaliaikamittauksella tai tiedostopohjaisella mittauksella. Kumpikin    mittaustapa soveltuu eri käyttökohteisiin.<br>    <h3>Reaaliaikamittaus</h3>    Reaaliaikamittaus soveltuu kohteisiin, joissa käyttäjä voi aktiivisesti    lukea mittaria ja säätää sen perusteella äänilähteen äänekkyyttä    reaaliajassa. Reaaliaikamittaus soveltuu hyvin tuotantopisteisiin, joissa    tallennetaan 'livesignaalia' ja joissa ohjelma valmistuu reaaliajassa    (ulkolähetys, studiotallennus, toky, live radio, lähetysyksiköt, jne).<br>    <br>    Reaaliaikamittari on hyödyllinen aistinvaraisen äänekkyysmittauksen tueksi    myös mm. jälkikäsittelyn äänitarkkaamoissa.<br>    <h3>Tiedostopohjainen äänekkyysmittaus</h3>    Tiedostopohjaisessa äänekkyysmittauksessa mittaus tehdään lähetysvalmiin    ohjelman äänitiedostosta. Samalla kun tiedoston keskimääräinen äänekkyys    mitatataan, voidaan sen äänekkyystaso säätää koneellisesti EBU:n    kohdeäänekkyystasoon.<br>    <br>    Tämä työtapa sopii kohteisiin, joissa ohjelma tallennetaan tiedostoksi ennen    ohjelman lähetystä.<br>    <h3>Kumpikin mittaustapa</h3>    Vaikka käytettävissä olisikin äänekkyysmittari, on käyttäjän tärkein työkalu    edelleen korvat ja aistinvarainen äänekkyysmittaus. Kone ei tiedä mikä on    hyötyääntä esim. puhetta ja mikä epäoleellista taustaääntä esim. sateen    kohinaa. Käyttäjän on siksi säädettävä aistinvaraisesti eri äänielementtien    keskinäiset suhteet toisiinsa sopiviksi. Äänekkyysmittari on käyttäjän    tukena ja antaa 'ankkurin' (kohdetason -23 LUFS), johon lopputuloksen    keskimääräinen äänekkyys 'ankkuroidaan'.<br>    <br>    On tärkeää tietää, että katsojat säätävät kotikuuntelunsa äänen voimakkuuden    sopivaksi puheen äänekkyyden mukaan. Jos puhe on liian hiljaista tai    äänekästä, joutuu kuuntelija säätämään vastaanottimensa äänen voimakkuutta.    On siis tärkeää että puhe on aina kohdeäänekkyystasossa -23 LUFS tai ainakin    hyvin lähellä sitä.<br>    <br>    <br>    <h2><a id="Aanekkyysvaihtelut lahetysvirrassa">Äänekkyysvaihtelut        lähetysvirrassa</a></h2>    Alla olevassa kuvassa on yhden tv-kanavan lähetysvirrasta mitattuja    äänekkyyksiä keväällä 2012.<br>    <br>    Mittaus tapahtui aikavälillä klo 10:00 - 15:00 (aikajana kuvan alareunassa).    Kuvassa näkyy punaisena 3 sekunnin yksittäisten äänekkyysmittausten piirtämä    tiheä kuvio. Kuvan vasemmassa laidassa on R128 - suosituksen mukainen    mitta-asteikko (yksikkönä LUFS). EBU:n kohdetaso näkyy koko kuvan läpi    kulkevana vihreänä vaakaviivana. Yksittäisen tv-ohjelmien keskimääräiset    äänekkyydet on piirretty kuvaan mustina vaakasuuntaisina viivoina. Pienet    mustat pisteet ohjelmien välissä kuvaavat välikkeistä mitattuja    äänekkyystasoja.<br>    <br>    Mittausjakson aikana lähetettiin 8 kokonaista ohjelmaa ja niiden    keskimääräiset äänekkyydet vaihtelivat EBU:n kohdetason kumminkin puolin.    Kuva on kertoo yhdestä tyypillisestä lähetyspäivästä ja kuvaa hyvin    lähetyksen äänekkyyden arkea.<br>    <br>    Kuva kertoo sen, että nykyisten ohjeistusten mukaan tehtyjen ohjelmien    äänekkyystasot eivät asetu millekään yhtenäiselle äänekkyystasolle. Äänen    sähköiseen huipputasoon pohjautuva äänitarkkailu tuottaa äänekkyystasoja,    jotka ovat enemmän tai vähemmän sattumanvaraisia.<br>    <br>    <br>    <img alt="" src="Pictures/The_Problem.png"><br>    <br>    <br>    Alla yksityiskohta yläkuvasta. Ohjelmavirrassa näkyy muutamia häiritsevän    suuria äänekkyyshyppyjä. Klo 11:00 tapahtuu 7 LU pudotus, klo 12:05 7.8 LU:n    nousu ja klo 12:50 6.8 LU:n pudotus. Tämän kokoluokan äänekkyyshyppy on    häiritsevä.<br>    <br>    <br>    <img alt="" src="Pictures/The_Problem-2-finnish.jpg"><br>    <br>    <p></p>    <p></p>    <h2><a id="Tiedostopohjaisen AanekkyysKorjauksen kayttaminen">Tiedostopohjaisen
-        ÄänekkyysKorjauksen käyttäminen</a></h2>    Seuraavaksi esitellään tiedostopohjainen äänekkyysmittari / automaattinen    äänekkyyden korjaaja FreeLCS (<a href="http://freelcs.sourceforge.net">http://freelcs.sourceforge.net</a>).
-    Laite näkyy käyttäjälle verkossa nimellä "ÄänekkyysKorjaus".<br>    <br>    Käyttäjä voi siirtää ÄänekkyysKorjaus<strong> </strong>- palvelimelle    äänitiedostoja mitattavaksi ja korjattavaksi. Palvelin tekee äänitiedostosta    EBU R128:n kohdetasoon korjatun version, jonka käyttäjä voi imeä takaisin    omalle työasemalleen verkon kautta. Palvelin tuottaa myös äänitiedoston    sisäisiä äänekkyysvaihteluita kuvaavan grafiikan.<br>    <br>    ÄänekkyysKorjaus - palvelimen käyttö on hyvin helppoa:<br>    <ol>      <li>Ensin ÄänekkyysKorjaus - palvelimen verkkolevy mountataan työasemalle.</li>      <li>Sitten käsiteltävät tiedostot kopioidaan verkon yli työasemalta        palvelimen levylle.</li>      <li>Muutaman minuutin odottelun jälkeen äänekkyyskorjatut tiedostot        raahataan palvelimen hakemistosta "<strong>00-Korjatut_Tiedostot</strong>"        takaisin työasemalle.</li>    </ol>    <a href="#AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen">Palvelimen
-      levyn mounttaaminen</a> työasemalle on selitetty myöhemmin omassa    kappaleessaan. Alla olevan esimerkin kuvat ovat windows 7    käyttöjärjestelmästä, mutta samat periaatteet pätevät muihinkin    käyttöjärjestelmiin (OS X , windows xp, jne).<br>    <br>    Alla olevassa kuvassa työaseman paikalliselta levyltä (ylempi ikkuna)    kopioidaan äänitiedostoja palvelimen levylle (alempi ikkuna). Huom !!!!!!!    Vain palvelimen juurihakemistoon kopioidut tiedostot menevät    äänekkyyskorjaukseen.<br>    <br>    <br>    <img alt="" src="Pictures/Usage-windows7-finnish-01.jpg"><br>    <br>    <br>    Kopioinnin jälkeen klikkaa auki palvelimen hakemisto "<strong>00-Korjatut_Tiedostot</strong>",
-    äänekkyyskorjauksen tuloksena syntyvät tiedostot ilmestyvät sinne.<br>    <br>    <br>    <img alt="" src="Pictures/Usage-windows7-finnish-02.jpg"><br>    <br>    <br>    Äänekkyyskorjauksen tuloksien valmistuminen&nbsp; kestää muutaman minuutin.<br>    <br>    Ensin valmiiksi tulee korjaamattoman äänitiedoston äänekkyysvaihteluista    kertova grafiikkatiedosto. Tiedoston tunnistaa sen nimen lopussa olevasta    teksistä "<strong>Aanekkyyslaskennan_Tulokset</strong>". Tiedoston voi avata    tarkasteltavaksi tuplaklikkaamalla sitä hiirellä. <br>    <br>    Seuraavaksi ilmestyy EBU R128:n kohdetasoon korjattu versio alkuperäisestä    äänitiedostosta. Korjatun tiedoston nimen lopussa on aina teksti "<strong>-23_LUFS</strong>".<br>    <br>    Äänekkyyskorjattu tiedosto kopioidaan lopuksi verkon yli takaisin omalle    työasemalle ja liitetään ohjelman ääneksi.<br>    <br>    <br>    <img alt="" src="Pictures/Usage-windows7-finnish-03.jpg"><br>    <br>    <br>    <h2><a id="AanekkyysKorjaus - palvelimen hakemistot">ÄänekkyysKorjaus -        palvelimen hakemistot</a></h2>    Palvelimen levyllä on kolme hakemistoa:<br>    <ul>      <li><strong>"Juurihakemisto"</strong> on hakemisto, jonka sisällä alla        mainitut kaksi muuta hakemistoa sijaitsevat. Kaikki käsiteltävät        tiedostot kopioidaan palvelimen juurihakemistoon, palvelin ei käsittele        muihin hakemistoihin ilmestyviä tiedostoja.</li>      <li><strong>"00-Korjatut_Tiedostot"</strong> on hakemisto, johon        äänitiedostojen äänekkyysmittauksen ja korjauksen tuloksena syntyvät        tiedostot ilmestyvät.<br>      </li>      <li><strong>"00-Laskentajonon_Tiedot</strong>" on hakemisto, josta löytyy        ÄänekkyysKorjaus - palvelimen ns. käsittelyjonon tilannetta kuvaava        nettisivu (<strong>00-Laskentajonon_Tiedot.html</strong>). Sivu        kertoo&nbsp; kuinka monta tiedostoa odottaa jonossa käsittelyä ja mitä        tiedostoja käsitellään parhaillaan. Tiedoston tuplaklikkaaminen avaa sen        nettiselaimeen tarkasteltavaksi.<br>      </li>    </ul>    Käyttäjän palvelimelle kopioimat ja niiden käsittelyn tuloksena syntyneet    tiedostot deletoidaan palvelimelta automaattisesti kahdeksan tunnin    kuluttua.<br>    <br>    <p></p>    <ul>    </ul>    <h2><a id="Tulosgrafiikka">Tulosgrafiikka</a></h2>    Alla on esimerkki äänekkyysmittauksen tuloksena syntyvästä grafiikasta.    Kuvan keskeltä ylälaidasta käy ilmi seuraavat tiedot:<br>    <ul>      <li>Äänitiedoston nimi</li>      <li>Tiedoston keskimääräinen äänekkyys (Äänekkyystaso)<br>      </li>      <li>Kuinka paljon tiedoston keskimääräinen äänekkyys eroaa EBU:n        kohdetasosta -23 LUFS.</li>      <li>Äänekkyyden vaihteluväli</li>      <li>Tiedoston huipputaso.<br>      </li>    </ul>    Äänekkyysvaihteluiden kuvaajaa luetaan näin:<br>    <ul>      <li>Kuvan vasemmassa laidassa on EBU R128:n mitta-asteikko (yksikkönä        LUFS).<br>      </li>      <li>Ruskea viiva kuvaa tiedostosta mitattuja lyhytaikaisen äänekkyyden        vaihteluita.</li>      <li>Kuvan läpi kulkeva vaalean vihreä vaakaviiva kuvaa EBU:n kohdetasoa        -23 LUFS / 0 LU.</li>      <li>Tumman vihreä vaakaviiva kuvaa tiedostosta mitattua keskimääräistä        äänekkyystasoa.</li>      <li>Kuvan alalaidassa on aikajana.<br>      </li>    </ul>    <br>    Esimerkin grafiikka kuvaa yhden klassisen musiikkikappaleen sisäisiä    äänekkyysvaihteluita.<br>    <br>    Jos äänekkyyskuvaajassa esiintyy epäilyttäviä äänekkyyshyppyjä, kannattaa    materiaalin kyseiset paikat vielä tarkistaa. Ohjelman sisällä saa olla    kohdetasosta poikkeavia äänekkyystasoja, jos ne ovat tarkoituksellisia ja    tukevat kerrontaa.<br>    <br>    <br>    <br>    <img alt="" src="Pictures/Beethoven-Coriolan_Overture_Op_62.wav-Aanekkyyslaskennan_Tulokset.jpg"><br>    <br>    <br>    <br>    <h2><a id="Palvelimen kasittelyjonon tietojen katselu">Palvelimen        käsittelyjonon tietojen katselu</a></h2>    Jos tiedostojen äänekkyyskorjauttujen versioiden ilmestymien tuntuu viipyvän    normaalia kauemmin, voi palvelimen käsittelyjonon tietojen katselu paljastaa    mistä viivästys johtuu.<br>    <br>    Jos klikkaat auki tiedoston "<strong>00-Korjatut_Tiedostot /</strong><strong>      00-Laskentajonon_Tiedot.html</strong>", aukeaa nettiselaimeen    käsittelyjonon tilanteesta kertova nettisivu.<br>    <br>    Sivu päivittyy 5 sekunnin välein. Sen ylälaidassa kerrotaan kuinka monta    tiedostoa odottaa jonossa käsittelypaikan vapautumista (esimerkissä 25 kpl)    ja tämän alla näkyy jonossa seuraavaksi käsittelyyn tulevien kymmenen    tiedoston nimet.<br>    <br>    Harmaan laatikon sisällä näkyy juuri nyt käsittelyssä olevien tiedostojen    nimet. Laatikon alla on viimeiset 100 käsiteltyä tiedostoa ja aika jolloin    niiden käsittely valmistui.<br>    <br>    <br>    <img alt="" src="Pictures/Html_Progress_Report-finnish.jpg"><br>    <br>    <h2><a id="Aanen sahkoinen huipputaso ja TruePeak">Äänen sähköinen        huipputaso ja TruePeak</a><br>    </h2>    Analogisen äänen digitoinnissa on eräs tekninen ongelma, jonka seurauksena    ääneen saattaa syntyä säröä, kun digitaalinen ääni muutetaan takaisin    analogiseksi.<br>    <br>    Alla kuvassa sininen viiva edustaa äänen sähköisiä vaihteluita ja punaiset    pisteet hetkiä, jolloin ääntä digitoitaessa siitä on otettu näytteitä.    Esimerkin tilanteessa äänen sähköiset huipputasot sattuvat hyvin yksiin    näytteenoton kanssa ja kaikki sähköiset huiput rekisteröityvät digitaaliseen    muotoon ongelmitta. <br>    <br>    <br>    <img alt="" src="Pictures/TruePeak-Sampling-1.png"><br>    <br>    Jos äänessä on hyvin nopeita sähköisiä huippuja, saattaa syntyä alla näkyvä    tilanne. Digitoitaessa näytteiden oton ajoitus osuu epäedullisesti suhteessa    signaalin huippuihin. Äänen sähköiseksi huipputasoksi rekisteröituu    digitoitaessa liian matala arvo, sillä näytteenotot osuvat huippujen    välisiin ajankohtiin.<br>    <br>    Ongelma ilmenee vasta siinä vaiheessa, kun ääni muutetaan takaisin    analogiseksi tai kun ääni tallennetaan lähetystä varten kompressoituun    tiedostomuotoon (mpeg2, mpeg4, aac). Silloin nämä "haamuhuiput" ilmestyvät    takaisin signaaliin.<br>    <br>    Huippuarvomittari ei tällaisessa tapauksessa näytä signaalin todellisia    analogisia huippuja. Kun ääni muutetaan katsojan vastaanottimessa takaisin    analogiseen muotoon, saattavat nämä haamuhuiput mennä yli sallitun asteikon.    Ääneen syntyy säröä.<br>    <br>    <br>    <img alt="" src="Pictures/TruePeak-Sampling-2.png"><br>    <br>    Ongelman ratkaisuksi kehitetyn menetelmän nimi on TruePeak. Tekniikka laskee    äänisignaalista otettujen näytteiden välille uusia näytepisteitä ja samalla    löytää&nbsp; näytteiden välissä mahdollisesti sijaitsevat "haamuhuiput". <br>    <br>    TruePeak tekniikalla varustetun mittarin asteikossa on tunnus dBTP    erotuksena perinteisestä sähköistä huippuarvoa näyttävästä digitaalisesta    mittarista, jonka asteikko on usemmiten dBFS.<br>    <br>    Käytännössä ohjelmista on löytynyt "haamuhuippuja" joiden suuruus on jopa 3    dB:tä. TruePeak mittaus saattaa näyttää tällaiselle äänisignaalille    huippuarvoa, joka on positiivinen, eli yli dBFS asteikon ylimmän sallitun    arvon 0 dBFS. <br>    <br>    Haamuhuippujen ongelmallisuuden takia EBU:n äänekkyyssuosituksessa    määritellään, että äänen huippuarvot on mitattava TruePeak - tekniikkaa    käyttäen. R128 suosituksen mukaan tehdyn äänimateriaalin korkeimmat huiput    saavat nousta TruePeak asteikolla <strong>-1 dBTP </strong>asti.<br>    <br>    Alla olevassa kuvassa on äänisignaalista otettujen näytteiden välille    laskettu jälkikäteen uusia näytteitä, jolloin signaalin sisältämät    haamuhuiput löytyivät.<br>    <br>    <br>    <img alt="" src="Pictures/TruePeak-Sampling-3.png"><br>    <br>    <br>    <br>    <h2><a id="Tarkeita huomioita AanekkyysKorjaus - palvelimen kaytosta">Tärkeitä
-        huomioita ÄänekkyysKorjaus - palvelimen käytöstä</a></h2>    Tiedostopohjaisessa äänekkyysmittauksessa on muutamia asioita, jotka on    tärkeätä ottaa huomioon.<br>    <h3>Äänikanavat</h3>    Yhden miksauksen kaikkien äänikanavien pitää olla samassa tiedostossa. Esim.    stereomiksauksen äänikanavia ei saa käsitellä niin, että    äänekkyyskorjaukseen laitetaan erilliset vasemman ja oikean äänikanavan    tiedostot. Tällä tavalla käsiteltyjen käsiteltyjen tiedostojen äänekkyys    menee väärälle äänekkyystasolle (3 LU :ta pieleen).<br>    <br>    Yhdessä äänitiedostossa saa olla vain yhden miksauksen äänikanavat. Jos    ohjelmassa on erillinen stereo- ja 5.1 - miksaus, kumpikin miksaus pitää    käsitellä erikseen.<br>    <br>    <strong>Esim:</strong> Kun ohjelmassa on kolme eri äänimiksausta (Stereo    Suomi, Stereo Ruotsi, 5.1 Suomi) syntyy tästä seuraavat tiedostot:<br>    <br>    <strong>Tiedosto 1</strong> = Stereo Suomi (kaksi äänikanavaa)<br>    <strong>Tiedosto 2</strong> = Stereo Ruotsi (kaksi äänikanavaa)<br>    <strong>Tiedosto 3</strong> = 5.1 Suomi (kuusi äänikanavaa)<br>    <h3>Raakamateriaalin käsittely</h3>    EBU:n R128 on tarkoitettu vain lähetysvalmiiden ohjelmien äänekkyyden    mittaamiseen. Raakamateriaalia ei voi äänekkyyskorjata, sillä jos    materiaalista leikataan äänekkyyskorjauksen jälkeen pois osia, muuttuu    tiedoston keskimääräinen äänekkyys. Tämä johtuu siitä, että keskimääräinen    äänekkyys kertyy tiedostosta tehtyjen lyhyiden mittausten keskiarvosta ja    tämä keskiarvo muuttuu kun mittaustuloksia (tiedoston osia) poistetaan.    Pääsääntöisesti ÄänekkyysKorjaus - palvelimelle siis laitetaan    käsiteltäväksi ainoastaan lähetysvalmiita ohjelmia, joita ei enää muuteta    mitenkään.<br>    <br>    Poikkeuksen edelliseen tekee makasiinohjelmat. Jos materiaali koostuu esim.    samassa paikassa tehdyistä studiojuonnoista ja erillisistä inserteistä, voi    juonnot ja insertit korjata niin, että jokainen ohjelmasegmentti korjataan    erikseen. Tällä tavalla pääsee eroon segmenttien välisistä mahdollisista    äänekkyyseroista. Tässä pitää kuitenkin pitää huolta siitä, että    materiaalissa ei ole osia, jotka leikataan myöhemmin pois. Hiljaisuutta ei    oteta huomioon äänekkyysmittauksessa, joten mykkiä kohtia voi leikata pois    vaikuttamatta tiedoston keskimääräiseen äänekkyyteen.<br>    <h3>Ohjelman sisäiset äänekkyysvaihtelut<br>    </h3>    ÄänekkyysKorjaus-palvelin on työkalu, joka säätää ohjelman äänekkyyden    lähetysvirtaan sopivaksi. Äänekkyyskorjaus ei muuta tiedoston sisäisiä    äänekkysvaihteluita mitenkään. Jos äänekkyyvaihtelut ovat alun perinkin    liian suuria, ne ovet sitä myös äänekkyyskorjauksen jälkeen. Ohjelman    työstäjän vastuulla on säätää äänimateriaalin sisäiset äänekkyyserot    sopiviksi.<br>    <br>    <h3>Lähetysvirran keskimääräinen äänekkyystaso laskee</h3>    Kanavillamme lähetettävien ohjelmien äänekkyystasoja on tilastoitu parin    vuoden ajan. Keskimääräinen äänekkyys vaihtelee ohjelmasta toiseen, mutta    kaikkien tv - kanaviemme pitkäaikainen keskimääräinen äänekkyys on asettunut    tasoon -21 LUFS. Kun siirrymme käyttämään EBU:n äänekkyyssuositusta, laskee    lähetysvirran keskimääräinen äänekkyys n. 2 LU:ta.<br>    <br>    <h3>R128:n käyttöönotolla on hyviä seuraksia</h3>    Kun äänen voimakkuus ankkuroidaan oikealle paikalleen äänekkyyden mukaan,    sähköisille huipuille ja äänekkyysvaihteluille eli dynamiikan käytölle jää    enemmän tilaa. Kompression liiallinen käyttö vähenee, kun sillä ei saavuteta    enää äänekkyyshyötyä ja miksauksista tulee hengittävämpiä ja elävämpiä.<br>    <br>    EBU:n äänekkyyssuositus siirtää vastuun kotikuuntelun äänekkyydestä takaisin    sinne missä sen olisi pitänyt aina ollakin: katsojalle itselleen. Kun    kaikkien ohjelmien keskimääräinen äänekkyys on sama, voi katsoja lopultakin    itse päättää kuinka kovaa hän mitäkin ohjelmaa kuuntelee.<br>    <ul>    </ul>    <strong>DemoVideo 3:</strong> Videossa on DemoVideo 1:n ääninäytteet    korjattu samalle kohdetasolle 0 LU (-23 LUFS).<br>    <br>    Jos alla oleva video ei toimi selaimellasi, voit katsoa videon <a href="http://www.youtube.com/watch?v=I64kckkp3BE&amp;vq&amp;hd=1">YouTubesta</a>.<br>    <br>    <br>    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-3.webm"        type="video/webm">      <source src="../video/mp4/DemoVideo-3.mp4" type="video/mp4"> Your browser      does not support the video tag. </video> <br>    <br>    <br>    <h2><a id="Miten EBU R128 - suosituksen kayttoonotto vaikuttaa aanisuunnittelijan tyohon ?">Miten
-        EBU R128 - suosituksen käyttöönotto vaikuttaa äänisuunittelijan työhön ?</a></h2>    EBU:n äänekkyyssuosituksen suurin käytännön muutos on se, että äänen    kompressoinnilla ei enää saavuta äänekkyyshyötyä. Liiallinen kompressio    aiheuttaa ainoastaan äänen laadun heikkenemistä ja kuunteluväsymystä    kuuntelijassa.<br>    <br>    Katselijoiden kotikuuntelussa käyttämä kuunteluvoimakkuus rajoittaa    käytettävissä olevan dynamiikka-alueen koon. Kotikuuntelun äänen voimakkuus    on keskimäärin suhteellisen matala, eikä tähän tule minkäänlaista muutosta    EBU:n äänekkyyssuosituksen käyttöönoton myötä. Käytettävissä olevan    dynamiikka-alueen koko pysyy siis samana kuin ennen EBU:n    äänekkyyssuosituksen käyttöönottoa.<br>    <br>    EBU:n suositus määrittelee sähköiselle huippuarvolle suurimmaksi sallituksi    arvoksi -1 dBTP. Kaikki arvot tämän alapuolella ovat sallittuja. Sähköisen    huippuarvon suurimmalla arvolla ei EBU:n suosituksen käyttöönoton jälkeen    ole enää kovinkaan suurta merkitystä. Huippuarvo saa olla mikä tahansa    kunhan suurin sallittu arvo -1 dBTP ei ylity.<br>    <br>    Vanhoja hyväksi todettuja miksausmenetelmiä ei tarvitse muuttaa mitenkään,    ne toimivat EBU:n äänekkyyssuosituksen käyttöönoton jälkeen yhtä hyvin kuin    ennenkin. Ainoa muutos on se että ohjelmien keskimääräinen äänekkyys    pakotetaan samalle tasolle.<br>    <br>    Korva on myös edelleen äänittäjän tärkein työkalu ja paras äänekkyysmittari.    Kone ei voi tietää mikä on hyötyääntä esim. puhetta ja mikä taustaa.<br>    <br>    <br>    <h2><a id="AanekkyysKorjaus - palvelimen levyn mounttaaminen">ÄänekkyysKorjaus
-        - palvelimen levyn mounttaaminen</a></h2>    Alla on linkit ohjeisiin, joissa kerrotaan miten eri käyttöjärjestelmissä    mountataan ÄänekkyysKorjaus - palvelimen levy työasemalle.<br>    <br>    <br>    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20windows%207%20tyoasemaan.html">ÄänekkyysKorjaus
-      - palvelimen levyn mounttaaminen windows 7 työasemaan</a><br>    <br>    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20windows%20xp%20tyoasemaan.html">ÄänekkyysKorjaus
-      - palvelimen levyn mounttaaminen windows xp työasemaan</a><br>    <br>    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20OS%20X%20tyoasemaan.html">ÄänekkyysKorjaus
-      - palvelimen levyn mounttaaminen OS X työasemaan</a><br>    <br>    <br>    <h2><a id="Aanekkyyskorjattujen tiedostojen tuominen Avid - Media Composeriin">Äänekkyyskorjattujen
-        tiedostojen tuominen Avid - Media Composeriin</a><br>    </h2>    <br>    Alla on linkki ohjeeseen, jossa kerrotaan miten äänekkyyskorjatut tiedostot    tuodaan Avid Media Composeriin.<br>    <br>    <a href="Mounting_the_server_hotfolder/Aanekkyyskorjattujen%20tiedostojen%20tuominen%20Avid%20-%20Media%20Composeriin.html">Äänekkyyskorjattujen
-      tiedostojen tuominen Avid - Media Composeriin</a><br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>  </body></html>
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <title>Introduction To Loudness Correction</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <meta content="Mikael Hartzell 2013" name="author">
+  </head>
+  <body>
+    <div style="color: #7f7f7f;" align="right">Mikael Hartzell 2013<br>
+    </div>
+    <h1>Introduction To Loudness Correction<br>
+    </h1>
+    <br>
+    <a href="#What%20does%20loudness%20mean%20?">What does loudness mean ?</a><br>
+    <br>
+    <a href="#Problematic%20loudness">Problematic loudness</a><a href="#Problem%20with%20loudness"></a><br>
+    <br>
+    <a href="#Why%20haven%27t%20we%20been%20able%20to%20solve%20the%20loudness%20problem%20?">Why
+      haven't we been able to solve the loudness problem ?</a><br>
+    <br>
+    <a href="#A%20peak%20meter%20can%20not%20be%20used%20to%20measure%20loudness">A
+      peak meter can not be used to measure loudness</a><br>
+    <br>
+    <a href="#EBU%20loudness%20recommendation%20R128">EBU loudness
+      recommendation R128</a><a href="#EBU:n%20aanekkyyssuositus%20R128"></a><br>
+    <br>
+    <a href="#EBU%20R128%20measurement%20units">EBU R128 measurement units</a><a
+      href="#EBU%20R128:n%20mittayksikot"></a><br>
+    <br>
+    <a href="#How%20are%20the%20different%20measurement%20results%20used%20?">How
+      are the different measurement results used ?</a><br>
+    <a href="#Reaaliaikainen%20ja%20tiedostopohjainen%20aanekkyysmittaus"></a><br>
+    <a href="#Realtime%20or%20file%20based%20loudness%20measurement%20?">Realtime
+      or file based loudness measurement ?</a><br>
+    <br>
+    <a href="#Loudness%20variations%20in%20a%20transmission%20stream">Loudness
+      variations in a transmission stream</a><br>
+    <br>
+    <a href="#Automatic%20file%20based%20loudness%20correction">Automatic file
+      based loudness correction</a><br>
+    <br>
+    <br>
+    <a href="#Aanekkyysvaihtelut%20lahetysvirrassa"></a><br>
+    <br>
+    <a href="#Tiedostopohjaisen%20AanekkyysKorjauksen%20kayttaminen"></a><br>
+    <br>
+    <a href="#AanekkyysKorjaus%20-%20palvelimen%20hakemistot">ÄänekkyysKorjaus -
+      palvelimen hakemistot</a><br>
+    <br>
+    <a href="#Tulosgrafiikka">Tulosgrafiikka</a><br>
+    <br>
+    <a href="#Palvelimen%20kasittelyjonon%20tietojen%20katselu">Palvelimen
+      käsittelyjonon tietojen katselu</a><br>
+    <br>
+    <a href="#Aanen%20sahkoinen%20huipputaso%20ja%20TruePeak">Äänen sähköinen
+      huipputaso ja TruePeak</a><br>
+    <br>
+    <a href="#Tarkeita%20huomioita%20AanekkyysKorjaus%20-%20palvelimen%20kaytosta">Tärkeitä
+      huomioita ÄänekkyysKorjaus - palvelimen käytöstä</a><br>
+    <br>
+    <a href="#Miten%20EBU%20R128%20-%20suosituksen%20kayttoonotto%20vaikuttaa%20kaytannon%20aanitoihin%20?"></a><a
+      href="#Miten%20EBU%20R128%20-%20suosituksen%20kayttoonotto%20vaikuttaa%20aanisuunnittelijan%20tyohon%20?">Miten
+      EBU R128 - suosituksen käyttöönotto vaikuttaa äänisuunittelijan työhön ?</a><br>
+    <br>
+    <a href="#AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen">ÄänekkyysKorjaus
+      - palvelimen levyn mounttaaminen</a><br>
+    <br>
+    <a href="#Aanekkyyskorjattujen%20tiedostojen%20tuominen%20Avid%20-%20Media%20Composeriin">Äänekkyyskorjattujen
+      tiedostojen tuominen Avid - Media Composeriin</a><br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2><a id="What does loudness mean ?">What does loudness mean ?</a></h2>
+    Loudness means the sound level percieved by a human.<br>
+    <br>
+    Electrical peaks shown by a peak meter do not correspond to how a human
+    percieves the loudness of a sound. Human hearing tends to average sound
+    level a bit. Frequency components and their durations also affect human
+    sensation of loudness.<br>
+    <br>
+    In this documents when we talk about loudness we always mean the sound level
+    perceived by a person or a measurement done with a loudness meter. When we
+    talk about peak value we mean the electrical measurement of the highest
+    electrical peak of a sound signal.<br>
+    <br>
+    <br>
+    <h2><a id="Problematic loudness">Problematic loudness</a></h2>
+    Loudness jumps have been a problem since tv- and radio begun. It is the
+    cause of constant complaint from the viewers.<br>
+    <br>
+    Despite our technical advancements there hasn't been any proper tools to
+    control loudness. This is why the problem gas remained unsold until our
+    days.<br>
+    <br>
+    There are two separate problems that needs to be solved:<br>
+    <ol>
+      <li>Loudness jumps inside a program.</li>
+      <li>Loudness jumps between programs.<br>
+      </li>
+    </ol>
+    <br>
+    <br>
+    <h2><a id="Why haven't we been able to solve the loudness problem ?">Why
+        haven't we been able to solve the loudness problem ?</a></h2>
+    It has been difficult to model the way humans perceive loudness and this is
+    tha reason we have not had any proper tools to control loudness.<br>
+    <br>
+    Peak meter has been the only tool to manage loudness. However readings on a
+    peak meter do not match the way how humans hear loudness.<br>
+    <br>
+    The situation has slowly grown worse. In the analog era we used PPM - meters
+    that had some deliberate 'slowness' on how fast the meter reacted to rapid
+    changes in sound level. This slowness or integration time had an averaging
+    effect on the meter display. This averaging removed sharp movement from the
+    meter display causing the meter to react more like human hearing reacts on
+    the loudness of sound. When the digital age began fast digital meters
+    surpassed PPM meters and we lost the averaging effect of the meter. Readings
+    on a fast digital meter do not correspond any more to how humans 'feel'
+    loudness.<br>
+    <br>
+    In 1990's digital processing gave sound engineers tools to manipulate audio
+    in ways that were not possible before. The music industry gave birth to a
+    phenomenon were sound was 'over compressed' to gain more and more loudness.
+    Hypercompression was used to get one's own music to sound louder on car
+    radio than the music from cometing companies. This trend soon crossed over
+    to radio and television.<br>
+    <br>
+    Compression can be used to increase loudness in a way were the electrical
+    peaks in the audio don't go up, in fact they can even go down inspite of
+    loudness going up. This hypercompression made it even more difficult to get
+    a sensible reading for loudness from a peak meter.<br>
+    <br>
+    Because there has not been any proper tools to manage loudness, the only way
+    for a sound engineer to do it was to use his ears as a loudness meter. Using
+    one's hearing as a loudness meter works surprisingly well, but it's problem
+    is the lack of a commonly agreed target loudness level. A sound engineer can
+    produce very consistent loudness inside the same working day, but the lack
+    of a common standard target level makes it very difficult even for the same
+    sound engineer to produce consistent loudness in the long run.<br>
+    <br>
+    <br>
+    <h2><a id="A peak meter can not be used to measure loudness">A peak meter
+        can not be used to measure loudness<br>
+      </a></h2>
+    <br>
+    <strong>DemoVideo 1:</strong> The video below demonstrates a situation where
+    peak levels of several sound samples are the same 0 dBFS, the the loudness
+    of each sample is different.<br>
+    <br>
+    If your browser is not able to play the video below, then you can watch it
+    on <a href="http://www.youtube.com/watch?v=ii1ijC2OQow&amp;vq&amp;hd=1">YouTube</a>.<br>
+    <br>
+    Note !!!!!!! You should use a relatively loud playback volume to really hear
+    loudness differences in the samples.<br>
+    <br>
+    <br>
+    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-1.webm"
+        type="video/webm">
+      <source src="../video/mp4/DemoVideo-1.mp4" type="video/mp4"> Your browser
+      does not support the video tag. </video> <br>
+    <br>
+    <br>
+    <strong>DemoVideo 2:</strong> The next video demontrates what happens to
+    loudness and peak level of a sample when it is compressed. The same sample
+    is played twice in the demo, first without additional compression and then
+    with heavy compression. Both samples have the same peak level of 0 dBFS.<br>
+    <br>
+    If your browser is not able to play the video below, then you can watch it
+    on <a href="http://www.youtube.com/watch?v=FeQCduxNM-k&amp;vq&amp;hd=1">YouTube</a>.<br>
+    <br>
+    Note !!!!!!! You should use a relatively loud playback volume to really hear
+    loudness differences in the samples.<br>
+    <br>
+    <br>
+    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-2.webm"
+        type="video/webm">
+      <source src="../video/mp4/DemoVideo-3.mp4" type="video/mp4"> Your browser
+      does not support the video tag. </video> <br>
+    <br>
+    <strong>Example:</strong> Loudness and peak level measurements can be in
+    total disagreement with each other. The the upper part of the picture below
+    shows the electrical peaks of a heavy-metal consert and the lower part the
+    measured loudness. The parts with high electrical peaks in upper picture are
+    interviews of musicians and the parts with low peak levels are musical
+    performances. The parts with high peak levels are actually lower in loudness
+    than the parts with low electrical peaks and vice versa. Music has been
+    heavily compressed increasing it's loudness while simultaneously lowering
+    it's electrical peaks. If one had a peak and a loudness meter side by side
+    both measuring this material the meters would in fact show opposite values.
+    When peak levels go up the loudness goes down.<br>
+    <br>
+    <br>
+    <img src="Pictures/Sample_Peaks_vs_Loudness-English.jpg"><br>
+    <br>
+    <br>
+    <h2><a id="EBU loudness recommendation R128">EBU loudness recommendation
+        R128</a></h2>
+    <h2></h2>
+    <p>The European Broadcasting Union EBU published the loudness recommendation
+      <strong>R128</strong> in august 2010. R128 defines a technical method for
+      measuring loudness in a way that corresponds very well with how humans
+      perceive loudness. The recommendation defines a common target loudness
+      level for all audio material and finally gives us the tools to measure and
+      manage loudness.</p>
+    <p></p>
+    <p><br>
+    </p>
+    <p></p>
+    <table style="width: 100%;" border="0">
+      <tbody>
+        <tr>
+          <td><img alt="" src="Pictures/R128_Scales.png"></td>
+          <td style="width: 100%; vertical-align: top;">
+            <ul>
+            </ul>
+            <blockquote>
+              <h1>Main concepts of R128<br>
+              </h1>
+            </blockquote>
+            <ul>
+              <ul>
+                <li>R128 uses a measuring method defined in ITU-R BS 1770.
+                  Measurements done with this algorithm correspond very well to
+                  human perception of loudness.</li>
+                <li>R128 supports channel counts from one to six (mono -&gt;
+                  5.1).</li>
+                <li>R128 works very well with all types of material (classical
+                  music, speech, heavy-metal, etc).</li>
+                <li>R128 uses the same scale used in digital peak meters. In
+                  peak meters the unit is dB in loudness meters the unit is LU
+                  (Loudness Unit).<br>
+                </li>
+              </ul>
+            </ul>
+            <blockquote>
+              <h3>Target level<br>
+              </h3>
+            </blockquote>
+            <ul>
+              <ul>
+                <li>Target level for all kinds of&nbsp; material is -23 LUFS.<br>
+                </li>
+                <li>Kohdeäänekkyystaso on kaikelle äänimateriaalille -23 LUFS.<br>
+                </li>
+              </ul>
+            </ul>
+            <blockquote>
+              <h3>Loudness scale<br>
+              </h3>
+            </blockquote>
+            <ul>
+              <ul>
+                <li>There are two ways to define the loudness scale (pictire on
+                  the left): 1. Relative to target level 2. Relative to maximum
+                  level .</li>
+                <li><strong>LU:</strong> the maximum value is +23. Unit is <strong>LU</strong>
+                  (Loudness Unit) and target level is 0 LU.</li>
+                <li><strong>LUFS:</strong> the maximum value is 0. Unit is <strong>LUFS</strong>
+                  (<strong>L</strong>oudness <strong>U</strong>nit <strong>R</strong>elative
+                  to <strong>F</strong>ull <strong>S</strong>cale) and target
+                  level is -23 LUFS.</li>
+                <li><strong>0 LU = -23 LUFS:</strong> Target level is the same
+                  in both scales, only the way to apply numbers on the scale are
+                  different. The user is free to choose which way he wants to
+                  use.<br>
+                </li>
+              </ul>
+            </ul>
+            <blockquote>
+              <h3>Huomattavaa</h3>
+            </blockquote>
+            <ul>
+              <ul>
+                <ul>
+                </ul>
+                <li>The R128 uses the same scale as digital peak meters and
+                  because of this <strong>1 LU = 1 dB</strong>.&nbsp; This
+                  means that if the measured integrated loudness of a program is
+                  +3 LU too high, then the loudness will be precisely at target
+                  level if you reduce the volume by 3 dB's in the audio
+                  workstation. </li>
+              </ul>
+            </ul>
+            <blockquote>
+              <h3>Suosituksen käyttöönotto</h3>
+            </blockquote>
+            <blockquote>
+              <ul>
+                <li>The following countries have (by march 2013) already use or
+                  have announced that they will start to use R128 soon (source:
+                  <a href="http://www.r128audio.com/">http://www.r128audio.com/</a>):
+                  <strong>France, Germany, Netherlands, Italy, Israel,
+                    Switzerland, Austria, Scandinavian countries, Poland</strong>.
+                  Other European countries will follow shortly.</li>
+                <li><strong>Usa</strong><strong></strong><strong></strong> (<a href="http://www.thecalmact.com/">http://www.thecalmact.com/</a>
+                  ), <strong>Japan</strong> and <strong>Brazil</strong> are
+                  using a method very similar to R128.<br>
+                </li>
+              </ul>
+            </blockquote>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p><br>
+    </p>
+    <h2><a id="EBU R128 measurement units">EBU R128 measurement units<br>
+      </a></h2>
+    The EBU loudness recommendation defines three new measurement units. The
+    main difference in these units is how long the time window of the
+    measurement is.<br>
+    <br>
+    <h3>Integrated loudness</h3>
+    Integrated loudness measures the loudness for the duration of a whole
+    program from start to finish. The result of this measurement is a single
+    number that tells the averaged loudness of the program.<br>
+    <ul>
+      <li>The program duration is divided into 400 ms 'slices' and loudness of
+        each slice is measured. Some of the measurement results are thrown away
+        (filtered) according to rules.</li>
+      <li>The back channels of a surround mix get a slightly greater weight in
+        the calculations compared to front channels. The LFE channel is always
+        discarded in the loudness calculations.</li>
+      <li>The result of integrated loudness measurement is a single number that
+        tells the averaged loudness of the program.</li>
+      <li>The target loudness level is -23 LUFS. The integrated loudness of all
+        programs must be at the target level.</li>
+      <li>Loudness is allowed to vary inside a program, only the averaged result
+        of all loudness variations is taken into account.<br>
+      </li>
+    </ul>
+    <h3>Short-term loudness</h3>
+    <ul>
+    </ul>
+    <p>Short-term loudness measures loudness from a 3 second time slice.</p>
+    <ul>
+      <li>In case of file based loudness measurement the results of these 3
+        second time slices are used to create a graphical presentation of
+        loudness variations inside a file.<br>
+      </li>
+    </ul>
+    <h3>Momentary loudness<br>
+    </h3>
+    <ul>
+      <li>Momentary loudness measures loudness from a single 400 ms time slice.
+        The results of multiple momentary loudness measurements is used when
+        integrated loudness and short-term loudness is calculated.<br>
+      </li>
+    </ul>
+    <h3>Loudness range (LRA)<br>
+    </h3>
+    <p></p>
+    <ul>
+      <li>Loudness range (LRA) tells about the wideness of loudness variations
+        in the audio material.</li>
+      <li>Loudness range tries to tell how far apart the loud and quiet parts of
+        a program are from each other. LRA measurement is somewhat coarse in
+        nature and can be used only as a guide, it is not absolute in any way.
+        LRA results should be taken with a grain of salt.<br>
+      </li>
+    </ul>
+    <p><br>
+    </p>
+    <h2><a id="How are the different measurement results used ?">How are the
+        different measurement results used ?</a></h2>
+    <h3>File based loudness measurement</h3>
+    <ul>
+      <li><strong>Integrated loudness:</strong> The result of this measurement
+        shows the averaged loudness of the program.</li>
+      <li><strong>Short-term loudness:</strong> The result of this measurement
+        are used to create a graphical presentation of loudness variations
+        inside a file</li>
+      <li><strong>Momentary loudness:</strong> The result of this measurement is
+        not used for anything visible to a user.&nbsp; These results are used
+        when integrated loudness and short-term loudness is calculated.</li>
+      <li><strong>Loudness range:</strong> The result of this measurement shows
+        about the wideness of loudness variations in the audio material.</li>
+    </ul>
+    Picture below: Short-term loudness results are used to create a graphical
+    presentation of loudness variations inside a file. The brown line in the
+    picture is drawn using results from 3 second time slice loudness
+    measurements.<br>
+    <br>
+    <img alt="" src="Pictures/Short_Term_Loudness_Is_Used_To_Draw_History_Graphics.jpg"><br>
+    <h3>Realtime loudness measurement</h3>
+    <ul>
+      <li><strong>Integrated loudness:</strong> When using a realtime loudness
+        meter then the user must manually start the integrated loudness
+        measurement in the beginning of the program and stop at the end of the
+        program. The measurement result shows the accumulated integrated
+        loudness from the beginning of the program to the current moment.<br>
+      </li>
+      <li><strong>Short-term loudness:</strong> This value shows the loudness of
+        the last 3 seconds. This value can be used to determine the direction
+        where the loudness is heading at the moment.<br>
+      </li>
+      <li><strong>Momentary loudness:</strong> This value shows fast movements
+        of the loudness and it is used to draw a metering bar on the display of
+        the loudness meter.<br>
+      </li>
+      <li><strong>Loudness range:</strong> The result of this measurement shows
+        about the wideness of loudness variations in the audio material.</li>
+    </ul>
+    <p></p>
+    There is an example of a realtime loudness meter below (Nugen Audio). The
+    measurement units discussed above can all be found on right side of the
+    meter display. They are from top to bottom:<br>
+    <ul>
+      <li>Short-term = loudness of the last 3 seconds.</li>
+      <li>Integrated = the integrated loudess from the beginning of the
+        measurement to current moment.</li>
+      <li>Loudness range</li>
+      <li>The meter bar on the right side of the values shows measurements of
+        momentary loudness.</li>
+    </ul>
+    <p>On the left side of the meter display is a loudness history window. It
+      rolls to the left and shows the history of past momentary loudness
+      measurements. The time window of the history display is user definable and
+      in the case below it shows the history of the last two minutes.<br>
+    </p>
+    Understanding the units of EBU R128 helps to read the display of a realtime
+    loudness meter.<br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/VisLM-H.png"><br>
+    <br>
+    <strong>Demovideo 4:</strong> shows a simple realtime loudness meter
+    (ZPlane).<br>
+    <br>
+    The loudness of the audio in the demo increases from start to the middle of
+    the video and then starts to decrease towards the end. The result of
+    integrated loudness can be seen on the right side of the meter display and
+    the led bar shows results from momentary loudness measuremets. Note how the
+    result from integrated loudness moves very slowly compared to the fast led
+    bar.<br>
+    <br>
+    The slow response to loudness variations of the integrated measuremets is
+    caused by the fact that integrated loudness is the averaged sum of previous
+    loudness measurements. Short changes in the loudness have no effect on
+    integrated loudness, a large number of changes toward the same direction are
+    needed before the averaged result starts to move into that direction. This
+    means that it is possible that there are large loudness variations inside a
+    file and the integrated loudnes still hits the target level of -23 LUFS. The
+    user still has the responsibility to adjust loudness variations in a program
+    to fit the distribution channel.<br>
+    <br>
+    If your browser is not able to play the video below, then you can watch it
+    on <a href="http://www.youtube.com/watch?v=3IF8j8IEtOc&amp;vq&amp;hd=1">YouTubesta</a>.<br>
+    <br>
+    <br>
+    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-4.webm"
+        type="video/webm">
+      <source src="../video/mp4/DemoVideo-4.mp4" type="video/mp4"> Your browser
+      does not support the video tag. </video> <br>
+    <br>
+    <br>
+    <h2><a id="Realtime or file based loudness measurement ?">Realtime or file
+        based loudness measurement</a> ?<br>
+    </h2>
+    Loudness measurement can be done in two different ways: realtime and file
+    based measurement. Both methods have different target applications.<br>
+    <br>
+    <h3>Realtime loudness measurement<br>
+    </h3>
+    Realtime loudness measurement can be used in places where the user has the
+    possibility to read the loudness meter in realtime and also adjust volume of
+    the sound sources in realtime. This method of loudness metering is best in
+    production environments where the program is recorded live like tv -
+    studios, OB vans, live radio, broadcasting centers, etc.<br>
+    <br>
+    A realtime meter is not absolutely necessary, but can be useful to a sound
+    engineer in a post production studio. Mixing is traditionally done using
+    ones ears as the loudness meter and this still works very well.<br>
+    <br>
+    <h3>File based loudness measurement<br>
+    </h3>
+    If a program is stored as a file before transmission, then the loudness
+    measurement can be done on the audio file of the program. The file can also
+    be automatically corrected to the target loudness level after doing the
+    loudness measurement.<br>
+    <br>
+    <h3>Both measurement methods</h3>
+    The best loudness meter is still the human ear.&nbsp; A machine has no sense
+    of what sound is important (for example speech) and what is not (for example
+    the sound of heavy rain). The user is still responsible for adjusting
+    loudness variations inside a program to fit the transmission channel. A
+    loudness meter provides a common 'anchor' for the loudness level of all
+    program material.<br>
+    <br>
+    Viewer adjusts the volume of their tv -sets based on the loudness of speech.
+    If speech level changes then the viewer must adjust his listening volume
+    again. It is important that speech loudness is at the EBU target level or at
+    least very close to it.<br>
+    <br>
+    <br>
+    <h2><a id="Loudness variations in a transmission stream">Loudness variations
+        in a transmission stream<br>
+      </a></h2>
+    The picture below displays loudness variations in the transmission stream of
+    a tv station in the spring of 2012. There is a timeline on the bottom of the
+    picture, the measurement took place from 10 o'clock am to 3 o'clock pm.
+    Loudness is measured in 3 second time slices and the measurements are shown
+    in red in the picture. EBU loudness scale (LUFS) is on the left side of the
+    picture. EBU target level -23 LUFS is shown as the green line the goes
+    across the picture. Loudness leve of individual programs are shown as black
+    lines. The little black dots are trailers shown between programs.<br>
+    <br>
+    Eight programs were transmitted during the measurement period and the
+    loudness of these varies greatly on both sides of the EBU target loudness
+    level. This picture tells the story of a typical day in tv broadcasting.<br>
+    <br>
+    The loudness variations in the transmission stream are the result of trying
+    to handle loudness using only a peak meter. Clearly a peak meter is almost
+    useless in loudness management and we need better tools to handle the
+    situation.<br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/The_Problem.png"><br>
+    <br>
+    <br>
+    The picture below shows a couple of problem spots in the transmission. At 11
+    o'clock loudness drops 7 LUs, at 12:05 loudness increases 7.8 LUs and at
+    12:50 it drops by 6.8 LUs. Loudness jumps this big are annoying and the
+    viewer is likely to grab his remote control to adjust the volume.<br>
+    <br>
+    <br>
+    <img src="Pictures/The_Problem-2-english.jpg"><br>
+    <br>
+    <p></p>
+    <p></p>
+    <h2><a id="Automatic file based loudness correction">Automatic file based
+        loudness correction<br>
+      </a></h2>
+    Seuraavaksi esitellään tiedostopohjainen äänekkyysmittari / automaattinen
+    äänekkyyden korjaaja FreeLCS (<a href="http://freelcs.sourceforge.net">http://freelcs.sourceforge.net</a>).
+    Laite näkyy käyttäjälle verkossa nimellä "ÄänekkyysKorjaus".<br>
+    <br>
+    Käyttäjä voi siirtää ÄänekkyysKorjaus<strong> </strong>- palvelimelle
+    äänitiedostoja mitattavaksi ja korjattavaksi. Palvelin tekee äänitiedostosta
+    EBU R128:n kohdetasoon korjatun version, jonka käyttäjä voi imeä takaisin
+    omalle työasemalleen verkon kautta. Palvelin tuottaa myös äänitiedoston
+    sisäisiä äänekkyysvaihteluita kuvaavan grafiikan.<br>
+    <br>
+    ÄänekkyysKorjaus - palvelimen käyttö on hyvin helppoa:<br>
+    <ol>
+      <li>Ensin ÄänekkyysKorjaus - palvelimen verkkolevy mountataan työasemalle.</li>
+      <li>Sitten käsiteltävät tiedostot kopioidaan verkon yli työasemalta
+        palvelimen levylle.</li>
+      <li>Muutaman minuutin odottelun jälkeen äänekkyyskorjatut tiedostot
+        raahataan palvelimen hakemistosta "<strong>00-Korjatut_Tiedostot</strong>"
+        takaisin työasemalle.</li>
+    </ol>
+    <a href="#AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen">Palvelimen
+      levyn mounttaaminen</a> työasemalle on selitetty myöhemmin omassa
+    kappaleessaan. Alla olevan esimerkin kuvat ovat windows 7
+    käyttöjärjestelmästä, mutta samat periaatteet pätevät muihinkin
+    käyttöjärjestelmiin (OS X , windows xp, jne).<br>
+    <br>
+    Alla olevassa kuvassa työaseman paikalliselta levyltä (ylempi ikkuna)
+    kopioidaan äänitiedostoja palvelimen levylle (alempi ikkuna). Huom !!!!!!!
+    Vain palvelimen juurihakemistoon kopioidut tiedostot menevät
+    äänekkyyskorjaukseen.<br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/Usage-windows7-finnish-01.jpg"><br>
+    <br>
+    <br>
+    Kopioinnin jälkeen klikkaa auki palvelimen hakemisto "<strong>00-Korjatut_Tiedostot</strong>",
+    äänekkyyskorjauksen tuloksena syntyvät tiedostot ilmestyvät sinne.<br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/Usage-windows7-finnish-02.jpg"><br>
+    <br>
+    <br>
+    Äänekkyyskorjauksen tuloksien valmistuminen&nbsp; kestää muutaman minuutin.<br>
+    <br>
+    Ensin valmiiksi tulee korjaamattoman äänitiedoston äänekkyysvaihteluista
+    kertova grafiikkatiedosto. Tiedoston tunnistaa sen nimen lopussa olevasta
+    teksistä "<strong>Aanekkyyslaskennan_Tulokset</strong>". Tiedoston voi avata
+    tarkasteltavaksi tuplaklikkaamalla sitä hiirellä. <br>
+    <br>
+    Seuraavaksi ilmestyy EBU R128:n kohdetasoon korjattu versio alkuperäisestä
+    äänitiedostosta. Korjatun tiedoston nimen lopussa on aina teksti "<strong>-23_LUFS</strong>".<br>
+    <br>
+    Äänekkyyskorjattu tiedosto kopioidaan lopuksi verkon yli takaisin omalle
+    työasemalle ja liitetään ohjelman ääneksi.<br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/Usage-windows7-finnish-03.jpg"><br>
+    <br>
+    <br>
+    <h2><a id="AanekkyysKorjaus - palvelimen hakemistot">ÄänekkyysKorjaus -
+        palvelimen hakemistot</a></h2>
+    Palvelimen levyllä on kolme hakemistoa:<br>
+    <ul>
+      <li><strong>"Juurihakemisto"</strong> on hakemisto, jonka sisällä alla
+        mainitut kaksi muuta hakemistoa sijaitsevat. Kaikki käsiteltävät
+        tiedostot kopioidaan palvelimen juurihakemistoon, palvelin ei käsittele
+        muihin hakemistoihin ilmestyviä tiedostoja.</li>
+      <li><strong>"00-Korjatut_Tiedostot"</strong> on hakemisto, johon
+        äänitiedostojen äänekkyysmittauksen ja korjauksen tuloksena syntyvät
+        tiedostot ilmestyvät.<br>
+      </li>
+      <li><strong>"00-Laskentajonon_Tiedot</strong>" on hakemisto, josta löytyy
+        ÄänekkyysKorjaus - palvelimen ns. käsittelyjonon tilannetta kuvaava
+        nettisivu (<strong>00-Laskentajonon_Tiedot.html</strong>). Sivu
+        kertoo&nbsp; kuinka monta tiedostoa odottaa jonossa käsittelyä ja mitä
+        tiedostoja käsitellään parhaillaan. Tiedoston tuplaklikkaaminen avaa sen
+        nettiselaimeen tarkasteltavaksi.<br>
+      </li>
+    </ul>
+    Käyttäjän palvelimelle kopioimat ja niiden käsittelyn tuloksena syntyneet
+    tiedostot deletoidaan palvelimelta automaattisesti kahdeksan tunnin
+    kuluttua.<br>
+    <br>
+    <p></p>
+    <ul>
+    </ul>
+    <h2><a id="Tulosgrafiikka">Tulosgrafiikka</a></h2>
+    Alla on esimerkki äänekkyysmittauksen tuloksena syntyvästä grafiikasta.
+    Kuvan keskeltä ylälaidasta käy ilmi seuraavat tiedot:<br>
+    <ul>
+      <li>Äänitiedoston nimi</li>
+      <li>Tiedoston keskimääräinen äänekkyys (Äänekkyystaso)<br>
+      </li>
+      <li>Kuinka paljon tiedoston keskimääräinen äänekkyys eroaa EBU:n
+        kohdetasosta -23 LUFS.</li>
+      <li>Äänekkyyden vaihteluväli</li>
+      <li>Tiedoston huipputaso.<br>
+      </li>
+    </ul>
+    Äänekkyysvaihteluiden kuvaajaa luetaan näin:<br>
+    <ul>
+      <li>Kuvan vasemmassa laidassa on EBU R128:n mitta-asteikko (yksikkönä
+        LUFS).<br>
+      </li>
+      <li>Ruskea viiva kuvaa tiedostosta mitattuja lyhytaikaisen äänekkyyden
+        vaihteluita.</li>
+      <li>Kuvan läpi kulkeva vaalean vihreä vaakaviiva kuvaa EBU:n kohdetasoa
+        -23 LUFS / 0 LU.</li>
+      <li>Tumman vihreä vaakaviiva kuvaa tiedostosta mitattua keskimääräistä
+        äänekkyystasoa.</li>
+      <li>Kuvan alalaidassa on aikajana.<br>
+      </li>
+    </ul>
+    <br>
+    Esimerkin grafiikka kuvaa yhden klassisen musiikkikappaleen sisäisiä
+    äänekkyysvaihteluita.<br>
+    <br>
+    Jos äänekkyyskuvaajassa esiintyy epäilyttäviä äänekkyyshyppyjä, kannattaa
+    materiaalin kyseiset paikat vielä tarkistaa. Ohjelman sisällä saa olla
+    kohdetasosta poikkeavia äänekkyystasoja, jos ne ovat tarkoituksellisia ja
+    tukevat kerrontaa.<br>
+    <br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/Beethoven-Coriolan_Overture_Op_62.wav-Aanekkyyslaskennan_Tulokset.jpg"><br>
+    <br>
+    <br>
+    <br>
+    <h2><a id="Palvelimen kasittelyjonon tietojen katselu">Palvelimen
+        käsittelyjonon tietojen katselu</a></h2>
+    Jos tiedostojen äänekkyyskorjauttujen versioiden ilmestymien tuntuu viipyvän
+    normaalia kauemmin, voi palvelimen käsittelyjonon tietojen katselu paljastaa
+    mistä viivästys johtuu.<br>
+    <br>
+    Jos klikkaat auki tiedoston "<strong>00-Korjatut_Tiedostot /</strong><strong>
+      00-Laskentajonon_Tiedot.html</strong>", aukeaa nettiselaimeen
+    käsittelyjonon tilanteesta kertova nettisivu.<br>
+    <br>
+    Sivu päivittyy 5 sekunnin välein. Sen ylälaidassa kerrotaan kuinka monta
+    tiedostoa odottaa jonossa käsittelypaikan vapautumista (esimerkissä 25 kpl)
+    ja tämän alla näkyy jonossa seuraavaksi käsittelyyn tulevien kymmenen
+    tiedoston nimet.<br>
+    <br>
+    Harmaan laatikon sisällä näkyy juuri nyt käsittelyssä olevien tiedostojen
+    nimet. Laatikon alla on viimeiset 100 käsiteltyä tiedostoa ja aika jolloin
+    niiden käsittely valmistui.<br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/Html_Progress_Report-finnish.jpg"><br>
+    <br>
+    <h2><a id="Aanen sahkoinen huipputaso ja TruePeak">Äänen sähköinen
+        huipputaso ja TruePeak</a><br>
+    </h2>
+    Analogisen äänen digitoinnissa on eräs tekninen ongelma, jonka seurauksena
+    ääneen saattaa syntyä säröä, kun digitaalinen ääni muutetaan takaisin
+    analogiseksi.<br>
+    <br>
+    Alla kuvassa sininen viiva edustaa äänen sähköisiä vaihteluita ja punaiset
+    pisteet hetkiä, jolloin ääntä digitoitaessa siitä on otettu näytteitä.
+    Esimerkin tilanteessa äänen sähköiset huipputasot sattuvat hyvin yksiin
+    näytteenoton kanssa ja kaikki sähköiset huiput rekisteröityvät digitaaliseen
+    muotoon ongelmitta. <br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/TruePeak-Sampling-1.png"><br>
+    <br>
+    Jos äänessä on hyvin nopeita sähköisiä huippuja, saattaa syntyä alla näkyvä
+    tilanne. Digitoitaessa näytteiden oton ajoitus osuu epäedullisesti suhteessa
+    signaalin huippuihin. Äänen sähköiseksi huipputasoksi rekisteröituu
+    digitoitaessa liian matala arvo, sillä näytteenotot osuvat huippujen
+    välisiin ajankohtiin.<br>
+    <br>
+    Ongelma ilmenee vasta siinä vaiheessa, kun ääni muutetaan takaisin
+    analogiseksi tai kun ääni tallennetaan lähetystä varten kompressoituun
+    tiedostomuotoon (mpeg2, mpeg4, aac). Silloin nämä "haamuhuiput" ilmestyvät
+    takaisin signaaliin.<br>
+    <br>
+    Huippuarvomittari ei tällaisessa tapauksessa näytä signaalin todellisia
+    analogisia huippuja. Kun ääni muutetaan katsojan vastaanottimessa takaisin
+    analogiseen muotoon, saattavat nämä haamuhuiput mennä yli sallitun asteikon.
+    Ääneen syntyy säröä.<br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/TruePeak-Sampling-2.png"><br>
+    <br>
+    Ongelman ratkaisuksi kehitetyn menetelmän nimi on TruePeak. Tekniikka laskee
+    äänisignaalista otettujen näytteiden välille uusia näytepisteitä ja samalla
+    löytää&nbsp; näytteiden välissä mahdollisesti sijaitsevat "haamuhuiput". <br>
+    <br>
+    TruePeak tekniikalla varustetun mittarin asteikossa on tunnus dBTP
+    erotuksena perinteisestä sähköistä huippuarvoa näyttävästä digitaalisesta
+    mittarista, jonka asteikko on usemmiten dBFS.<br>
+    <br>
+    Käytännössä ohjelmista on löytynyt "haamuhuippuja" joiden suuruus on jopa 3
+    dB:tä. TruePeak mittaus saattaa näyttää tällaiselle äänisignaalille
+    huippuarvoa, joka on positiivinen, eli yli dBFS asteikon ylimmän sallitun
+    arvon 0 dBFS. <br>
+    <br>
+    Haamuhuippujen ongelmallisuuden takia EBU:n äänekkyyssuosituksessa
+    määritellään, että äänen huippuarvot on mitattava TruePeak - tekniikkaa
+    käyttäen. R128 suosituksen mukaan tehdyn äänimateriaalin korkeimmat huiput
+    saavat nousta TruePeak asteikolla <strong>-1 dBTP </strong>asti.<br>
+    <br>
+    Alla olevassa kuvassa on äänisignaalista otettujen näytteiden välille
+    laskettu jälkikäteen uusia näytteitä, jolloin signaalin sisältämät
+    haamuhuiput löytyivät.<br>
+    <br>
+    <br>
+    <img alt="" src="Pictures/TruePeak-Sampling-3.png"><br>
+    <br>
+    <br>
+    <br>
+    <h2><a id="Tarkeita huomioita AanekkyysKorjaus - palvelimen kaytosta">Tärkeitä
+        huomioita ÄänekkyysKorjaus - palvelimen käytöstä</a></h2>
+    Tiedostopohjaisessa äänekkyysmittauksessa on muutamia asioita, jotka on
+    tärkeätä ottaa huomioon.<br>
+    <h3>Äänikanavat</h3>
+    Yhden miksauksen kaikkien äänikanavien pitää olla samassa tiedostossa. Esim.
+    stereomiksauksen äänikanavia ei saa käsitellä niin, että
+    äänekkyyskorjaukseen laitetaan erilliset vasemman ja oikean äänikanavan
+    tiedostot. Tällä tavalla käsiteltyjen käsiteltyjen tiedostojen äänekkyys
+    menee väärälle äänekkyystasolle (3 LU :ta pieleen).<br>
+    <br>
+    Yhdessä äänitiedostossa saa olla vain yhden miksauksen äänikanavat. Jos
+    ohjelmassa on erillinen stereo- ja 5.1 - miksaus, kumpikin miksaus pitää
+    käsitellä erikseen.<br>
+    <br>
+    <strong>Esim:</strong> Kun ohjelmassa on kolme eri äänimiksausta (Stereo
+    Suomi, Stereo Ruotsi, 5.1 Suomi) syntyy tästä seuraavat tiedostot:<br>
+    <br>
+    <strong>Tiedosto 1</strong> = Stereo Suomi (kaksi äänikanavaa)<br>
+    <strong>Tiedosto 2</strong> = Stereo Ruotsi (kaksi äänikanavaa)<br>
+    <strong>Tiedosto 3</strong> = 5.1 Suomi (kuusi äänikanavaa)<br>
+    <h3>Raakamateriaalin käsittely</h3>
+    EBU:n R128 on tarkoitettu vain lähetysvalmiiden ohjelmien äänekkyyden
+    mittaamiseen. Raakamateriaalia ei voi äänekkyyskorjata, sillä jos
+    materiaalista leikataan äänekkyyskorjauksen jälkeen pois osia, muuttuu
+    tiedoston keskimääräinen äänekkyys. Tämä johtuu siitä, että keskimääräinen
+    äänekkyys kertyy tiedostosta tehtyjen lyhyiden mittausten keskiarvosta ja
+    tämä keskiarvo muuttuu kun mittaustuloksia (tiedoston osia) poistetaan.
+    Pääsääntöisesti ÄänekkyysKorjaus - palvelimelle siis laitetaan
+    käsiteltäväksi ainoastaan lähetysvalmiita ohjelmia, joita ei enää muuteta
+    mitenkään.<br>
+    <br>
+    Poikkeuksen edelliseen tekee makasiinohjelmat. Jos materiaali koostuu esim.
+    samassa paikassa tehdyistä studiojuonnoista ja erillisistä inserteistä, voi
+    juonnot ja insertit korjata niin, että jokainen ohjelmasegmentti korjataan
+    erikseen. Tällä tavalla pääsee eroon segmenttien välisistä mahdollisista
+    äänekkyyseroista. Tässä pitää kuitenkin pitää huolta siitä, että
+    materiaalissa ei ole osia, jotka leikataan myöhemmin pois. Hiljaisuutta ei
+    oteta huomioon äänekkyysmittauksessa, joten mykkiä kohtia voi leikata pois
+    vaikuttamatta tiedoston keskimääräiseen äänekkyyteen.<br>
+    <h3>Ohjelman sisäiset äänekkyysvaihtelut<br>
+    </h3>
+    ÄänekkyysKorjaus-palvelin on työkalu, joka säätää ohjelman äänekkyyden
+    lähetysvirtaan sopivaksi. Äänekkyyskorjaus ei muuta tiedoston sisäisiä
+    äänekkysvaihteluita mitenkään. Jos äänekkyyvaihtelut ovat alun perinkin
+    liian suuria, ne ovet sitä myös äänekkyyskorjauksen jälkeen. Ohjelman
+    työstäjän vastuulla on säätää äänimateriaalin sisäiset äänekkyyserot
+    sopiviksi.<br>
+    <br>
+    <h3>Lähetysvirran keskimääräinen äänekkyystaso laskee</h3>
+    Kanavillamme lähetettävien ohjelmien äänekkyystasoja on tilastoitu parin
+    vuoden ajan. Keskimääräinen äänekkyys vaihtelee ohjelmasta toiseen, mutta
+    kaikkien tv - kanaviemme pitkäaikainen keskimääräinen äänekkyys on asettunut
+    tasoon -21 LUFS. Kun siirrymme käyttämään EBU:n äänekkyyssuositusta, laskee
+    lähetysvirran keskimääräinen äänekkyys n. 2 LU:ta.<br>
+    <br>
+    <h3>R128:n käyttöönotolla on hyviä seuraksia</h3>
+    Kun äänen voimakkuus ankkuroidaan oikealle paikalleen äänekkyyden mukaan,
+    sähköisille huipuille ja äänekkyysvaihteluille eli dynamiikan käytölle jää
+    enemmän tilaa. Kompression liiallinen käyttö vähenee, kun sillä ei saavuteta
+    enää äänekkyyshyötyä ja miksauksista tulee hengittävämpiä ja elävämpiä.<br>
+    <br>
+    EBU:n äänekkyyssuositus siirtää vastuun kotikuuntelun äänekkyydestä takaisin
+    sinne missä sen olisi pitänyt aina ollakin: katsojalle itselleen. Kun
+    kaikkien ohjelmien keskimääräinen äänekkyys on sama, voi katsoja lopultakin
+    itse päättää kuinka kovaa hän mitäkin ohjelmaa kuuntelee.<br>
+    <ul>
+    </ul>
+    <strong>DemoVideo 3:</strong> Videossa on DemoVideo 1:n ääninäytteet
+    korjattu samalle kohdetasolle 0 LU (-23 LUFS).<br>
+    <br>
+    Jos alla oleva video ei toimi selaimellasi, voit katsoa videon <a href="http://www.youtube.com/watch?v=I64kckkp3BE&amp;vq&amp;hd=1">YouTubesta</a>.<br>
+    <br>
+    <br>
+    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-3.webm"
+        type="video/webm">
+      <source src="../video/mp4/DemoVideo-3.mp4" type="video/mp4"> Your browser
+      does not support the video tag. </video> <br>
+    <br>
+    <br>
+    <h2><a id="Miten EBU R128 - suosituksen kayttoonotto vaikuttaa aanisuunnittelijan tyohon ?">Miten
+        EBU R128 - suosituksen käyttöönotto vaikuttaa äänisuunittelijan työhön ?</a></h2>
+    EBU:n äänekkyyssuosituksen suurin käytännön muutos on se, että äänen
+    kompressoinnilla ei enää saavuta äänekkyyshyötyä. Liiallinen kompressio
+    aiheuttaa ainoastaan äänen laadun heikkenemistä ja kuunteluväsymystä
+    kuuntelijassa.<br>
+    <br>
+    Katselijoiden kotikuuntelussa käyttämä kuunteluvoimakkuus rajoittaa
+    käytettävissä olevan dynamiikka-alueen koon. Kotikuuntelun äänen voimakkuus
+    on keskimäärin suhteellisen matala, eikä tähän tule minkäänlaista muutosta
+    EBU:n äänekkyyssuosituksen käyttöönoton myötä. Käytettävissä olevan
+    dynamiikka-alueen koko pysyy siis samana kuin ennen EBU:n
+    äänekkyyssuosituksen käyttöönottoa.<br>
+    <br>
+    EBU:n suositus määrittelee sähköiselle huippuarvolle suurimmaksi sallituksi
+    arvoksi -1 dBTP. Kaikki arvot tämän alapuolella ovat sallittuja. Sähköisen
+    huippuarvon suurimmalla arvolla ei EBU:n suosituksen käyttöönoton jälkeen
+    ole enää kovinkaan suurta merkitystä. Huippuarvo saa olla mikä tahansa
+    kunhan suurin sallittu arvo -1 dBTP ei ylity.<br>
+    <br>
+    Vanhoja hyväksi todettuja miksausmenetelmiä ei tarvitse muuttaa mitenkään,
+    ne toimivat EBU:n äänekkyyssuosituksen käyttöönoton jälkeen yhtä hyvin kuin
+    ennenkin. Ainoa muutos on se että ohjelmien keskimääräinen äänekkyys
+    pakotetaan samalle tasolle.<br>
+    <br>
+    Korva on myös edelleen äänittäjän tärkein työkalu ja paras äänekkyysmittari.
+    Kone ei voi tietää mikä on hyötyääntä esim. puhetta ja mikä taustaa.<br>
+    <br>
+    <br>
+    <h2><a id="AanekkyysKorjaus - palvelimen levyn mounttaaminen">ÄänekkyysKorjaus
+        - palvelimen levyn mounttaaminen</a></h2>
+    Alla on linkit ohjeisiin, joissa kerrotaan miten eri käyttöjärjestelmissä
+    mountataan ÄänekkyysKorjaus - palvelimen levy työasemalle.<br>
+    <br>
+    <br>
+    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20windows%207%20tyoasemaan.html">ÄänekkyysKorjaus
+      - palvelimen levyn mounttaaminen windows 7 työasemaan</a><br>
+    <br>
+    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20windows%20xp%20tyoasemaan.html">ÄänekkyysKorjaus
+      - palvelimen levyn mounttaaminen windows xp työasemaan</a><br>
+    <br>
+    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20OS%20X%20tyoasemaan.html">ÄänekkyysKorjaus
+      - palvelimen levyn mounttaaminen OS X työasemaan</a><br>
+    <br>
+    <br>
+    <h2><a id="Aanekkyyskorjattujen tiedostojen tuominen Avid - Media Composeriin">Äänekkyyskorjattujen
+        tiedostojen tuominen Avid - Media Composeriin</a><br>
+    </h2>
+    <br>
+    Alla on linkki ohjeeseen, jossa kerrotaan miten äänekkyyskorjatut tiedostot
+    tuodaan Avid Media Composeriin.<br>
+    <br>
+    <a href="Mounting_the_server_hotfolder/Aanekkyyskorjattujen%20tiedostojen%20tuominen%20Avid%20-%20Media%20Composeriin.html">Äänekkyyskorjattujen
+      tiedostojen tuominen Avid - Media Composeriin</a><br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </body>
+</html>
