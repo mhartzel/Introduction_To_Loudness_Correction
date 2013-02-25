@@ -10,16 +10,15 @@
     </div>
     <h1>Introduction To Loudness Correction<br>
     </h1>
+    <a href="#What%20does%20loudness%20mean%20?"></a><br>
+    <a href="#What%20is%20loudness%20?">What is loudness ?</a><br>
     <br>
-    <a href="#What%20does%20loudness%20mean%20?">What does loudness mean ?</a><br>
-    <br>
-    <a href="#Problematic%20loudness">Problematic loudness</a><a href="#Problem%20with%20loudness"></a><br>
+    <a href="#Loudness%20jumps">Loudness jumps</a><a href="#Problematic%20loudness"></a><br>
     <br>
     <a href="#Why%20haven%27t%20we%20been%20able%20to%20solve%20the%20loudness%20problem%20?">Why
       haven't we been able to solve the loudness problem ?</a><br>
     <br>
-    <a href="#A%20peak%20meter%20can%20not%20be%20used%20to%20measure%20loudness">A
-      peak meter can not be used to measure loudness</a><br>
+    <a href="#Peak%20level%20and%20loudness">Peak level and loudness</a><a href="#A%20peak%20meter%20can%20not%20be%20used%20to%20measure%20loudness"></a><br>
     <br>
     <a href="#EBU%20loudness%20recommendation%20R128">EBU loudness
       recommendation R128</a><a href="#EBU:n%20aanekkyyssuositus%20R128"></a><br>
@@ -65,27 +64,25 @@
     <br>
     <br>
     <br>
-    <h2><a id="What does loudness mean ?">What does loudness mean ?</a></h2>
-    Loudness means the sound level percieved by a human.<br>
+    <h2><a id="What is loudness ?">What is loudness ?</a></h2>
+    An digital peak meter shows electrical peaks of sound very reliably.
+    Frequency content does not affect meter reading in any way. Human hearing
+    works in a very different manner. Frequency components and their durations
+    affect how loud a sound feels. This means loudness can not be measured with
+    a peak meter. To accurately measure loudness we need an algorithm that
+    mimics the way humans perceive loudness.<br>
     <br>
-    Electrical peaks shown by a peak meter do not correspond to how a human
-    percieves the loudness of a sound. Human hearing tends to average sound
-    level a bit. Frequency components and their durations also affect human
-    sensation of loudness.<br>
-    <br>
-    In this documents when we talk about loudness we always mean the sound level
-    perceived by a person or a measurement done with a loudness meter. When we
-    talk about peak value we mean the electrical measurement of the highest
-    electrical peak of a sound signal.<br>
+    When we talk about loudness in this document we mean loudness as it is
+    perceived by a person or&nbsp; a measurement done with a loudness meter.
+    When we talk about peak value or peak level we mean the electrical
+    measurement of the highest electrical peak of a sound signal.<br>
     <br>
     <br>
-    <h2><a id="Problematic loudness">Problematic loudness</a></h2>
-    Loudness jumps have been a problem since tv- and radio begun. It is the
-    cause of constant complaint from the viewers.<br>
-    <br>
-    Despite our technical advancements there hasn't been any proper tools to
-    control loudness. This is why the problem gas remained unsold until our
-    days.<br>
+    <h2><a id="Loudness jumps">Loudness jumps<br>
+      </a></h2>
+    Loudness jumps have been a problem since the start of tv and radio. Proper
+    tools to measure and control loudness have not been available until very
+    recently. This is why the problem has remained unsolved until our days.<br>
     <br>
     There are two separate problems that needs to be solved:<br>
     <ol>
@@ -97,56 +94,54 @@
     <br>
     <h2><a id="Why haven't we been able to solve the loudness problem ?">Why
         haven't we been able to solve the loudness problem ?</a></h2>
-    It has been difficult to model the way humans perceive loudness and this is
-    tha reason we have not had any proper tools to control loudness.<br>
+    The lack of a working model of human perception of loudness has prevented
+    the creation of proper tools to measure and manage loudness. A peak meter
+    has been our only 'loudness' tool even thought the reading does not
+    correspond to human hearing in any way.<br>
     <br>
-    Peak meter has been the only tool to manage loudness. However readings on a
-    peak meter do not match the way how humans hear loudness.<br>
+    Loudness problem has not always been this bad. In the analog era we used PPM
+    - meters that had some deliberate 'slowness' on the reaction to rapid
+    changes in sound level. This slowness had an averaging effect that removed
+    fast peaks causing the meter reading to correspond more to human hearing and
+    perception of loudness. Fast digital meters has surpassed PPM meters now and
+    we have lost the averaging effect of the PPM meter. Fast digital meters do
+    not correspond any more to the way how humans perceive loudness .<br>
     <br>
-    The situation has slowly grown worse. In the analog era we used PPM - meters
-    that had some deliberate 'slowness' on how fast the meter reacted to rapid
-    changes in sound level. This slowness or integration time had an averaging
-    effect on the meter display. This averaging removed sharp movement from the
-    meter display causing the meter to react more like human hearing reacts on
-    the loudness of sound. When the digital age began fast digital meters
-    surpassed PPM meters and we lost the averaging effect of the meter. Readings
-    on a fast digital meter do not correspond any more to how humans 'feel'
-    loudness.<br>
-    <br>
-    In 1990's digital processing gave sound engineers tools to manipulate audio
-    in ways that were not possible before. The music industry gave birth to a
-    phenomenon were sound was 'over compressed' to gain more and more loudness.
-    Hypercompression was used to get one's own music to sound louder on car
-    radio than the music from cometing companies. This trend soon crossed over
+    The 1990's gave birth to new digital tools that allowed sound processing on
+    a level that was not possible before. A new phenomenon "hyper-compression"
+    emerged in the music industry. The method used agressive compression to make
+    music sound louder on car radio. It was used as a competetive tool to make a
+    companys music stand out from the competition. Hyper-compression squeezes
+    sound to the edge of distortion lowering sound quality in the process. Hyper
+    compressed sound also causes listening fatigue. This trend soon crossed over
     to radio and television.<br>
     <br>
-    Compression can be used to increase loudness in a way were the electrical
-    peaks in the audio don't go up, in fact they can even go down inspite of
-    loudness going up. This hypercompression made it even more difficult to get
-    a sensible reading for loudness from a peak meter.<br>
+    Compressing a sound can cause the electrical peaks to go down while
+    simultaneously loudness of audio goes up. A peak meter is not useful when
+    metering hyper-compressed sound because the peaks don't correspond to the
+    loudness of audio in any way.<br>
     <br>
-    Because there has not been any proper tools to manage loudness, the only way
-    for a sound engineer to do it was to use his ears as a loudness meter. Using
-    one's hearing as a loudness meter works surprisingly well, but it's problem
-    is the lack of a commonly agreed target loudness level. A sound engineer can
-    produce very consistent loudness inside the same working day, but the lack
-    of a common standard target level makes it very difficult even for the same
-    sound engineer to produce consistent loudness in the long run.<br>
+    The lack of proper loudness meter left the sound engineer to use the only
+    loudness sensitive device he has, his ears. Measuring loudness using ones
+    ears works surprisingly well. A sound engineer can easily produce material
+    with consistent loudness in the course of a day, but this method has a
+    fundamental problem. Since there is no commonly agreed standard for the
+    loudness target level there is no way for a sound engineer to produce
+    material with the same loudness level as another.<br>
     <br>
     <br>
-    <h2><a id="A peak meter can not be used to measure loudness">A peak meter
-        can not be used to measure loudness<br>
-      </a></h2>
+    <h2><a id="Peak level and loudness">Peak level and loudness</a></h2>
     <br>
-    <strong>DemoVideo 1:</strong> The video below demonstrates a situation where
-    peak levels of several sound samples are the same 0 dBFS, the the loudness
-    of each sample is different.<br>
+    <strong>DemoVideo 1:</strong> The video below demostrates what happens when
+    audio is levelled using only the peak level. The peak level for each music
+    sample in the video is the same (0 dBFS). Even though peak levels are equal
+    the loudness of each sample is different.<br>
     <br>
-    If your browser is not able to play the video below, then you can watch it
-    on <a href="http://www.youtube.com/watch?v=ii1ijC2OQow&amp;vq&amp;hd=1">YouTube</a>.<br>
+    If your browser does not show a video window below, then it does not support
+    HTML5 video. In this case you can watch the video on <a href="http://www.youtube.com/watch?v=ii1ijC2OQow&amp;vq&amp;hd=1">YouTube</a>.<br>
     <br>
-    Note !!!!!!! You should use a relatively loud playback volume to really hear
-    loudness differences in the samples.<br>
+    Note !!!!!!! You should use a relatively loud playback volume to hear
+    loudness differences in the music samples.<br>
     <br>
     <br>
     <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-1.webm"
@@ -154,16 +149,16 @@
       Your browser does not support the video tag. </video> <br>
     <br>
     <br>
-    <strong>DemoVideo 2:</strong> The next video demontrates what happens to
-    loudness and peak level of a sample when it is compressed. The same sample
-    is played twice in the demo, first without additional compression and then
-    with heavy compression. Both samples have the same peak level of 0 dBFS.<br>
+    <strong>DemoVideo 2:</strong> The next video demonstrates what happens to
+    loudness when sound is compressed. The first music sample has no additional
+    compression and the second one is quite heavily compressed. Note that the
+    peak level for both samples is still the same (0 dBFS).<br>
     <br>
-    If your browser is not able to play the video below, then you can watch it
-    on <a href="http://www.youtube.com/watch?v=FeQCduxNM-k&amp;vq&amp;hd=1">YouTube</a>.<br>
+    If your browser does not show a video window below, then it does not support
+    HTML5 video. In this case you can watch the video on <a href="http://www.youtube.com/watch?v=FeQCduxNM-k&amp;vq&amp;hd=1">YouTube</a>.<br>
     <br>
-    Note !!!!!!! You should use a relatively loud playback volume to really hear
-    loudness differences in the samples.<br>
+    Note !!!!!!! You should use a relatively loud playback volume to hear
+    loudness differences in the music samples.<br>
     <br>
     <br>
     <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-2.webm"
@@ -171,16 +166,25 @@
       Your browser does not support the video tag. </video> <br>
     <br>
     <strong>Example:</strong> Loudness and peak level measurements can be in
-    total disagreement with each other. The the upper part of the picture below
-    shows the electrical peaks of a heavy-metal consert and the lower part the
-    measured loudness. The parts with high electrical peaks in upper picture are
-    interviews of musicians and the parts with low peak levels are musical
-    performances. The parts with high peak levels are actually lower in loudness
-    than the parts with low electrical peaks and vice versa. Music has been
-    heavily compressed increasing it's loudness while simultaneously lowering
-    it's electrical peaks. If one had a peak and a loudness meter side by side
-    both measuring this material the meters would in fact show opposite values.
-    When peak levels go up the loudness goes down.<br>
+    total disagreement. The picture below shows loudness (lower part) and peak
+    levels (upper part) of a heavy-metal concert. <br>
+    <br>
+    Electrical peaks on the upper part are high during interviews and low during
+    musical performances.<br>
+    <br>
+    The levels on the upper and lower parts of the picture are in total
+    disagreement with each other. When electrical peaks go high the measured
+    loudness goes down. What has happened here is that musical performances have
+    been heavily compressed while much less compression is used on the
+    interviews. Compression has increased music loudness while simultaneously
+    lowering it's electrical peaks.<br>
+    <br>
+    If we measured this material simultaneously with a digital peak meter and a
+    loudness meter, they would show opposing values. When peak levels go up
+    loudness goes down.<br>
+    <br>
+    What this means is that a peak meter is quite useless in determining audio
+    loudness.<br>
     <br>
     <br>
     <img src="Pictures/Sample_Peaks_vs_Loudness-English.jpg"><br>
@@ -826,32 +830,32 @@
     knowing what sound is important and what is not (for example speech versus
     the sound of rain).<br>
     <br>
-    <br>
-    <h2><a id="Mounting the server HotFolder">Mounting the server HotFolder<br>
+    <h2><a id="Mounting the server HotFolder">Mounting the server HotFolder to
+        the workstation<br>
       </a></h2>
-    Alla on linkit ohjeisiin, joissa kerrotaan miten eri käyttöjärjestelmissä
-    mountataan ÄänekkyysKorjaus - palvelimen levy työasemalle.<br>
+    The links below lead to instructions on how to mount the server disk to a
+    local workstation on different operating systems.<br>
     <br>
+    <a href="Mounting_the_server_hotfolder/Mounting_server_HotFolder_on_windows_7.html">Mounting
+      server HotFolder on windows 7</a><br>
+    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20windows%207%20tyoasemaan.html"></a><br>
+    <a href="Mounting_the_server_hotfolder/Mounting_server_HotFolder_on_windows_xp.html">Mounting
+      server HotFolder on windows xp</a><br>
     <br>
-    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20windows%207%20tyoasemaan.html">ÄänekkyysKorjaus
-      - palvelimen levyn mounttaaminen windows 7 työasemaan</a><br>
-    <br>
-    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20windows%20xp%20tyoasemaan.html">ÄänekkyysKorjaus
-      - palvelimen levyn mounttaaminen windows xp työasemaan</a><br>
-    <br>
-    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20OS%20X%20tyoasemaan.html">ÄänekkyysKorjaus
-      - palvelimen levyn mounttaaminen OS X työasemaan</a><br>
-    <br>
+    <a href="Mounting_the_server_hotfolder/Mounting_server_HotFolder_on_OS_X.html">Mounting
+      server HotFolder on OS X</a><br>
+    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20windows%20xp%20tyoasemaan.html"></a><br>
     <br>
     <h2><a id="Importing loudness corrected files back to Avid Media Composer">Importing
         loudness corrected files back to Avid Media Composer</a><br>
     </h2>
+    The link below leads to instructions on how to import loudness corrected
+    files back to Avid Media Composer.<br>
     <br>
-    Alla on linkki ohjeeseen, jossa kerrotaan miten äänekkyyskorjatut tiedostot
-    tuodaan Avid Media Composeriin.<br>
+    <a href="Mounting_the_server_hotfolder/Importing_loudness_corrected_files_back_to_Avid_Media_Composer.html">Importing
+      loudness corrected files back to Avid Media Composer</a><br>
+    <a href="Mounting_the_server_hotfolder/Aanekkyyskorjattujen%20tiedostojen%20tuominen%20Avid%20-%20Media%20Composeriin.html"></a><br>
     <br>
-    <a href="Mounting_the_server_hotfolder/Aanekkyyskorjattujen%20tiedostojen%20tuominen%20Avid%20-%20Media%20Composeriin.html">Äänekkyyskorjattujen
-      tiedostojen tuominen Avid - Media Composeriin</a><br>
     <br>
     <br>
     <br>
