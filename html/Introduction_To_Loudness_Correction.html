@@ -1,891 +1,19 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="en">
-  <head>
-    <title>Introduction To Loudness Correction</title>
-    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
-    <meta content="Mikael Hartzell 2013" name="author">
-  </head>
-  <body>
-    <div style="color: #7f7f7f;" align="right">Mikael Hartzell 2013<br>
-    </div>
-    <h1>Introduction To Loudness Correction<br>
-    </h1>
-    <a href="#What%20does%20loudness%20mean%20?"></a><br>
-    <a href="#What%20is%20loudness%20?">What is loudness ?</a><br>
-    <br>
-    <a href="#Loudness%20jumps">Loudness jumps</a><a href="#Problematic%20loudness"></a><br>
-    <br>
-    <a href="#Why%20haven%27t%20we%20been%20able%20to%20solve%20the%20loudness%20problem%20?">Why
-      haven't we been able to solve the loudness problem ?</a><br>
-    <br>
-    <a href="#Peak%20level%20and%20loudness">Peak level and loudness</a><a href="#A%20peak%20meter%20can%20not%20be%20used%20to%20measure%20loudness"></a><br>
-    <br>
-    <a href="#EBU%20loudness%20recommendation%20R128">EBU loudness
-      recommendation R128</a><a href="#EBU:n%20aanekkyyssuositus%20R128"></a><br>
-    <br>
-    <a href="#EBU%20R128%20measurement%20units">EBU R128 measurement units</a><a
-      href="#EBU%20R128:n%20mittayksikot"></a><br>
-    <br>
-    <a href="#How%20are%20the%20different%20measurement%20results%20used%20?">How
-      are the different measurement results used ?</a><br>
-    <a href="#Reaaliaikainen%20ja%20tiedostopohjainen%20aanekkyysmittaus"></a><br>
-    <a href="#Realtime%20or%20file%20based%20loudness%20measurement%20?">Realtime
-      or file based loudness measurement ?</a><br>
-    <br>
-    <a href="#Loudness%20jumps%20in%20tv%20transmission">Loudness jumps in tv
-      transmission</a><a href="#Loudness%20variations%20in%20a%20transmission%20stream"></a><br>
-    <br>
-    <a href="#Automatic%20file%20based%20loudness%20correction">Automatic file
-      based loudness correction</a><br>
-    <br>
-    <a href="#Description%20of%20folders%20on%20the%20LoudnessCorrection%20-%20server">Description
-      of folders on the LoudnessCorrection - server</a><br>
-    <a href="#Aanekkyysvaihtelut%20lahetysvirrassa"></a><br>
-    <a href="#Loudness%20History%20Graphics">Loudness History Graphics</a><br>
-    <a href="#Tiedostopohjaisen%20AanekkyysKorjauksen%20kayttaminen"></a><br>
-    <a href="#Html%20progress%20report">Html progress report</a><br>
-    <a href="#AanekkyysKorjaus%20-%20palvelimen%20hakemistot"></a><br>
-    <a href="#Sample%20peak%20vs.%20TruePeak">Sample peak vs. TruePeak</a><br>
-    <a href="#Tulosgrafiikka"></a><br>
-    <a href="#Important%20things%20to%20know%20about%20loudness%20correction">Important
-      things to know about loudness correction</a><br>
-    <br>
-    <a href="#How%20does%20the%20EBU%20R128%20affect%20sound%20engineers%20work%20?">How
-      does the EBU R128 affect sound engineers work ?</a><br>
-    <br>
-    <a href="#Mounting%20the%20server%20HotFolder">Mounting the server HotFolder</a><br>
-    <a href="#Palvelimen%20kasittelyjonon%20tietojen%20katselu"></a><br>
-    <a href="#Importing%20loudness%20corrected%20files%20back%20to%20Avid%20Media%20Composer">Importing
-      loudness corrected files back to Avid Media Composer</a><br>
-    <a href="#Aanen%20sahkoinen%20huipputaso%20ja%20TruePeak"></a><br>
-    <br>
-    <a href="#Tarkeita%20huomioita%20AanekkyysKorjaus%20-%20palvelimen%20kaytosta"></a><br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h2><a id="What is loudness ?">What is loudness ?</a></h2>
-    An digital peak meter shows electrical peaks of sound very reliably.
-    Frequency content does not affect meter reading in any way. Human hearing
-    works in a very different manner. Frequency components and their durations
-    affect how loud a sound feels. This means loudness can not be measured with
-    a peak meter. To accurately measure loudness we need an algorithm that
-    mimics the way humans perceive loudness.<br>
-    <br>
-    When we talk about loudness in this document we mean loudness as it is
-    perceived by a person or&nbsp; a measurement done with a loudness meter.
-    When we talk about peak value or peak level we mean the electrical
-    measurement of the highest electrical peak of a sound signal.<br>
-    <br>
-    <br>
-    <h2><a id="Loudness jumps">Loudness jumps<br>
-      </a></h2>
-    Loudness jumps have been a problem since the start of tv and radio. Proper
-    tools to measure and control loudness have not been available until very
-    recently. This is why the problem has remained unsolved until our days.<br>
-    <br>
-    There are two separate problems that needs to be solved:<br>
-    <ol>
-      <li>Loudness jumps inside a program.</li>
-      <li>Loudness jumps between programs.<br>
-      </li>
-    </ol>
-    <br>
-    <br>
-    <h2><a id="Why haven't we been able to solve the loudness problem ?">Why
-        haven't we been able to solve the loudness problem ?</a></h2>
-    The lack of a working model of human perception of loudness has prevented
-    the creation of proper tools to measure and manage loudness. A peak meter
-    has been our only 'loudness' tool even thought the reading does not
-    correspond to human hearing in any way.<br>
-    <br>
-    Loudness problem has not always been this bad. In the analog era we used PPM
-    - meters that had some deliberate 'slowness' on the reaction to rapid
-    changes in sound level. This slowness had an averaging effect that removed
-    fast peaks causing the meter reading to correspond more to human hearing and
-    perception of loudness. Fast digital meters has surpassed PPM meters now and
-    we have lost the averaging effect of the PPM meter. Fast digital meters do
-    not correspond any more to the way how humans perceive loudness .<br>
-    <br>
-    The 1990's gave birth to new digital tools that allowed sound processing on
-    a level that was not possible before. A new phenomenon "hyper-compression"
-    emerged in the music industry. The method used agressive compression to make
-    music sound louder on car radio. It was used as a competetive tool to make a
-    companys music stand out from the competition. Hyper-compression squeezes
-    sound to the edge of distortion lowering sound quality in the process. Hyper
-    compressed sound also causes listening fatigue. This trend soon crossed over
-    to radio and television.<br>
-    <br>
-    Compressing a sound can cause the electrical peaks to go down while
-    simultaneously loudness of audio goes up. A peak meter is not useful when
-    metering hyper-compressed sound because the peaks don't correspond to the
-    loudness of audio in any way.<br>
-    <br>
-    The lack of proper loudness meter left the sound engineer to use the only
-    loudness sensitive device he has, his ears. Measuring loudness using ones
-    ears works surprisingly well. A sound engineer can easily produce material
-    with consistent loudness in the course of a day, but this method has a
-    fundamental problem. Since there is no commonly agreed standard for the
-    loudness target level there is no way for a sound engineer to produce
-    material with the same loudness level as another.<br>
-    <br>
-    <br>
-    <h2><a id="Peak level and loudness">Peak level and loudness</a></h2>
-    <br>
-    <strong>DemoVideo 1:</strong> The video below demostrates what happens when
-    audio is levelled using only the peak level. The peak level for each music
-    sample in the video is the same (0 dBFS). Even though peak levels are equal
-    the loudness of each sample is different.<br>
-    <br>
-    If your browser does not show a video window below, then it does not support
-    HTML5 video. In this case you can watch the video on <a href="http://www.youtube.com/watch?v=ii1ijC2OQow&amp;vq&amp;hd=1">YouTube</a>.<br>
-    <br>
-    Note !!!!!!! You should use a relatively loud playback volume to hear
-    loudness differences in the music samples.<br>
-    <br>
-    <br>
-    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-1.webm"
-        type="video/webm"> <source src="../video/mp4/DemoVideo-1.mp4" type="video/mp4">
-      Your browser does not support the video tag. </video> <br>
-    <br>
-    <br>
-    <strong>DemoVideo 2:</strong> The next video demonstrates what happens to
-    loudness when sound is compressed. The first music sample has no additional
-    compression and the second one is quite heavily compressed. Note that the
-    peak level for both samples is still the same (0 dBFS).<br>
-    <br>
-    If your browser does not show a video window below, then it does not support
-    HTML5 video. In this case you can watch the video on <a href="http://www.youtube.com/watch?v=FeQCduxNM-k&amp;vq&amp;hd=1">YouTube</a>.<br>
-    <br>
-    Note !!!!!!! You should use a relatively loud playback volume to hear
-    loudness differences in the music samples.<br>
-    <br>
-    <br>
-    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-2.webm"
-        type="video/webm"> <source src="../video/mp4/DemoVideo-3.mp4" type="video/mp4">
-      Your browser does not support the video tag. </video> <br>
-    <br>
-    <strong>Example:</strong> Loudness and peak level measurements can be in
-    total disagreement. The picture below shows loudness (lower part) and peak
-    levels (upper part) of a heavy-metal concert. <br>
-    <br>
-    Electrical peaks on the upper part are high during interviews and low during
-    musical performances.<br>
-    <br>
-    The levels on the upper and lower parts of the picture are in total
-    disagreement with each other. When electrical peaks go high the measured
-    loudness goes down. What has happened here is that musical performances have
-    been heavily compressed while much less compression is used on the
-    interviews. Compression has increased music loudness while simultaneously
-    lowering it's electrical peaks.<br>
-    <br>
-    If we measured this material simultaneously with a digital peak meter and a
-    loudness meter, they would show opposing values. When peak levels go up
-    loudness goes down.<br>
-    <br>
-    What this means is that a peak meter is quite useless in determining audio
-    loudness.<br>
-    <br>
-    <br>
-    <img src="Pictures/Sample_Peaks_vs_Loudness-English.jpg"><br>
-    <br>
-    <br>
-    <h2><a id="EBU loudness recommendation R128">EBU loudness recommendation
-        R128</a></h2>
-    <h2></h2>
-    <p>The European Broadcasting Union EBU published the loudness recommendation
-      <strong>R128</strong> in august 2010. R128 defines a technical method for
-      measuring loudness in a way that corresponds very well with how humans
-      perceive loudness. The recommendation defines a common target loudness
-      level for all audio material and finally gives us the tools to measure and
-      manage loudness.</p>
-    <p></p>
-    <p><br>
-    </p>
-    <p></p>
-    <table style="width: 100%;" border="0">
-      <tbody>
-        <tr>
-          <td><img alt="" src="Pictures/R128_Scales.png"></td>
-          <td style="width: 100%; vertical-align: top;">
-            <ul>
-            </ul>
-            <blockquote>
-              <h1>Main concepts of R128<br>
-              </h1>
-            </blockquote>
-            <ul>
-              <ul>
-                <li>R128 uses a measuring method defined in ITU-R BS 1770.
-                  Measurements done with this algorithm correspond very well to
-                  human perception of loudness.</li>
-                <li>R128 supports channel counts from one to six (mono -&gt;
-                  5.1).</li>
-                <li>R128 works very well with all types of material (classical
-                  music, speech, heavy-metal, etc).</li>
-                <li>R128 uses the same scale used in digital peak meters. In
-                  peak meters the unit is dB in loudness meters the unit is LU
-                  (Loudness Unit).<br>
-                </li>
-              </ul>
-            </ul>
-            <blockquote>
-              <h3>Target level<br>
-              </h3>
-            </blockquote>
-            <ul>
-              <ul>
-                <li>Target level for all kinds of&nbsp; material is -23 LUFS.<br>
-                </li>
-                <li>Kohdeäänekkyystaso on kaikelle äänimateriaalille -23 LUFS.<br>
-                </li>
-              </ul>
-            </ul>
-            <blockquote>
-              <h3>Loudness scale<br>
-              </h3>
-            </blockquote>
-            <ul>
-              <ul>
-                <li>There are two ways to define the loudness scale (pictire on
-                  the left): 1. Relative to target level 2. Relative to maximum
-                  level .</li>
-                <li><strong>LU:</strong> the maximum value is +23. Unit is <strong>LU</strong>
-                  (Loudness Unit) and target level is 0 LU.</li>
-                <li><strong>LUFS:</strong> the maximum value is 0. Unit is <strong>LUFS</strong>
-                  (<strong>L</strong>oudness <strong>U</strong>nit <strong>R</strong>elative
-                  to <strong>F</strong>ull <strong>S</strong>cale) and target
-                  level is -23 LUFS.</li>
-                <li><strong>0 LU = -23 LUFS:</strong> Target level is the same
-                  in both scales, only the way to apply numbers on the scale are
-                  different. The user is free to choose which way he wants to
-                  use.<br>
-                </li>
-              </ul>
-            </ul>
-            <blockquote>
-              <h3>LU vs. dB<br>
-              </h3>
-            </blockquote>
-            <ul>
-              <ul>
-                <ul>
-                </ul>
-                <li>The R128 uses the same scale as digital peak meters and
-                  because of this <strong>1 LU = 1 dB</strong>.&nbsp; This
-                  means that if the measured integrated loudness of a program is
-                  +3 LU too high, then the loudness will be precisely at target
-                  level if you reduce the volume of the mix by 3 dB's.</li>
-              </ul>
-            </ul>
-            <blockquote>
-              <h3>Countries using R128<br>
-              </h3>
-            </blockquote>
-            <blockquote>
-              <ul>
-                <li>The following countries (by march 2013) already use or have
-                  announced that they will start to use R128 soon (source: <a href="http://www.r128audio.com/">http://www.r128audio.com/</a>):
-                  <strong>France, Germany, Netherlands, Italy, Israel,
-                    Switzerland, Austria, Scandinavian countries, Poland</strong>.
-                  Other European countries will follow shortly.</li>
-                <li><strong>Usa</strong><strong></strong><strong></strong> (<a href="http://www.thecalmact.com/">http://www.thecalmact.com/</a>
-                  ), <strong>Japan</strong> and <strong>Brazil</strong> are
-                  using a method very similar to R128.<br>
-                </li>
-              </ul>
-            </blockquote>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <p><br>
-    </p>
-    <h2><a id="EBU R128 measurement units">EBU R128 measurement units<br>
-      </a></h2>
-    The EBU loudness recommendation defines three new measurement units. The
-    main difference in these units is how long the time window of the
-    measurement is.<br>
-    <br>
-    <h3>Integrated loudness</h3>
-    Integrated loudness measures the loudness for the duration of a whole
-    program from start to finish. The result of this measurement is a single
-    number that tells the averaged loudness of the program.<br>
-    <ul>
-      <li>The program duration is divided into 400 ms 'slices' and loudness of
-        each slice is measured. Some of the measurement results are thrown away
-        (filtered) according to rules.</li>
-      <li>The back channels of a surround mix get a slightly greater weight in
-        the calculations compared to front channels. The LFE channel is always
-        discarded in the loudness calculations.</li>
-      <li>The result of integrated loudness measurement is a single number that
-        tells the averaged loudness of the program.</li>
-      <li>The target loudness level is -23 LUFS. The integrated loudness of all
-        programs must be at the target level.</li>
-      <li>Loudness is allowed to vary inside a program, only the averaged result
-        of all loudness variations is taken into account.<br>
-      </li>
-    </ul>
-    <h3>Short-term loudness</h3>
-    <ul>
-    </ul>
-    <p>Short-term loudness measures loudness from a 3 second time slice.</p>
-    <ul>
-      <li>In case of file based loudness measurement the results of these 3
-        second time slices are used to create a graphical presentation of
-        loudness variations inside a file.<br>
-      </li>
-    </ul>
-    <h3>Momentary loudness<br>
-    </h3>
-    <ul>
-      <li>Momentary loudness measures loudness from a single 400 ms time slice.
-        The results of multiple momentary loudness measurements is used when
-        integrated loudness and short-term loudness is calculated.<br>
-      </li>
-    </ul>
-    <h3>Loudness range (LRA)<br>
-    </h3>
-    <p></p>
-    <ul>
-      <li>Loudness range (LRA) tells about the wideness of loudness variations
-        in the audio material.</li>
-      <li>Loudness range tries to tell how far apart the loud and quiet parts of
-        a program are from each other. LRA measurement is somewhat coarse in
-        nature and can be used only as a guide, it is not absolute in any way.
-        LRA results should be taken with a grain of salt.<br>
-      </li>
-    </ul>
-    <p><br>
-    </p>
-    <h2><a id="How are the different measurement results used ?">How are the
-        different measurement results used ?</a></h2>
-    <h3>File based loudness measurement</h3>
-    <ul>
-      <li><strong>Integrated loudness:</strong> The result of this measurement
-        shows the averaged loudness of the program.</li>
-      <li><strong>Short-term loudness:</strong> The result of this measurement
-        are used to create a graphical presentation of loudness variations
-        inside a file</li>
-      <li><strong>Momentary loudness:</strong> The result of this measurement is
-        not used for anything visible to a user.&nbsp; These results are used
-        when integrated loudness and short-term loudness is calculated.</li>
-      <li><strong>Loudness range:</strong> The result of this measurement shows
-        about the wideness of loudness variations in the audio material.</li>
-    </ul>
-    Picture below: Short-term loudness results are used to create a graphical
-    presentation of loudness variations inside a file. The brown line in the
-    picture is drawn using results from 3 second time slice loudness
-    measurements.<br>
-    <br>
-    <img alt="" src="Pictures/Short_Term_Loudness_Is_Used_To_Draw_History_Graphics.jpg"><br>
-    <h3>Realtime loudness measurement</h3>
-    <ul>
-      <li><strong>Integrated loudness:</strong> When using a realtime loudness
-        meter then the user must manually start the integrated loudness
-        measurement in the beginning of the program and stop at the end of the
-        program. The measurement result shows the accumulated integrated
-        loudness from the beginning of the program to the current moment.<br>
-      </li>
-      <li><strong>Short-term loudness:</strong> This value shows the loudness of
-        the last 3 seconds. This value can be used to determine the direction
-        where the loudness is heading at the moment.<br>
-      </li>
-      <li><strong>Momentary loudness:</strong> This value shows fast movements
-        of the loudness and it is used to draw a metering bar on the display of
-        the loudness meter.<br>
-      </li>
-      <li><strong>Loudness range:</strong> The result of this measurement shows
-        about the wideness of loudness variations in the audio material.</li>
-    </ul>
-    <p></p>
-    There is an example of a realtime loudness meter below (Nugen Audio). The
-    measurement units discussed above can all be found on right side of the
-    meter display. They are from top to bottom:<br>
-    <ul>
-      <li>Short-term = loudness of the last 3 seconds.</li>
-      <li>Integrated = the integrated loudess from the beginning of the
-        measurement to current moment.</li>
-      <li>Loudness range</li>
-      <li>The meter bar on the right side of the values shows measurements of
-        momentary loudness.</li>
-    </ul>
-    <p>On the left side of the meter display is a loudness history window. It
-      rolls to the left and shows the history of past momentary loudness
-      measurements. The time window of the history display is user definable and
-      in the case below it shows the history of the last two minutes.<br>
-    </p>
-    Understanding the units of EBU R128 helps to read the display of a realtime
-    loudness meter.<br>
-    <br>
-    <br>
-    <img alt="" src="Pictures/VisLM-H.png"><br>
-    <br>
-    <strong>Demovideo 4:</strong> shows a simple realtime loudness meter
-    (ZPlane).<br>
-    <br>
-    The loudness of the audio in the demo increases from start to the middle of
-    the video and then starts to decrease towards the end. The result of
-    integrated loudness can be seen on the right side of the meter display and
-    the led bar shows results from momentary loudness measuremets. Note how the
-    result from integrated loudness moves very slowly compared to the fast led
-    bar.<br>
-    <br>
-    The slow response to loudness variations of the integrated measuremets is
-    caused by the fact that integrated loudness is the averaged sum of previous
-    loudness measurements. Short changes in the loudness have no effect on
-    integrated loudness, a large number of changes toward the same direction are
-    needed before the averaged result starts to move into that direction. This
-    means that it is possible that there are large loudness variations inside a
-    file and the integrated loudnes still hits the target level of -23 LUFS. The
-    user still has the responsibility to adjust loudness variations in a program
-    to fit the distribution channel.<br>
-    <br>
-    If your browser is not able to play the video below, then you can watch it
-    on <a href="http://www.youtube.com/watch?v=3IF8j8IEtOc&amp;vq&amp;hd=1">YouTube</a>.<br>
-    <br>
-    <br>
-    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-4.webm"
-        type="video/webm"> <source src="../video/mp4/DemoVideo-4.mp4" type="video/mp4">
-      Your browser does not support the video tag. </video> <br>
-    <br>
-    <br>
-    <h2><a id="Realtime or file based loudness measurement ?">Realtime or file
-        based loudness measurement</a> ?<br>
-    </h2>
-    Loudness measurement can be done in two different ways: realtime and file
-    based measurement. Both methods have different target applications.<br>
-    <br>
-    <h3>Realtime loudness measurement<br>
-    </h3>
-    Realtime loudness measurement can be used in places where the user has the
-    possibility to read the loudness meter in realtime and also adjust volume of
-    the sound sources in realtime. This method of loudness metering is best in
-    production environments where the program is recorded live like tv -
-    studios, OB vans, live radio, broadcasting centers, etc.<br>
-    <br>
-    A realtime meter is not absolutely necessary, but can be useful to a sound
-    engineer in a post production studio. Mixing is traditionally done using
-    ones ears as the loudness meter and this still works very well.<br>
-    <br>
-    <h3>File based loudness measurement<br>
-    </h3>
-    If a program is stored as a file before transmission, then the loudness
-    measurement can be done on the audio file of the program. The file can also
-    be automatically corrected to the target loudness level after doing the
-    loudness measurement.<br>
-    <br>
-    <h3>Both measurement methods</h3>
-    The best loudness meter is still the human ear.&nbsp; A machine has no sense
-    of what sound is important (for example speech) and what is not (for example
-    the sound of heavy rain). The user is still responsible for adjusting
-    loudness variations inside a program to fit the transmission channel. A
-    loudness meter provides a common 'anchor' for the loudness level of all
-    program material.<br>
-    <br>
-    Viewer adjusts the volume of their tv -sets based on the loudness of speech.
-    If speech level changes then the viewer must adjust his listening volume
-    again. It is important that speech loudness is at the EBU target level or at
-    least very close to it.<br>
-    <br>
-    <br>
-    <h2><a id="Loudness jumps in tv transmission">Loudness jumps in tv
-        transmission<br>
-      </a></h2>
-    The picture below displays loudness variations in the transmission stream of
-    a tv station in the spring of 2012. There is a timeline on the bottom of the
-    picture, the measurement took place from 10 o'clock am to 3 o'clock pm.
-    Loudness is measured in 3 second time slices and the measurements are shown
-    in red in the picture. EBU loudness scale (LUFS) is on the left side of the
-    picture. EBU target level -23 LUFS is shown as the green line the goes
-    across the picture. Loudness leve of individual programs are shown as black
-    lines. The little black dots are trailers shown between programs.<br>
-    <br>
-    Eight programs were transmitted during the measurement period and the
-    loudness of these varies greatly on both sides of the EBU target loudness
-    level. This picture tells the story of a typical day in tv broadcasting.<br>
-    <br>
-    The loudness variations in the transmission stream are the result of trying
-    to handle loudness using only a peak meter. Clearly a peak meter is almost
-    useless in loudness management and we need better tools to handle the
-    situation.<br>
-    <br>
-    <br>
-    <img alt="" src="Pictures/The_Problem.png"><br>
-    <br>
-    <br>
-    The picture below shows a couple of problem spots in the transmission. At 11
-    o'clock loudness drops 7 LUs, at 12:05 loudness increases 7.8 LUs and at
-    12:50 it drops by 6.8 LUs. Loudness jumps this big are annoying and the
-    viewer is likely to grab his remote control to adjust the volume.<br>
-    <br>
-    <br>
-    <img src="Pictures/The_Problem-2-english.jpg"><br>
-    <br>
-    <p></p>
-    <p></p>
-    <h2><a id="Automatic file based loudness correction">Automatic file based
-        loudness correction</a></h2>
-    In the capters below I will describe the usage of the free file based
-    automatic loudness correction and measurement tool FreeLCS (<a href="http://freelcs.sourceforge.net">http://freelcs.sourceforge.net</a>).
-    FreeLCS is a server on the network where users can drop in files to be
-    automatically loudness corrected. The server also creates a loudness history
-    graphics file which gives visual feedback of the internal loudness
-    variations in a file.<br>
-    <br>
-    It is very easy to use the server:<br>
-    <ol>
-      <li>Mount the server disk to the users local workstation.</li>
-      <li>Drag files over to the server.</li>
-      <li>A couple of minutes later the user can drag loudness corrected
-        versions of the files back to his workstation.<br>
-      </li>
-    </ol>
-    Mounting the server disk to the local workstation is discussed in <a href="#Mounting%20the%20server%20disk%20to%20a%20local%20workstation">its
-      own chapter</a>. The example below is for windows 7, but the same
-    principles apply to other operating systems also (OS X, windows xp, etc).<br>
-    <br>
-    In the picture below files from the local workstation are being copied over
-    to the loudness correction server. The network name of the server is
-    "LoudnessCorrection". Note: only files copied to the root folder of the
-    server will be processed.<br>
-    <br>
-    <br>
-    <img src="Pictures/Usage-windows7-english-01.jpg"><br>
-    <br>
-    <br>
-    Loudness corrected files will appear in folder "<strong>00-Corrected_Files</strong>",
-    double click to open it.<br>
-    <br>
-    <br>
-    <img src="Pictures/Usage-windows7-english-02.jpg"><br>
-    <br>
-    <br>
-    It takes a couple of minutes for the server to process the files.<br>
-    <br>
-    The first file to appear is the loudness history graphics file. The end of
-    the file name is always "<strong>Loudness_Results_Graphics</strong>". The
-    file is in jpeg format and it can be opened for viewing by double clicking
-    on it.<br>
-    <br>
-    The next file to appear is the loudness corrected audio file. The end of the
-    file name is always&nbsp; "<strong>-23_LUFS</strong>".<br>
-    <br>
-    Now the user can copy the loudness corrected file back to the local
-    workstation and attach it as the final mix of the program.<br>
-    <br>
-    All files on the server will be automatically deleted after a waiting period
-    that is set during FreeLCS installation. It is by default 8 hours.<br>
-    <br>
-    <br>
-    <img src="Pictures/Usage-windows7-english-03.jpg"><br>
-    <br>
-    <br>
-    <h2><a id="Description of folders on the LoudnessCorrection - server">Description
-        of folders on the LoudnessCorrection - server</a></h2>
-    There are three folders on the LoudnessCorrection - server:<br>
-    <ul>
-      <li>"<strong>Root - folder</strong>" or "<strong>HotFolder</strong>" is on
-        top of the server folder structure and the other two folders described
-        below are both inside this folder. Only files dropped into the root -
-        folder will be processed, the server will not process files dropped to
-        any other folder.</li>
-      <li>"<strong>00-Corrected_Files</strong>" is the folder where loudness
-        corrected audio files and loudness history graphics files will appear.</li>
-      <li>"<strong>00-Calculation_Queue_Information</strong>" is used for
-        storing a html progress report ("<strong>00-Calculation_Queue_Information.html</strong>")
-        that shows the current state of the processing queue. This file is a web
-        page and can be double clicked to open it for viewing in a web browser.
-        The html progress report shows how many files are waiting in the queue
-        for processing and which files are currently being processed upon.<br>
-      </li>
-    </ul>
-    All files on the server will be automatically deleted after a waiting period
-    that is set during FreeLCS installation. It is by default 8 hours.<br>
-    <br>
-    <br>
-    <p></p>
-    <ul>
-    </ul>
-    <h2><a id="Loudness History Graphics">Loudness History Graphics</a></h2>
-    The picture below shows a loudness history graphics file. The top of the
-    picture shows:<br>
-    <ul>
-      <li>The name of the audio file.</li>
-      <li>Integrated loudness of the file.</li>
-      <li>How much the integrated loudness of the file differs from EBU target
-        level -23 LUFS.</li>
-      <li>Loudness range.</li>
-      <li>The peak level of the file (selectable during installation between
-        sample peak and TruePeak).</li>
-    </ul>
-    <p>The loudness graphics shows the following information:</p>
-    <ul>
-      <li>EBU loudness scale (LUFS) is on the left side of the picture.</li>
-      <li>The brown line shows how loudness varies across time in the file.</li>
-      <li>The bright green line shows the EBU R128 target level -23 LUFS.</li>
-      <li>The dark green line shows integrated loudness measured from the file</li>
-      <li>On bottom of the graphics is the timeline.<br>
-      </li>
-    </ul>
-    The example shows loudness variations inside a piece of classical music.<br>
-    <br>
-    The graphics file allows the user to visually verify that there aren't any
-    unintended loudness jumps in the file. Suspicious spots can be located and
-    checked using time displayed on the bottom of the graphics file.<br>
-    <br>
-    The goal of EBU R128 is not to make every second of a program to be on the
-    same loudness level, on the contrary R128 encourages the usage of more
-    dynamics and less compression to make the material more pleasing to the ear.<br>
-    <br>
-    <br>
-    <br>
-    <img src="Pictures/Beethoven-Coriolan_Overture_Op_62.wav-Loudness_Results_Graphics.jpg"><br>
-    <br>
-    <br>
-    <br>
-    <h2><a id="Html progress report">Html progress report</a></h2>
-    If file processing seems to take longer than usual, then user can view the
-    "html progress report" to see what causes the delay. The file is located in
-    "<strong>00-Calculation_Queue_Information /
-      00-Calculation_Queue_Information.html</strong>" and double clicking on it
-    opens it up in the web browser.<br>
-    <br>
-    The progress report shows the current state of the servers calculation queue
-    and it updates every five seconds. The top of the page shows how many files
-    are waiting in the queue for processing (14 in the example) and below that
-    names of the next ten files to be processed.<br>
-    <br>
-    Files currently processed upon are shown in the gray box in the middle of
-    the page. The filenames of the last 100 completed files along with
-    completion times is shown on the bottom of the page.<br>
-    <br>
-    <br>
-    <br>
-    <img src="Pictures/Html_Progress_Report.jpg"><br>
-    <br>
-    <h2><a id="Sample peak vs. TruePeak">Sample peak vs. TruePeak</a><br>
-    </h2>
-    Digitizing an analog signal poses a problem that can cause distortion when
-    the sampled audio is converted back to analog.<br>
-    <br>
-    In the picture below the blue line represents voltage variations in analog
-    audio and red dots represent times when digital samples are taken from the
-    signal. In the example digital samples are taken exactly when the analog
-    voltage is at its highest peak. The sample rate coincides with the peaks in
-    the signal and the peak values are recorded correctly into the digital data.<br>
-    <br>
-    <br>
-    <img alt="" src="Pictures/TruePeak-Sampling-1.png"><br>
-    <br>
-    Sometimes there can be very fast peaks in the audio that happen before or
-    after samples are taken. Instead of the true values of the peaks in the
-    signal lower values are recorded in the digital data.<br>
-    <br>
-    The problem may go undetected until audio is converted back to analog or the
-    audio is compressed in a lossy format (mpeg2, mpeg3, aac) for transmission.
-    Then these 'phantom peaks' can appear back in the signal.<br>
-    <br>
-    A conventional digital peak meter won't show these phantom peaks because the
-    information is not available in digital samples of the audio. When samples
-    are converted back to analog audio then these phantom peaks can go over the
-    maximum allowed level in the DA - converter and introduce distortion to the
-    sound.<br>
-    <br>
-    <br>
-    <img alt="" src="Pictures/TruePeak-Sampling-2.png"><br>
-    <br>
-    ITU recommends a method called "TruePeak" to find these phantom peaks after
-    the signal is already in digital format.&nbsp; This method calculates new
-    samples between samples taken when digitizing audio and this makes the
-    phantom peaks visible again.<br>
-    <br>
-    A meter that shows peak using this method uses ascale called dBTP when a
-    conventional sample peak meter uses dBFS.<br>
-    <br>
-    In practice I have seen phantom peaks 3 dBs higher than the highest sample
-    peak value in the same audio. It is possible for a TruePeak measurement to
-    show values that go over the maximum allowed peak of the dBFS scale (0 dBFS)
-    showing positive TruePeak values for example +3 dBTP. In this case this
-    would mean that the true peak value is 3 dBs over the maximum value of for
-    example a DA - converter and converting a signal like this back to analog
-    would cause distortion in the DA - converter.<br>
-    <br>
-    EBU R128 recommends always using TruePeak when measuring audio peaks. The
-    maximum allowed value for peaks in R128 is &nbsp; -1 dBTP (dBs using the
-    TruePeak scale).<br>
-    <br>
-    In the picture below new samples has been calculated between samples taken
-    during audio digitization. These new samples make the phantom peaks visible
-    again.<br>
-    <br>
-    <br>
-    <img alt="" src="Pictures/TruePeak-Sampling-3.png"><br>
-    <br>
-    <br>
-    <br>
-    <h2><a id="Important things to know about loudness correction">Important
-        things to know about loudness correction</a></h2>
-    There are a couple of important things to take into consideration when using
-    loudness correction.<br>
-    <h3>Audio channels</h3>
-    All audio channels of one mix must be in the same file. If you split a
-    stereo mix to left and right files and process both separately then the
-    loudness level of the corrected files will be wrong by 3 LUs.<br>
-    <br>
-    One file can only have one mix in it.<strong> Example:</strong> If a program
-    consists of three different mixes: stereo English,&nbsp;&nbsp; stereo
-    French, &nbsp; 5.1 English, then the mixes must be processed as follows:<br>
-    <br>
-    <strong>File 1</strong> = Stereo English<br>
-    <strong>File 2</strong> = Stereo French<br>
-    <strong>File 3</strong> = 5.1 English<br>
-    <br>
-    <h3>Processing raw material<br>
-    </h3>
-    EBU R128 is meant for processing only finished programs that are ready for
-    transmission. It is not possible to loudness correct uncut raw material,
-    because the integrated loudness of a file changes when parts of it are cut
-    away. Integrated loudness measurement consists of the averaged sum of
-    multiple short loudness measurement results. The sum of these measuremets
-    changes when a portion of results are throuwn away (patrs of a file is cut
-    away). As a rule of thumb only process finished audio mixes of programs that
-    won't be changed any more.<br>
-    <br>
-    There is an exeption to the rule. Some types of programs can benefit from
-    processing parts of if independently from each other. An example is a
-    program that consists of a studio host presenting the next animation and a
-    bunch of animations produced outside your company. The different parts of
-    the program can have very different loudness levels and if put together
-    without correction could produce large loudness jumps inside the program.
-    You can get rid of the loudness differences between each part by processing
-    them separately. If you do this be careful not to include any parts that are
-    giong to be cut away. Silence won't affect integrated loudness since
-    loudness levels below -70 dB are not taken into account in loudness
-    measurement. So you can cut away silent parts without affecting integrated
-    loudness of a file.<br>
-    <br>
-    <h3>Loudness variations in a program</h3>
-    Loudness correction is a tool that adjusts loudness level of a program to
-    match other programs in the transmission stream. Loudness correction won't
-    change loudness variations in a file in any way. If the material is too
-    dynamic before correction it will be too dynamic after the correction also.
-    The user has the responsibility to adjust loudness variations in a file to
-    fit the transmission channel. This means that loudness variations must be
-    restricted to a range that is usable in the average home listening
-    environment.<br>
-    <br>
-    <h3>The average loudness will go down</h3>
-    A typical European tv station has a averaged loudness somewhere between -21
-    and -20 LUFS. The EBU R128 therefore causes the average loudness to go down
-    by 2 - 3 LUs.<br>
-    <br>
-    <h3>R128 brings good things with it<br>
-    </h3>
-    When audio levelling is done using loudness of audio, there will be more
-    electrical headroom for peaks to exist. Heavy compression gives no loudness
-    advantage any more, it only makes the mix sound bad. This will probably
-    encourage sound engineers to make their mixes more airy and pleasing to the
-    ear.<br>
-    <br>
-    EBU R128 moves responsibility for the listening level back to where it
-    always was supposed to be, to the viewer. When loudness of all programs is
-    at the same level then the viewer is at last allowed to decide the listening
-    level of his won living room.<br>
-    <ul>
-    </ul>
-    <strong>DemoVideo 3:</strong> Audio samples from DemoVideo 1 are now all
-    corrected to the EBU target loudness level (-23 LUFS).<br>
-    <br>
-    &nbsp;If your browser is not able to play the video below, then you can
-    watch it on <a href="http://www.youtube.com/watch?v=I64kckkp3BE&amp;vq&amp;hd=1">YouTube</a>.<br>
-    <br>
-    <br>
-    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-3.webm"
-        type="video/webm"> <source src="../video/mp4/DemoVideo-3.mp4" type="video/mp4">
-      Your browser does not support the video tag. </video> <br>
-    <br>
-    <br>
-    <h2><a id="How does the EBU R128 affect sound engineers work ?">How does the
-        EBU R128 affect sound engineers work ?</a></h2>
-    The biggest practical change that R128 causes is that heavy compression
-    gives no loudness advantage any more, it only makes the mix to sound bad.<br>
-    <br>
-    The average listening volume used by viewers is quite low and this limits
-    the usable dynamics range available for the mixing sound engineer. The
-    average listening volume used in homes won't be affected by the fact that
-    the broadcaster starts to use R128 loudness management. The usable
-    dynamics&nbsp; range therefore stays the same as it was before R128.<br>
-    <br>
-    The maximum allowed level for peaks is -1 dBTP in the EBU loudness
-    recommendation. All peak values below that are ok. This means that the peak
-    value is no longer important. It does not matter what the peak value is as
-    long as it won't go over the maximum allowed -1 dBTP.<br>
-    <br>
-    Old methods of making a mix sound good are still valid after R128. The only
-    change is that the loudness of the mix is forced to the same loudness level
-    with every other program.<br>
-    <br>
-    The best loudness meter is still the human ear. A machine has no way of
-    knowing what sound is important and what is not (for example speech versus
-    the sound of rain).<br>
-    <br>
-    <h2><a id="Mounting the server HotFolder">Mounting the server HotFolder to
-        the workstation<br>
-      </a></h2>
-    The links below lead to instructions on how to mount the server disk to a
-    local workstation on different operating systems.<br>
-    <br>
-    <a href="Mounting_the_server_hotfolder/Mounting_server_HotFolder_on_windows_7.html">Mounting
-      server HotFolder on windows 7</a><br>
-    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20windows%207%20tyoasemaan.html"></a><br>
-    <a href="Mounting_the_server_hotfolder/Mounting_server_HotFolder_on_windows_xp.html">Mounting
-      server HotFolder on windows xp</a><br>
-    <br>
-    <a href="Mounting_the_server_hotfolder/Mounting_server_HotFolder_on_OS_X.html">Mounting
-      server HotFolder on OS X</a><br>
-    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20windows%20xp%20tyoasemaan.html"></a><br>
-    <br>
-    <h2><a id="Importing loudness corrected files back to Avid Media Composer">Importing
-        loudness corrected files back to Avid Media Composer</a><br>
-    </h2>
-    The link below leads to instructions on how to import loudness corrected
-    files back to Avid Media Composer.<br>
-    <br>
-    <a href="Mounting_the_server_hotfolder/Importing_loudness_corrected_files_back_to_Avid_Media_Composer.html">Importing
-      loudness corrected files back to Avid Media Composer</a><br>
-    <a href="Mounting_the_server_hotfolder/Aanekkyyskorjattujen%20tiedostojen%20tuominen%20Avid%20-%20Media%20Composeriin.html"></a><br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-  </body>
-</html>
+<!DOCTYPE html><html dir="ltr" lang="en">  <head>    <title>Introduction To Loudness Correction</title>    <meta content="text/html; charset=UTF-8" http-equiv="content-type">    <meta content="Mikael Hartzell 2013" name="author">  </head>  <body>    <div style="color: #7f7f7f;" align="right">Mikael Hartzell 2013<br>    </div>    <h1>Introduction To Loudness Correction<br>    </h1>    <a href="#What%20does%20loudness%20mean%20?"></a><br>    <a href="#What%20is%20loudness%20?">What is loudness ?</a><br>    <br>    <a href="#Loudness%20jumps">Loudness jumps</a><a href="#Problematic%20loudness"></a><br>    <br>    <a href="#Why%20haven%27t%20we%20been%20able%20to%20solve%20the%20loudness%20problem%20?">Why
+      haven't we been able to solve the loudness problem ?</a><br>    <br>    <a href="#Peak%20level%20and%20loudness">Peak level and loudness</a><a href="#A%20peak%20meter%20can%20not%20be%20used%20to%20measure%20loudness"></a><br>    <br>    <a href="#EBU%20R128%20loudness%20recommendation">EBU R128 loudness      recommendation</a><a href="#EBU%20loudness%20recommendation%20R128"></a><br>    <br>    <a href="#EBU%20R128%20measurement%20units">EBU R128 measurement units</a><a      href="#EBU%20R128%20measurement%20units"></a><br>    <br>    <a href="#How%20are%20the%20different%20measurement%20results%20used%20?">How
+      are the different measurement results used ?</a><br>    <a href="#Reaaliaikainen%20ja%20tiedostopohjainen%20aanekkyysmittaus"></a><br>    <a href="#Realtime%20or%20file%20based%20loudness%20measurement%20?">Realtime
+      or file based loudness measurement ?</a><br>    <br>    <a href="#Loudness%20jumps%20in%20tv%20transmission">Loudness jumps in tv      transmission</a><a href="#Loudness%20variations%20in%20a%20transmission%20stream"></a><br>    <br>    <a href="#Automatic%20file%20based%20loudness%20correction">Automatic file      based loudness correction</a><br>    <br>    <a href="#Description%20of%20folders%20on%20the%20LoudnessCorrection%20-%20server">Description
+      of folders on the LoudnessCorrection - server</a><br>    <a href="#Aanekkyysvaihtelut%20lahetysvirrassa"></a><br>    <a href="#Loudness%20History%20Graphics">Loudness History Graphics</a><br>    <a href="#Tiedostopohjaisen%20AanekkyysKorjauksen%20kayttaminen"></a><br>    <a href="#Html%20progress%20report">Html progress report</a><br>    <a href="#AanekkyysKorjaus%20-%20palvelimen%20hakemistot"></a><br>    <a href="#Sample%20peak%20vs.%20TruePeak">Sample peak vs. TruePeak</a><br>    <a href="#Tulosgrafiikka"></a><br>    <a href="#Important%20things%20to%20know%20about%20loudness%20correction">Important
+      things to know about loudness correction</a><br>    <br>    <a href="#How%20does%20the%20EBU%20R128%20affect%20sound%20engineers%20work%20?">How
+      does the EBU R128 affect sound engineers work ?</a><br>    <br>    <a href="#Mounting%20the%20server%20HotFolder">Mounting the server HotFolder</a><br>    <a href="#Palvelimen%20kasittelyjonon%20tietojen%20katselu"></a><br>    <a href="#Importing%20loudness%20corrected%20files%20back%20to%20Avid%20Media%20Composer">Importing
+      loudness corrected files back to Avid Media Composer</a><br>    <a href="#Aanen%20sahkoinen%20huipputaso%20ja%20TruePeak"></a><br>    <br>    <a href="#Tarkeita%20huomioita%20AanekkyysKorjaus%20-%20palvelimen%20kaytosta"></a><br>    <br>    <br>    <br>    <br>    <h2><a id="What is loudness ?">What is loudness ?</a></h2>    An digital peak meter shows electrical peaks of sound very reliably.    Frequency content does not affect meter reading in any way. Human hearing    works in a very different manner. Frequency components and their durations    affect how loud a sound feels. This means loudness can not be measured with    a peak meter. To accurately measure loudness we need an algorithm that    mimics the way humans perceive loudness.<br>    <br>    When we talk about loudness in this document we mean loudness as it is    perceived by a person or&nbsp; a measurement done with a loudness meter.    When we talk about peak value or peak level we mean the electrical    measurement of the highest electrical peak of a sound signal.<br>    <br>    <br>    <h2><a id="Loudness jumps">Loudness jumps<br>      </a></h2>    Loudness jumps have been a problem since the start of tv and radio. Proper    tools to measure and control loudness have not been available until very    recently. This is why the problem has remained unsolved until our days.<br>    <br>    There are two separate problems that needs to be solved:<br>    <ol>      <li>Loudness jumps inside a program.</li>      <li>Loudness jumps between programs.<br>      </li>    </ol>    <br>    <br>    <h2><a id="Why haven't we been able to solve the loudness problem ?">Why        haven't we been able to solve the loudness problem ?</a></h2>    The lack of a working model of human perception of loudness has prevented    the creation of proper tools to measure and manage loudness. A peak meter    has been our only 'loudness' tool even thought the reading does not    correspond to human hearing in any way.<br>    <br>    Loudness problem has not always been this bad. In the analog era we used PPM    - meters that had some deliberate 'slowness' on the reaction to rapid    changes in sound level. This slowness had an averaging effect that removed    fast peaks causing the meter reading to correspond more to human hearing and    perception of loudness. Fast digital meters has surpassed PPM meters now and    we have lost the averaging effect of the PPM meter. Fast digital meters do    not correspond any more to the way how humans perceive loudness .<br>    <br>    The 1990's gave birth to new digital tools that allowed sound processing on    a level that was not possible before. A new phenomenon "hyper-compression"    emerged in the music industry. The method used agressive compression to make    music sound louder on car radio. It was used as a competetive tool to make a    companys music stand out from the competition. Hyper-compression squeezes    sound to the edge of distortion lowering sound quality in the process. Hyper    compressed sound also causes listening fatigue. This trend soon crossed over    to radio and television.<br>    <br>    Compressing a sound can cause the electrical peaks to go down while    simultaneously loudness of audio goes up. A peak meter is not useful when    metering hyper-compressed sound because the peaks don't correspond to the    loudness of audio in any way.<br>    <br>    The lack of proper loudness meter left the sound engineer to use the only    loudness sensitive device he has, his ears. Measuring loudness using ones    ears works surprisingly well. A sound engineer can easily produce material    with consistent loudness in the course of a day, but this method has a    fundamental problem. Since there is no commonly agreed standard for the    loudness target level there is no way for a sound engineer to produce    material with the same loudness level as another.<br>    <br>    <br>    <h2><a id="Peak level and loudness">Peak level and loudness</a></h2>    <br>    <strong>DemoVideo 1:</strong> The video below demostrates what happens when    audio is levelled using only the peak level. The peak level for each music    sample in the video is the same (0 dBFS). Even though peak levels are equal    the loudness of each sample is different.<br>    <br>    If your browser does not show a video window below, then it does not support    HTML5 video. In this case you can watch the video on <a href="http://www.youtube.com/watch?v=ii1ijC2OQow&amp;vq&amp;hd=1">YouTube</a>.<br>    <br>    Note !!!!!!! You should use a relatively loud playback volume to hear    loudness differences in the music samples.<br>    <br>    <br>    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-1.webm"        type="video/webm">      <source src="../video/mp4/DemoVideo-1.mp4" type="video/mp4"> Your browser      does not support the video tag. </video> <br>    <br>    <br>    <strong>DemoVideo 2:</strong> The next video demonstrates what happens to    loudness when sound is compressed. The first music sample has no additional    compression and the second one is quite heavily compressed. Note that the    peak level for both samples is still the same (0 dBFS).<br>    <br>    If your browser does not show a video window below, then it does not support    HTML5 video. In this case you can watch the video on <a href="http://www.youtube.com/watch?v=FeQCduxNM-k&amp;vq&amp;hd=1">YouTube</a>.<br>    <br>    Note !!!!!!! You should use a relatively loud playback volume to hear    loudness differences in the music samples.<br>    <br>    <br>    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-2.webm"        type="video/webm">      <source src="../video/mp4/DemoVideo-3.mp4" type="video/mp4"> Your browser      does not support the video tag. </video> <br>    <br>    <strong>Example:</strong> Loudness and peak level measurements can be in    total disagreement. The picture below shows loudness (lower part) and peak    levels (upper part) of a heavy-metal concert. <br>    <br>    Electrical peaks on the upper part are high during interviews and low during    musical performances.<br>    <br>    The levels on the upper and lower parts of the picture are in total    disagreement with each other. When electrical peaks go high the measured    loudness goes down. What has happened here is that musical performances have    been heavily compressed while much less compression is used on the    interviews. Compression has increased music loudness while simultaneously    lowering it's electrical peaks.<br>    <br>    If we measured this material simultaneously with a digital peak meter and a    loudness meter, they would show opposing values. When peak levels go up    loudness goes down.<br>    <br>    What this all means is that a peak meter is quite useless in determining    audio loudness.<br>    <br>    <br>    <img src="Pictures/Sample_Peaks_vs_Loudness-English.jpg"><br>    <br>    <br>    <h2><a id="EBU R128 loudness recommendation">EBU R128 loudness        recommendation</a></h2>    <h2></h2>    <p>The European Broadcasting Union EBU published loudness recommendation <strong>R128</strong>      in august 2010. R128 uses a loudness measurement method that corresponds      very well with human perception of loudness. R128 also defines a common      target loudness level for all audio material and finally gives us tools to      measure and manage loudness. </p>    <p></p>    <p><br>    </p>    <p></p>    <table style="width: 100%;" border="0">      <tbody>        <tr>          <td><img alt="" src="Pictures/R128_Scales.png"></td>          <td style="width: 100%; vertical-align: top;">            <ul>            </ul>            <blockquote>              <h1>R128 in a nutshell<br>              </h1>            </blockquote>            <ul>              <ul>                <li>R128 uses a measurement method defined by ITU (International                  Telecommunication Union) in document <strong>ITU-R BS 1770</strong>.<br>                </li>                <li>R128 supports channel counts from one to six (mono -&gt;                  5.1).</li>                <li>R128 works very well with all kinds of material (classical                  music, speech, heavy-metal, etc).</li>                <li>R128 uses the same scale as digital peak meters. The unit is                  dB for electrical peak metering and LU (Loudness Unit) for                  loudness measurements.<br>                </li>              </ul>            </ul>            <blockquote>              <h3>Target level<br>              </h3>            </blockquote>            <ul>              <ul>                <li>Target level for all kinds of&nbsp; material is -23 LUFS.<br>                </li>              </ul>            </ul>            <blockquote>              <h3>Loudness scale<br>              </h3>            </blockquote>            <ul>              <ul>                <li>The loudness scale numbers can be defined in two different                  ways. Relative to target loudness level or&nbsp; relative to                  the maximum level of the scale.</li>                <li>The unit for scale relative to target loudness level is <strong>LU</strong>                  (<strong>L</strong>oudness <strong>U</strong>nit).<br>                </li>                <li>The unit for scale relative to the maximum level of the                  scale is <strong>LUFS</strong> (<strong>L</strong>oudness <strong>U</strong>nits                  relative to <strong>F</strong>ull <strong>S</strong>cale).<br>                </li>                <li><strong>LU scale:</strong> the target loudness level is <strong>0                    LU</strong> and the maximum loudness level +23 LU's .</li>                <li><strong>LUFS scale:</strong> the target loudness level is <strong>-23                    LUFS</strong> and the maximum loudness level is 0 LUFS.</li>                <li><strong>0 LU = -23 LUFS:</strong> The target loudness level                  is the same in both cases. The user if free to choose which                  way he wants to use.<br>                </li>              </ul>            </ul>            <blockquote>              <h3>LU vs. dB<br>              </h3>            </blockquote>            <ul>              <ul>                <ul>                </ul>                <li>R128 uses the same scale used for digital peak metering and                  because of this <strong>1 LU = 1 dB</strong>.&nbsp; This                  means that if the measured integrated loudness is +3 LUs too                  high, it hits the target level exactly if attenuated by 3 dBs.<br>                </li>              </ul>            </ul>            <blockquote>              <h3>Countries using R128<br>              </h3>            </blockquote>            <blockquote>              <ul>                <li>The following countries already use R128 or will start to                  use it in the near future (source: <a href="http://www.r128audio.com/">http://www.r128audio.com/</a>):
+                  <strong>France, Germany, Netherlands, Italy, Israel,                    Switzerland, Austria, Scandinavian countries, Poland</strong>.                  Other European countries will follow shortly.</li>                <li><strong>Usa</strong><strong></strong><strong></strong> (<a href="http://www.thecalmact.com/">http://www.thecalmact.com/</a>                  ), <strong>Japan</strong> and <strong>Brazil</strong> are                  using a method very similar to R128.<br>                </li>              </ul>            </blockquote>          </td>        </tr>      </tbody>    </table>    <p><br>    </p>    <h2><a id="EBU R128 measurement units">EBU R128 measurement units</a><br>    </h2>    &nbsp;EBU loudness recommendation defines new measurement units. The main    difference between these units is time window length.<br>    <h3>Integrated loudness</h3>    Integrated loudness measurement is done on a complete program from start to    finish. Integrated loudness measurement is a single number that tells the    averaged loudness of a program.<br>    <ul>      <li>Loudness is measured in 400 ms time slices across the duration of a        program. Some of the measurements are filtered (thrown away) according        to R128 gating rules.<br>      </li>      <li>The result of integrated loudness measurement is a single number that        tells the averaged loudness of a program.</li>      <li>EBU R128 target loudness level is -23 LUFS. Integrated loudness of        R128 compliant material is always -23 LUFS.<br>      </li>      <li>Rear channels of a surround mix get a slightly greater weight in        loudness calculation compared to front channels.</li>      <li>LFE channel is always discarded in loudness calculation.<br>      </li>    </ul>    <h3>Short-term loudness</h3>    <ul>    </ul>    <p>Short-term loudness measurement is done on a 3 second slice of audio.<br>    </p>    <ul>      <li>In case of file based loudness measurement the results of these 3        second time slices are used to create a graphical presentation of        loudness variations inside a file.</li>    </ul>    <h3>Momentary loudness<br>    </h3>    <ul>      <li>Momentary loudness measurement is done an a single 400 ms time slice        of audio. The results of multiple momentary loudness measurements is        used when integrated loudness and short-term loudness are calculated.</li>    </ul>    <h3>Loudness range (LRA)<br>    </h3>    <p></p>    <ul>      <li>Loudness range (LRA) tells how far apart loud and quiet parts of a        program are from each other.</li>      <li>LRA should be taken only as a guide since the measurement is somewhat        unprecise in nature.<br>      </li>    </ul>    <p><br>    </p>    <h2><a id="How are the different measurement results used ?">How are the        different measurement results used ?</a></h2>    <h3>File based loudness measurement</h3>    <ul>      <li><strong>Integrated loudness:</strong> The result of this measurement        shows the averaged loudness of the program.</li>      <li><strong>Short-term loudness:</strong> The result of this measurement        are used to create a graphical presentation of loudness variations        inside a file</li>      <li><strong>Momentary loudness:</strong> The result of this measurement is        not used for anything visible to a user.&nbsp; These results are used        when integrated loudness and short-term loudness is calculated.</li>      <li><strong>Loudness range:</strong> The result of this measurement shows        about the wideness of loudness variations in the audio material.</li>    </ul>    Picture below: Short-term loudness results are used to create a graphical    presentation of loudness variations inside a file. The brown line in the    picture is drawn using results from 3 second time slice loudness    measurements.<br>    <br>    <img alt="" src="Pictures/Short_Term_Loudness_Is_Used_To_Draw_History_Graphics.jpg"><br>    <h3>Realtime loudness measurement</h3>    <ul>      <li><strong>Integrated loudness:</strong> When using a realtime loudness        meter then the user must manually start the integrated loudness        measurement in the beginning of the program and stop at the end of the        program. The measurement result shows the accumulated integrated        loudness from the beginning of the program to the current moment.<br>      </li>      <li><strong>Short-term loudness:</strong> This value shows the loudness of        the last 3 seconds. This value can be used to determine the direction        where the loudness is heading at the moment.<br>      </li>      <li><strong>Momentary loudness:</strong> This value shows fast movements        of the loudness and it is used to draw a metering bar on the display of        the loudness meter.<br>      </li>      <li><strong>Loudness range:</strong> The result of this measurement shows        about the wideness of loudness variations in the audio material.</li>    </ul>    <p></p>    There is an example of a realtime loudness meter below (Nugen Audio). The    measurement units discussed above can all be found on right side of the    meter display. They are from top to bottom:<br>    <ul>      <li>Short-term = loudness of the last 3 seconds.</li>      <li>Integrated = the integrated loudess from the beginning of the        measurement to current moment.</li>      <li>Loudness range</li>      <li>The meter bar on the right side of the values shows measurements of        momentary loudness.</li>    </ul>    <p>On the left side of the meter display is a loudness history window. It      rolls to the left and shows the history of past momentary loudness      measurements. The time window of the history display is user definable and      in the case below it shows the history of the last two minutes.<br>    </p>    Understanding the units of EBU R128 helps to read the display of a realtime    loudness meter.<br>    <br>    <br>    <img alt="" src="Pictures/VisLM-H.png"><br>    <br>    <strong>Demovideo 4:</strong> shows a simple realtime loudness meter    (ZPlane).<br>    <br>    The loudness of the audio in the demo increases from start to the middle of    the video and then starts to decrease towards the end. The result of    integrated loudness can be seen on the right side of the meter display and    the led bar shows results from momentary loudness measuremets. Note how the    result from integrated loudness moves very slowly compared to the fast led    bar.<br>    <br>    The slow response to loudness variations of the integrated measuremets is    caused by the fact that integrated loudness is the averaged sum of previous    loudness measurements. Short changes in the loudness have no effect on    integrated loudness, a large number of changes toward the same direction are    needed before the averaged result starts to move into that direction. This    means that it is possible that there are large loudness variations inside a    file and the integrated loudnes still hits the target level of -23 LUFS. The    user still has the responsibility to adjust loudness variations in a program    to fit the distribution channel.<br>    <br>    If your browser is not able to play the video below, then you can watch it    on <a href="http://www.youtube.com/watch?v=3IF8j8IEtOc&amp;vq&amp;hd=1">YouTube</a>.<br>    <br>    <br>    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-4.webm"        type="video/webm">      <source src="../video/mp4/DemoVideo-4.mp4" type="video/mp4"> Your browser      does not support the video tag. </video> <br>    <br>    <br>    <h2><a id="Realtime or file based loudness measurement ?">Realtime or file        based loudness measurement</a> ?<br>    </h2>    Loudness measurement can be done in two different ways: realtime and file    based measurement. Both methods have different target applications.<br>    <br>    <h3>Realtime loudness measurement<br>    </h3>    Realtime loudness measurement can be used in places where the user has the    possibility to read the loudness meter in realtime and also adjust volume of    the sound sources in realtime. This method of loudness metering is best in    production environments where the program is recorded live like tv -    studios, OB vans, live radio, broadcasting centers, etc.<br>    <br>    A realtime meter is not absolutely necessary, but can be useful to a sound    engineer in a post production studio. Mixing is traditionally done using    ones ears as the loudness meter and this still works very well.<br>    <br>    <h3>File based loudness measurement<br>    </h3>    If a program is stored as a file before transmission, then the loudness    measurement can be done on the audio file of the program. The file can also    be automatically corrected to the target loudness level after doing the    loudness measurement.<br>    <br>    <h3>Both measurement methods</h3>    The best loudness meter is still the human ear.&nbsp; A machine has no sense    of what sound is important (for example speech) and what is not (for example    the sound of heavy rain). The user is still responsible for adjusting    loudness variations inside a program to fit the transmission channel. A    loudness meter provides a common 'anchor' for the loudness level of all    program material.<br>    <br>    Viewer adjusts the volume of their tv -sets based on the loudness of speech.    If speech level changes then the viewer must adjust his listening volume    again. It is important that speech loudness is at the EBU target level or at    least very close to it.<br>    <br>    <br>    <h2><a id="Loudness jumps in tv transmission">Loudness jumps in tv        transmission<br>      </a></h2>    The picture below displays loudness variations in the transmission stream of    a tv station in the spring of 2012. There is a timeline on the bottom of the    picture, the measurement took place from 10 o'clock am to 3 o'clock pm.    Loudness is measured in 3 second time slices and the measurements are shown    in red in the picture. EBU loudness scale (LUFS) is on the left side of the    picture. EBU target level -23 LUFS is shown as the green line the goes    across the picture. Loudness leve of individual programs are shown as black    lines. The little black dots are trailers shown between programs.<br>    <br>    Eight programs were transmitted during the measurement period and the    loudness of these varies greatly on both sides of the EBU target loudness    level. This picture tells the story of a typical day in tv broadcasting.<br>    <br>    The loudness variations in the transmission stream are the result of trying    to handle loudness using only a peak meter. Clearly a peak meter is almost    useless in loudness management and we need better tools to handle the    situation.<br>    <br>    <br>    <img alt="" src="Pictures/The_Problem.png"><br>    <br>    <br>    The picture below shows a couple of problem spots in the transmission. At 11    o'clock loudness drops 7 LUs, at 12:05 loudness increases 7.8 LUs and at    12:50 it drops by 6.8 LUs. Loudness jumps this big are annoying and the    viewer is likely to grab his remote control to adjust the volume.<br>    <br>    <br>    <img src="Pictures/The_Problem-2-english.jpg"><br>    <br>    <p></p>    <p></p>    <h2><a id="Automatic file based loudness correction">Automatic file based        loudness correction</a></h2>    In the capters below I will describe the usage of the free file based    automatic loudness correction and measurement tool FreeLCS (<a href="http://freelcs.sourceforge.net">http://freelcs.sourceforge.net</a>).
+    FreeLCS is a server on the network where users can drop in files to be    automatically loudness corrected. The server also creates a loudness history    graphics file which gives visual feedback of the internal loudness    variations in a file.<br>    <br>    It is very easy to use the server:<br>    <ol>      <li>Mount the server disk to the users local workstation.</li>      <li>Drag files over to the server.</li>      <li>A couple of minutes later the user can drag loudness corrected        versions of the files back to his workstation.<br>      </li>    </ol>    Mounting the server disk to the local workstation is discussed in <a href="#Mounting%20the%20server%20disk%20to%20a%20local%20workstation">its
+      own chapter</a>. The example below is for windows 7, but the same    principles apply to other operating systems also (OS X, windows xp, etc).<br>    <br>    In the picture below files from the local workstation are being copied over    to the loudness correction server. The network name of the server is    "LoudnessCorrection". Note: only files copied to the root folder of the    server will be processed.<br>    <br>    <br>    <img src="Pictures/Usage-windows7-english-01.jpg"><br>    <br>    <br>    Loudness corrected files will appear in folder "<strong>00-Corrected_Files</strong>",
+    double click to open it.<br>    <br>    <br>    <img src="Pictures/Usage-windows7-english-02.jpg"><br>    <br>    <br>    It takes a couple of minutes for the server to process the files.<br>    <br>    The first file to appear is the loudness history graphics file. The end of    the file name is always "<strong>Loudness_Results_Graphics</strong>". The    file is in jpeg format and it can be opened for viewing by double clicking    on it.<br>    <br>    The next file to appear is the loudness corrected audio file. The end of the    file name is always&nbsp; "<strong>-23_LUFS</strong>".<br>    <br>    Now the user can copy the loudness corrected file back to the local    workstation and attach it as the final mix of the program.<br>    <br>    All files on the server will be automatically deleted after a waiting period    that is set during FreeLCS installation. It is by default 8 hours.<br>    <br>    <br>    <img src="Pictures/Usage-windows7-english-03.jpg"><br>    <br>    <br>    <h2><a id="Description of folders on the LoudnessCorrection - server">Description
+        of folders on the LoudnessCorrection - server</a></h2>    There are three folders on the LoudnessCorrection - server:<br>    <ul>      <li>"<strong>Root - folder</strong>" or "<strong>HotFolder</strong>" is on        top of the server folder structure and the other two folders described        below are both inside this folder. Only files dropped into the root -        folder will be processed, the server will not process files dropped to        any other folder.</li>      <li>"<strong>00-Corrected_Files</strong>" is the folder where loudness        corrected audio files and loudness history graphics files will appear.</li>      <li>"<strong>00-Calculation_Queue_Information</strong>" is used for        storing a html progress report ("<strong>00-Calculation_Queue_Information.html</strong>")
+        that shows the current state of the processing queue. This file is a web        page and can be double clicked to open it for viewing in a web browser.        The html progress report shows how many files are waiting in the queue        for processing and which files are currently being processed upon.<br>      </li>    </ul>    All files on the server will be automatically deleted after a waiting period    that is set during FreeLCS installation. It is by default 8 hours.<br>    <br>    <br>    <p></p>    <ul>    </ul>    <h2><a id="Loudness History Graphics">Loudness History Graphics</a></h2>    The picture below shows a loudness history graphics file. The top of the    picture shows:<br>    <ul>      <li>The name of the audio file.</li>      <li>Integrated loudness of the file.</li>      <li>How much the integrated loudness of the file differs from EBU target        level -23 LUFS.</li>      <li>Loudness range.</li>      <li>The peak level of the file (selectable during installation between        sample peak and TruePeak).</li>    </ul>    <p>The loudness graphics shows the following information:</p>    <ul>      <li>EBU loudness scale (LUFS) is on the left side of the picture.</li>      <li>The brown line shows how loudness varies across time in the file.</li>      <li>The bright green line shows the EBU R128 target level -23 LUFS.</li>      <li>The dark green line shows integrated loudness measured from the file</li>      <li>On bottom of the graphics is the timeline.<br>      </li>    </ul>    The example shows loudness variations inside a piece of classical music.<br>    <br>    The graphics file allows the user to visually verify that there aren't any    unintended loudness jumps in the file. Suspicious spots can be located and    checked using time displayed on the bottom of the graphics file.<br>    <br>    The goal of EBU R128 is not to make every second of a program to be on the    same loudness level, on the contrary R128 encourages the usage of more    dynamics and less compression to make the material more pleasing to the ear.<br>    <br>    <br>    <br>    <img src="Pictures/Beethoven-Coriolan_Overture_Op_62.wav-Loudness_Results_Graphics.jpg"><br>    <br>    <br>    <br>    <h2><a id="Html progress report">Html progress report</a></h2>    If file processing seems to take longer than usual, then user can view the    "html progress report" to see what causes the delay. The file is located in    "<strong>00-Calculation_Queue_Information /      00-Calculation_Queue_Information.html</strong>" and double clicking on it    opens it up in the web browser.<br>    <br>    The progress report shows the current state of the servers calculation queue    and it updates every five seconds. The top of the page shows how many files    are waiting in the queue for processing (14 in the example) and below that    names of the next ten files to be processed.<br>    <br>    Files currently processed upon are shown in the gray box in the middle of    the page. The filenames of the last 100 completed files along with    completion times is shown on the bottom of the page.<br>    <br>    <br>    <br>    <img src="Pictures/Html_Progress_Report.jpg"><br>    <br>    <h2><a id="Sample peak vs. TruePeak">Sample peak vs. TruePeak</a><br>    </h2>    Digitizing an analog signal poses a problem that can cause distortion when    the sampled audio is converted back to analog.<br>    <br>    In the picture below the blue line represents voltage variations in analog    audio and red dots represent times when digital samples are taken from the    signal. In the example digital samples are taken exactly when the analog    voltage is at its highest peak. The sample rate coincides with the peaks in    the signal and the peak values are recorded correctly into the digital data.<br>    <br>    <br>    <img alt="" src="Pictures/TruePeak-Sampling-1.png"><br>    <br>    Sometimes there can be very fast peaks in the audio that happen before or    after samples are taken. Instead of the true values of the peaks in the    signal lower values are recorded in the digital data.<br>    <br>    The problem may go undetected until audio is converted back to analog or the    audio is compressed in a lossy format (mpeg2, mpeg3, aac) for transmission.    Then these 'phantom peaks' can appear back in the signal.<br>    <br>    A conventional digital peak meter won't show these phantom peaks because the    information is not available in digital samples of the audio. When samples    are converted back to analog audio then these phantom peaks can go over the    maximum allowed level in the DA - converter and introduce distortion to the    sound.<br>    <br>    <br>    <img alt="" src="Pictures/TruePeak-Sampling-2.png"><br>    <br>    ITU recommends a method called "TruePeak" to find these phantom peaks after    the signal is already in digital format.&nbsp; This method calculates new    samples between samples taken when digitizing audio and this makes the    phantom peaks visible again.<br>    <br>    A meter that shows peak using this method uses ascale called dBTP when a    conventional sample peak meter uses dBFS.<br>    <br>    In practice I have seen phantom peaks 3 dBs higher than the highest sample    peak value in the same audio. It is possible for a TruePeak measurement to    show values that go over the maximum allowed peak of the dBFS scale (0 dBFS)    showing positive TruePeak values for example +3 dBTP. In this case this    would mean that the true peak value is 3 dBs over the maximum value of for    example a DA - converter and converting a signal like this back to analog    would cause distortion in the DA - converter.<br>    <br>    EBU R128 recommends always using TruePeak when measuring audio peaks. The    maximum allowed value for peaks in R128 is &nbsp; -1 dBTP (dBs using the    TruePeak scale).<br>    <br>    In the picture below new samples has been calculated between samples taken    during audio digitization. These new samples make the phantom peaks visible    again.<br>    <br>    <br>    <img alt="" src="Pictures/TruePeak-Sampling-3.png"><br>    <br>    <br>    <br>    <h2><a id="Important things to know about loudness correction">Important        things to know about loudness correction</a></h2>    There are a couple of important things to take into consideration when using    loudness correction.<br>    <h3>Audio channels</h3>    All audio channels of one mix must be in the same file. If you split a    stereo mix to left and right files and process both separately then the    loudness level of the corrected files will be wrong by 3 LUs.<br>    <br>    One file can only have one mix in it.<strong> Example:</strong> If a program    consists of three different mixes: stereo English,&nbsp;&nbsp; stereo    French, &nbsp; 5.1 English, then the mixes must be processed as follows:<br>    <br>    <strong>File 1</strong> = Stereo English<br>    <strong>File 2</strong> = Stereo French<br>    <strong>File 3</strong> = 5.1 English<br>    <br>    <h3>Processing raw material<br>    </h3>    EBU R128 is meant for processing only finished programs that are ready for    transmission. It is not possible to loudness correct uncut raw material,    because the integrated loudness of a file changes when parts of it are cut    away. Integrated loudness measurement consists of the averaged sum of    multiple short loudness measurement results. The sum of these measuremets    changes when a portion of results are throuwn away (patrs of a file is cut    away). As a rule of thumb only process finished audio mixes of programs that    won't be changed any more.<br>    <br>    There is an exeption to the rule. Some types of programs can benefit from    processing parts of if independently from each other. An example is a    program that consists of a studio host presenting the next animation and a    bunch of animations produced outside your company. The different parts of    the program can have very different loudness levels and if put together    without correction could produce large loudness jumps inside the program.    You can get rid of the loudness differences between each part by processing    them separately. If you do this be careful not to include any parts that are    giong to be cut away. Silence won't affect integrated loudness since    loudness levels below -70 dB are not taken into account in loudness    measurement. So you can cut away silent parts without affecting integrated    loudness of a file.<br>    <br>    <h3>Loudness variations in a program</h3>    Loudness correction is a tool that adjusts loudness level of a program to    match other programs in the transmission stream. Loudness correction won't    change loudness variations in a file in any way. If the material is too    dynamic before correction it will be too dynamic after the correction also.    The user has the responsibility to adjust loudness variations in a file to    fit the transmission channel. This means that loudness variations must be    restricted to a range that is usable in the average home listening    environment.<br>    <br>    <h3>The average loudness will go down</h3>    A typical European tv station has a averaged loudness somewhere between -21    and -20 LUFS. The EBU R128 therefore causes the average loudness to go down    by 2 - 3 LUs.<br>    <br>    <h3>R128 brings good things with it<br>    </h3>    When audio levelling is done using loudness of audio, there will be more    electrical headroom for peaks to exist. Heavy compression gives no loudness    advantage any more, it only makes the mix sound bad. This will probably    encourage sound engineers to make their mixes more airy and pleasing to the    ear.<br>    <br>    EBU R128 moves responsibility for the listening level back to where it    always was supposed to be, to the viewer. When loudness of all programs is    at the same level then the viewer is at last allowed to decide the listening    level of his won living room.<br>    <ul>    </ul>    <strong>DemoVideo 3:</strong> Audio samples from DemoVideo 1 are now all    corrected to the EBU target loudness level (-23 LUFS).<br>    <br>    &nbsp;If your browser is not able to play the video below, then you can    watch it on <a href="http://www.youtube.com/watch?v=I64kckkp3BE&amp;vq&amp;hd=1">YouTube</a>.<br>    <br>    <br>    <video controls="controls" height="576" width="768"> <source src="../video/webm/DemoVideo-3.webm"        type="video/webm">      <source src="../video/mp4/DemoVideo-3.mp4" type="video/mp4"> Your browser      does not support the video tag. </video> <br>    <br>    <br>    <h2><a id="How does the EBU R128 affect sound engineers work ?">How does the        EBU R128 affect sound engineers work ?</a></h2>    The biggest practical change that R128 causes is that heavy compression    gives no loudness advantage any more, it only makes the mix to sound bad.<br>    <br>    The average listening volume used by viewers is quite low and this limits    the usable dynamics range available for the mixing sound engineer. The    average listening volume used in homes won't be affected by the fact that    the broadcaster starts to use R128 loudness management. The usable    dynamics&nbsp; range therefore stays the same as it was before R128.<br>    <br>    The maximum allowed level for peaks is -1 dBTP in the EBU loudness    recommendation. All peak values below that are ok. This means that the peak    value is no longer important. It does not matter what the peak value is as    long as it won't go over the maximum allowed -1 dBTP.<br>    <br>    Old methods of making a mix sound good are still valid after R128. The only    change is that the loudness of the mix is forced to the same loudness level    with every other program.<br>    <br>    The best loudness meter is still the human ear. A machine has no way of    knowing what sound is important and what is not (for example speech versus    the sound of rain).<br>    <br>    <h2><a id="Mounting the server HotFolder">Mounting the server HotFolder to        the workstation<br>      </a></h2>    The links below lead to instructions on how to mount the server disk to a    local workstation on different operating systems.<br>    <br>    <a href="Mounting_the_server_hotfolder/Mounting_server_HotFolder_on_windows_7.html">Mounting
+      server HotFolder on windows 7</a><br>    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20windows%207%20tyoasemaan.html"></a><br>    <a href="Mounting_the_server_hotfolder/Mounting_server_HotFolder_on_windows_xp.html">Mounting
+      server HotFolder on windows xp</a><br>    <br>    <a href="Mounting_the_server_hotfolder/Mounting_server_HotFolder_on_OS_X.html">Mounting
+      server HotFolder on OS X</a><br>    <a href="Mounting_the_server_hotfolder/AanekkyysKorjaus%20-%20palvelimen%20levyn%20mounttaaminen%20windows%20xp%20tyoasemaan.html"></a><br>    <br>    <h2><a id="Importing loudness corrected files back to Avid Media Composer">Importing
+        loudness corrected files back to Avid Media Composer</a><br>    </h2>    The link below leads to instructions on how to import loudness corrected    files back to Avid Media Composer.<br>    <br>    <a href="Mounting_the_server_hotfolder/Importing_loudness_corrected_files_back_to_Avid_Media_Composer.html">Importing
+      loudness corrected files back to Avid Media Composer</a><br>    <a href="Mounting_the_server_hotfolder/Aanekkyyskorjattujen%20tiedostojen%20tuominen%20Avid%20-%20Media%20Composeriin.html"></a><br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>  </body></html>
